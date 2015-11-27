@@ -1,0 +1,3 @@
+[submodule "app/Plugin/Recaptcha"]
+	path = app/Plugin/Recaptcha
+	url = git@github.com:CakeDC/recaptcha.git
