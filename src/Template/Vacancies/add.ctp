@@ -56,41 +56,37 @@
                 <div class="form-group col-sm-7">
                   <label for="exampleInputName2">Company &nbsp;</label>
                   <select class="form-control">
-                    <option selected="">Company 1</option>
-                    <option>Company 2</option>
-                    <option>Company 3</option>
-                    <option>Company 4</option>
-                    <option>Company 5</option>
+                    <option selected="">Select Company</option>
+                    <?php foreach($companies as $companies){ ?>
+                    <option value="<?php echo $companies->id ?>"><?php echo $companies->company_name ?></option>
+                    <?php }?>                    
                   </select>
                 </div><br>
                 <div class="form-group col-sm-7">
                   <label for="exampleInputName2">Branch &nbsp;</label>
                   <select class="form-control">
-                    <option selected="">Company 1</option>
-                    <option>Company 2</option>
-                    <option>Company 3</option>
-                    <option>Company 4</option>
-                    <option>Company 5</option>
+                    <option selected="">Select Branch</option>
+                    <?php foreach($branches as $branches){ ?>
+                    <option value="<?php echo $branches->id ?>"><?php echo $branches->branch_name ?></option>
+                    <?php }?>                    
                   </select>
                 </div><br>
                 <div class="form-group col-sm-7">
                   <label for="exampleInputName2">Organisation &nbsp;</label>
                   <select class="form-control">
-                    <option selected="">Company 1</option>
-                    <option>Company 2</option>
-                    <option>Company 3</option>
-                    <option>Company 4</option>
-                    <option>Company 5</option>
+                    <option selected="">Select Organization</option>
+                    <?php foreach($organizations as $organizations){ ?>
+                    <option value="<?php echo $organizations->id ?>"><?php echo $organizations->organization_name ?></option>
+                    <?php }?>
                   </select>
                 </div><br>
                 <div class="form-group col-sm-7">
                   <label for="exampleInputName2">Job &nbsp;</label>
                   <select class="form-control">
-                    <option selected="">Company 1</option>
-                    <option>Company 2</option>
-                    <option>Company 3</option>
-                    <option>Company 4</option>
-                    <option>Company 5</option>
+                    <option selected="">Select Job</option>
+                    <?php foreach($jobs as $jobs){ ?>
+                    <option value="<?php echo $jobs->id ?>"><?php echo $jobs->job_name ?></option>
+                    <?php }?>
                   </select>
                 </div><br>
                 <div class="form-group col-sm-7">

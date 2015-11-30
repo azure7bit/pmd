@@ -69,7 +69,6 @@ class BranchesTable extends Table
             ->notEmpty('created_by');
 
         $validator
-            ->add('creation_date', 'valid', ['rule' => 'date'])
             ->requirePresence('creation_date', 'create')
             ->notEmpty('creation_date');
 
@@ -79,7 +78,6 @@ class BranchesTable extends Table
             ->notEmpty('last_updated_by');
 
         $validator
-            ->add('last_update_date', 'valid', ['rule' => 'date'])
             ->requirePresence('last_update_date', 'create')
             ->notEmpty('last_update_date');
 

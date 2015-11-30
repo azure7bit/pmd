@@ -20,7 +20,12 @@ class JobsTableTest extends TestCase
         'app.jobs',
         'app.applicant_job_lists',
         'app.applicants',
-        'app.vacancies'
+        'app.social_accounts',
+        'app.users',
+        'app.vacancies',
+        'app.companies',
+        'app.branches',
+        'app.organizations'
     ];
 
     /**
@@ -73,6 +78,16 @@ class JobsTableTest extends TestCase
      * @return void
      */
     public function testBuildRules()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test totalJob method
+     *
+     * @return void
+     */
+    public function testTotalJob()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

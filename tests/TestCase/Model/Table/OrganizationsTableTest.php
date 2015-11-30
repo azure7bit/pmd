@@ -18,7 +18,14 @@ class OrganizationsTableTest extends TestCase
      */
     public $fixtures = [
         'app.organizations',
-        'app.vacancies'
+        'app.vacancies',
+        'app.companies',
+        'app.branches',
+        'app.jobs',
+        'app.applicant_job_lists',
+        'app.applicants',
+        'app.social_accounts',
+        'app.users'
     ];
 
     /**

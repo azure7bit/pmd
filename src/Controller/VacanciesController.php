@@ -28,6 +28,11 @@ class VacanciesController extends AppController
 
     public function add()
     {
+        $this->loadModel('Companies');
+        $this->loadModel('Branches');
+        $this->loadModel('Organizations');
+        $this->loadModel('Jobs');
+
         $vacancy = $this->Vacancies->newEntity();
         if ($this->request->is('post')) {
             $vacancy = $this->Vacancies->patchEntity($vacancy, $this->request->data);
@@ -38,7 +43,12 @@ class VacanciesController extends AppController
                 $this->Flash->error(__('The applicant could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('vacancy'));
+        $companies = $this->Companies->find();
+        $branches = $this->Branches->find();
+        $jobs = $this->Jobs->find();
+        $organizations = $this->Organizations->find();
+
+        $this->set(compact('vacancy','companies','branches','organizations','jobs'));
         $this->set('_serialize', ['vacancy']);
     }
 

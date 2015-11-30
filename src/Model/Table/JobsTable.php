@@ -73,7 +73,6 @@ class JobsTable extends Table
             ->notEmpty('created_by');
 
         $validator
-            ->add('creation_date', 'valid', ['rule' => 'date'])
             ->requirePresence('creation_date', 'create')
             ->notEmpty('creation_date');
 
@@ -83,7 +82,6 @@ class JobsTable extends Table
             ->notEmpty('last_updated_by');
 
         $validator
-            ->add('last_update_date', 'valid', ['rule' => 'date'])
             ->requirePresence('last_update_date', 'create')
             ->notEmpty('last_update_date');
 
@@ -101,9 +99,5 @@ class JobsTable extends Table
     {
         $rules->add($rules->existsIn(['job_id'], 'Jobs'));
         return $rules;
-    }
-
-    public function totalJob(){
-      return $this->find('all')->count();
     }
 }

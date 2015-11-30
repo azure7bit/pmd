@@ -12,7 +12,7 @@
 
     <?= $this->Html->css('bootstrap.css') ?>
     <?= $this->Html->css('style.css') ?>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"> -->
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -137,12 +137,10 @@
           </a>
           <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
             <div>
-              <a href="vacancy.html" class="itemsubs list-group-item">
+              <a href="vacancies/add" class="itemsubs list-group-item">
                 <i class="fa fa-search"></i> Create Vacancy
-              </a>
-              <a href="table-vacancy.html" class="itemsubs list-group-item">
-                <i class="fa fa-search"></i> Manage Vacancy
-              </a>
+              </a>              
+              <?php echo $this->Html->link('<i class="fa fa-search"></i> Manage Vacancy','/vacancies', ['class' => 'btn btn-primary']);?>
             </div>
           </div>
 
