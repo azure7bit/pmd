@@ -13,7 +13,8 @@ class CreateApplicantOrganizations extends AbstractMigration
     public function change()
     {
         $table = $this->table('applicant_organizations', ['id' => true, 'primary_key' => ['id']]);
-        $table->addColumn('institution', 'string', ['null'=>false])
+        $table->addColumn('applicant', 'string', ['null'=>false])
+              ->addColumn('institution', 'string', ['null'=>false])
               ->addColumn('position', 'string', ['null'=>false])
               ->addColumn('start', 'date', ['null'=>false])
               ->addColumn('end', 'date', ['null'=>false])

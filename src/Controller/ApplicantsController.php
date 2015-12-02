@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\Admin;
+namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
@@ -8,7 +8,7 @@ use Cake\Event\Event;
  *
  * @property \App\Model\Table\ApplicantsTable $Applicants
  */
-class ApplicantsController extends AdminController
+class ApplicantsController extends AppController
 {
 
     /**

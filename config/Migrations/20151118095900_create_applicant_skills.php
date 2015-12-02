@@ -13,7 +13,8 @@ class CreateApplicantSkills extends AbstractMigration
     public function change()
     {
         $table = $this->table('applicant_skills', ['id' => true, 'primary_key' => ['id']]);
-        $table->addColumn('certification', 'string', ['null'=>false])
+        $table->addColumn('applicant', 'string', ['null'=>false])
+              ->addColumn('certification', 'string', ['null'=>false])
               ->addColumn('city', 'string', ['null'=>false])
               ->addColumn('how_long', 'string', ['null'=>false])
               ->addColumn('year', 'date', ['null'=>false])

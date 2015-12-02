@@ -11,8 +11,13 @@
         <?= $this->Form->create($vacancy, ['class' => 'form-horizontal']) ?>
           <div class="form-group" align="left">
             <div class="col-sm-5">                            
+              <?= $this->Form->input('vacancy_code',['class' => 'form-control']) ?>
+            </div>
+
+            <div class="col-sm-5">                            
               <?= $this->Form->input('vacancy_name',['class' => 'form-control']) ?>
             </div>
+
           </div>        
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
           Add Description

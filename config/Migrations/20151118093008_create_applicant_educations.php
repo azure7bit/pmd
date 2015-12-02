@@ -13,13 +13,15 @@ class CreateApplicantEducations extends AbstractMigration
     public function change()
     {
         $table = $this->table('applicant_educations', ['id' => true, 'primary_key' => ['id']]);
-        $table->addColumn('level', 'string', ['null'=>false])
+        $table->addColumn('applicant', 'string', ['null'=>false])
+              ->addColumn('level', 'string', ['null'=>false])
               ->addColumn('institution', 'string', ['null'=>false])
               ->addColumn('city', 'string', ['null'=>false])
               ->addColumn('major', 'string', ['null'=>false])
               ->addColumn('start', 'date', ['null'=>false])
               ->addColumn('end', 'date', ['null'=>false])
               ->addColumn('ipk', 'decimal', ['null'=>false])
+              ->addColumn('gpa', 'decimal', ['null'=>false])
               ->addColumn('created_by', 'integer')
               ->addColumn('creation_date', 'timestamp')
               ->addColumn('last_updated_by', 'integer')

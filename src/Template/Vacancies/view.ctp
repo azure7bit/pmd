@@ -1,4 +1,4 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Vacancy'), ['action' => 'edit', $vacancy->id]) ?> </li>
@@ -16,9 +16,9 @@
         <li><?= $this->Html->link(__('List Vacancies'), ['controller' => 'Vacancies', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Vacancy'), ['controller' => 'Vacancies', 'action' => 'add']) ?> </li>
     </ul>
-</nav>
+</nav> -->
 <div class="vacancies view large-9 medium-8 columns content">
-    <h3><?= h($vacancy->id) ?></h3>
+    <h3><?= h($vacancy->vacancy_name) ?></h3>
     <table class="vertical-table">
         <tr>
             <th><?= __('Vacancy Code') ?></th>
@@ -30,19 +30,19 @@
         </tr>
         <tr>
             <th><?= __('Company') ?></th>
-            <td><?= $vacancy->has('company') ? $this->Html->link($vacancy->company->id, ['controller' => 'Companies', 'action' => 'view', $vacancy->company->id]) : '' ?></td>
+            <td><?= $vacancy->has('company') ? $this->Html->link($vacancy->company->company_name, ['controller' => 'Companies', 'action' => 'view', $vacancy->company->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Branch') ?></th>
-            <td><?= $vacancy->has('branch') ? $this->Html->link($vacancy->branch->id, ['controller' => 'Branches', 'action' => 'view', $vacancy->branch->id]) : '' ?></td>
+            <td><?= $vacancy->has('branch') ? $this->Html->link($vacancy->branch->branch_name, ['controller' => 'Branches', 'action' => 'view', $vacancy->branch->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Organization') ?></th>
-            <td><?= $vacancy->has('organization') ? $this->Html->link($vacancy->organization->id, ['controller' => 'Organizations', 'action' => 'view', $vacancy->organization->id]) : '' ?></td>
+            <td><?= $vacancy->has('organization') ? $this->Html->link($vacancy->organization->organization_name, ['controller' => 'Organizations', 'action' => 'view', $vacancy->organization->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Job') ?></th>
-            <td><?= $vacancy->has('job') ? $this->Html->link($vacancy->job->id, ['controller' => 'Jobs', 'action' => 'view', $vacancy->job->id]) : '' ?></td>
+            <td><?= $vacancy->has('job') ? $this->Html->link($vacancy->job->job_name, ['controller' => 'Jobs', 'action' => 'view', $vacancy->job->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('People Category Code') ?></th>
