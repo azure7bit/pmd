@@ -35,8 +35,8 @@ public function initialize(){
      */
     public function index()
     {           
-      $count_applicant = $this->Applicants->totalApplicant();
-      $count_job       = $this->Jobs->totalJob();
+      $count_applicant = $this->Applicants->find('all')->count();
+      $count_job       = $this->Jobs->find('all')->count();
       $this->set('dashboards');
       $this->set('_serialize', ['dashboards','row_applicant']);      
       $this->set(compact('count_applicant','count_job'));

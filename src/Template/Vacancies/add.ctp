@@ -1,33 +1,3 @@
-<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Applicants'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Applicant Job Lists'), ['controller' => 'ApplicantJobLists', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Applicant Job List'), ['controller' => 'ApplicantJobLists', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="applicants form large-9 medium-8 columns content">
-    <?= $this->Form->create($applicant, ['type' => "file"]) ?>
-    <fieldset>
-        <legend><?= __('Add Applicant') ?></legend>
-        <?php
-            echo $this->Form->input('id_card');
-            echo $this->Form->input('full_name');
-            echo $this->Form->input('email');
-            echo $this->Form->input('password');
-            echo $this->Form->input('address');
-            echo $this->Form->input('place_of_birth');
-            echo $this->Form->input('birthdate', ['minYear' => date('Y') - 40, 'maxYear' => date('Y') - 19,]);            
-            echo $this->Form->input('religion');
-            echo $this->Form->input('blood_type');
-            echo $this->Form->input('phone_number');
-            echo $this->Form->input('gender');
-            echo $this->Form->file('avatar');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div> -->
 <div class="container">
     <div class="row">
       <ol class="breadcrumb">
@@ -38,122 +8,75 @@
       <div class="col-lg-9"> 
         <h2>Create Vacancy</h2>
         <hr>
-        <form class="form-horizontal">
+        <?= $this->Form->create($vacancy, ['class' => 'form-horizontal']) ?>
           <div class="form-group" align="left">
-            <label for="inputEmail3" class="col-sm-2 control-label">Vacancy Name</label>
-            <div class="col-sm-5">
-              <input type="text" class="form-control" id="inputEmail3" placeholder="">
+            <div class="col-sm-5">                            
+              <?= $this->Form->input('vacancy_name',['class' => 'form-control']) ?>
             </div>
-          </div>
-        </form>
+          </div>        
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
           Add Description
         </button>
         <div class="collapse" id="collapseExample">
           <div>
-            <br>
-            <form>
-                <div class="form-group col-sm-7">
-                  <label for="exampleInputName2">Company &nbsp;</label>
-                  <select class="form-control">
-                    <option selected="">Select Company</option>
-                    <?php foreach($companies as $companies){ ?>
-                    <option value="<?php echo $companies->id ?>"><?php echo $companies->company_name ?></option>
-                    <?php }?>                    
-                  </select>
+            <br>        
+                <div class="form-group col-sm-7">                  
+                  <?= $this->Form->input('company_id', ['options'=>$companies, 'class' => 'form-control']) ?>                 
+                </div><br>
+                <div class="form-group col-sm-7">                  
+                  <?= $this->Form->input('branch_id', ['options'=>$branches, 'class' => 'form-control']) ?>
                 </div><br>
                 <div class="form-group col-sm-7">
-                  <label for="exampleInputName2">Branch &nbsp;</label>
-                  <select class="form-control">
-                    <option selected="">Select Branch</option>
-                    <?php foreach($branches as $branches){ ?>
-                    <option value="<?php echo $branches->id ?>"><?php echo $branches->branch_name ?></option>
-                    <?php }?>                    
-                  </select>
+                  <?= $this->Form->input('organization_id', ['options'=>$organizations, 'class' => 'form-control']) ?>
                 </div><br>
                 <div class="form-group col-sm-7">
-                  <label for="exampleInputName2">Organisation &nbsp;</label>
-                  <select class="form-control">
-                    <option selected="">Select Organization</option>
-                    <?php foreach($organizations as $organizations){ ?>
-                    <option value="<?php echo $organizations->id ?>"><?php echo $organizations->organization_name ?></option>
-                    <?php }?>
-                  </select>
+                  <?= $this->Form->input('job_id', ['options'=>$jobs, 'class' => 'form-control']) ?>
                 </div><br>
                 <div class="form-group col-sm-7">
-                  <label for="exampleInputName2">Job &nbsp;</label>
-                  <select class="form-control">
-                    <option selected="">Select Job</option>
-                    <?php foreach($jobs as $jobs){ ?>
-                    <option value="<?php echo $jobs->id ?>"><?php echo $jobs->job_name ?></option>
-                    <?php }?>
-                  </select>
+                  <?= $this->Form->input('people_category_code',['class' => 'form-control']) ?>
                 </div><br>
                 <div class="form-group col-sm-7">
-                  <label for="exampleInputName2">People Category &nbsp;</label>
-                  <select class="form-control">
-                    <option selected="">Company 1</option>
-                    <option>Company 2</option>
-                    <option>Company 3</option>
-                    <option>Company 4</option>
-                    <option>Company 5</option>
-                  </select>
-                </div><br>
-                <div class="form-group col-sm-7">
-                  <label for="exampleInputName2">Employment Category &nbsp;</label>
-                  <select class="form-control">
-                    <option selected="">Company 1</option>
-                    <option>Company 2</option>
-                    <option>Company 3</option>
-                    <option>Company 4</option>
-                    <option>Company 5</option>
-                  </select>
-                </div><br>
-            </form>
-            <form>
+                  <?= $this->Form->input('employment_category_code',['class' => 'form-control']) ?>
+                </div><br>            
+            
               <div class="form-group col-sm-7">
                 <label for="exampleInputquest">Valid</label>
                 <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/31/2015" />
               </div>
-            </form>
-            <form>
+                    
               <div class="form-group col-sm-7">
                 <label for="exampleInputquest">Required Person</label>
-                <input type="number" class="form-control"/>
+                <input type="number" name="required_personnel" class="form-control"/>
               </div>
-            </form>
-            <form>
+                 
               <div class="form-group col-sm-7">
                 <label for="exampleInputquest">Vacancy Status</label>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                    <input type="radio" name="vacancy_status_code" id="optionsRadios1" value="option1" checked>
                     Open
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                    <input type="radio" name="vacancy_status_code" id="optionsRadios2" value="option2">
                     Closed
                   </label>
                 </div>
               </div>
-            </form>
-            <form>
               <div class="form-group col-sm-7">
-                <label for="exampleInputquest">Remark</label>
-                <textarea type="text" class="form-control" id="exampleInputquest" placeholder=""></textarea>
-              </div>
-            </form>
+                <?= $this->Form->input('remark',['class' => 'form-control']) ?>
+              </div>            
           </div>
         </div>
         <div class="clearfix"></div><br>
-        <button class="btn btn-success" type="button">
+        <button type="submit" class="btn btn-success">
           Save
         </button>
         <button class="btn btn-warning" type="button">
           Reset
         </button>
+        <?= $this->Form->end() ?>
         <table>
           <tr>
             <td></td>

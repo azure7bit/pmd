@@ -24,6 +24,8 @@ class VacanciesTableTest extends TestCase
         'app.jobs',
         'app.applicant_job_lists',
         'app.applicants',
+        'app.social_accounts',
+        'app.users',
         'app.process_versions'
     ];
 

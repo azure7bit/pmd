@@ -34,9 +34,9 @@ class VacanciesFixture extends TestFixture
         'remark' => ['type' => 'text', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'process_version_id' => ['type' => 'integer', 'length' => 15, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'created_by' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'creation_date' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'creation_date' => ['type' => 'timestamp', 'length' => null, 'null' => false, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
         'last_updated_by' => ['type' => 'integer', 'length' => 15, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'last_update_date' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'last_update_date' => ['type' => 'timestamp', 'length' => null, 'null' => false, 'default' => '0000-00-00 00:00:00', 'comment' => '', 'precision' => null],
         '_indexes' => [
             'vacancy_code' => ['type' => 'index', 'columns' => ['vacancy_code'], 'length' => []],
             'company_id' => ['type' => 'index', 'columns' => ['company_id'], 'length' => []],
@@ -72,16 +72,16 @@ class VacanciesFixture extends TestFixture
             'job_id' => 1,
             'people_category_code' => 'Lorem ipsum dolor sit amet',
             'employment_category_code' => 'Lorem ipsum dolor sit amet',
-            'valid_date_from' => '2015-11-11',
-            'valid_date_to' => '2015-11-11',
+            'valid_date_from' => '2015-12-01',
+            'valid_date_to' => '2015-12-01',
             'required_personnel' => 1,
             'vacancy_status_code' => 'Lorem ipsum dolor sit amet',
             'remark' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
             'process_version_id' => 1,
             'created_by' => 1,
-            'creation_date' => '2015-11-11',
+            'creation_date' => 1448947477,
             'last_updated_by' => 1,
-            'last_update_date' => '2015-11-11'
+            'last_update_date' => 1448947477
         ],
     ];
 }

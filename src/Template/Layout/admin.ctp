@@ -140,7 +140,8 @@
               <a href="vacancies/add" class="itemsubs list-group-item">
                 <i class="fa fa-search"></i> Create Vacancy
               </a>              
-              <?php echo $this->Html->link('<i class="fa fa-search"></i> Manage Vacancy','/vacancies', ['class' => 'btn btn-primary']);?>
+              <?= $this->Html->link($this->Html->tag('i', 'vacancies', ['class' => 'fa fa-facebook'
+            ]), ['controller' => 'Vacancies', 'action'=>'index'], ['escape' => false, 'class' => 'btn btn-primary']); ?>
             </div>
           </div>
 

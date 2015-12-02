@@ -3,32 +3,47 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $applicant->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $applicant->id)]
+                ['action' => 'delete', $vacancy->id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $vacancy->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Applicants'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Applicant Job Lists'), ['controller' => 'ApplicantJobLists', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Applicant Job List'), ['controller' => 'ApplicantJobLists', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Vacancies'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Companies'), ['controller' => 'Companies', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Branches'), ['controller' => 'Branches', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Branch'), ['controller' => 'Branches', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Organizations'), ['controller' => 'Organizations', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Organization'), ['controller' => 'Organizations', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Jobs'), ['controller' => 'Jobs', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Job'), ['controller' => 'Jobs', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Vacancies'), ['controller' => 'Vacancies', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Vacancy'), ['controller' => 'Vacancies', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="applicants form large-9 medium-8 columns content">
-    <?= $this->Form->create($applicant) ?>
+<div class="vacancies form large-9 medium-8 columns content">
+    <?= $this->Form->create($vacancy) ?>
     <fieldset>
-        <legend><?= __('Edit Applicant') ?></legend>
+        <legend><?= __('Edit Vacancy') ?></legend>
         <?php
-            echo $this->Form->input('id_card');
-            echo $this->Form->input('full_name');
-            echo $this->Form->input('email');
-            echo $this->Form->input('password');
-            echo $this->Form->input('address');
-            echo $this->Form->input('place_of_birth');
-            echo $this->Form->input('birthdate');
-            echo $this->Form->input('religion');
-            echo $this->Form->input('blood_type');
-            echo $this->Form->input('phone_number');
-            echo $this->Form->input('gender');
-            echo $this->Form->file('avatar');            
+            echo $this->Form->input('vacancy_id');
+            echo $this->Form->input('vacancy_code');
+            echo $this->Form->input('vacancy_name');
+            echo $this->Form->input('company_id', ['options' => $companies]);
+            echo $this->Form->input('branch_id', ['options' => $branches]);
+            echo $this->Form->input('organization_id', ['options' => $organizations]);
+            echo $this->Form->input('job_id', ['options' => $jobs]);
+            echo $this->Form->input('people_category_code');
+            echo $this->Form->input('employment_category_code');
+            echo $this->Form->input('valid_date_from');
+            echo $this->Form->input('valid_date_to');
+            echo $this->Form->input('required_personnel');
+            echo $this->Form->input('vacancy_status_code');
+            echo $this->Form->input('remark');
+            echo $this->Form->input('process_version_id');
+            echo $this->Form->input('created_by');
+            echo $this->Form->input('creation_date');
+            echo $this->Form->input('last_updated_by');
+            echo $this->Form->input('last_update_date');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
