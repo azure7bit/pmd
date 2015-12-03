@@ -120,9 +120,7 @@
           </a>
           <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
             <div>
-              <a href="manage-applicant.html" class="itemsubs list-group-item">
-                <i class="fa fa-search"></i> Manage Applicants
-              </a>
+              <?= $this->Html->link($this->Html->tag('i', 'Manage Applicants', ['class' => 'fa fa-facebook']), ['controller' => 'applicants', 'action'=>'index'], ['escape' => false, 'class' => 'itemsubs list-group-item']); ?>
               <a href="#" class="itemsubs list-group-item">
                 <i class="fa fa-search"></i> Schedule Psikotes
               </a>
@@ -140,8 +138,7 @@
               <a href="vacancies/add" class="itemsubs list-group-item">
                 <i class="fa fa-search"></i> Create Vacancy
               </a>              
-              <?= $this->Html->link($this->Html->tag('i', 'vacancies', ['class' => 'fa fa-facebook'
-            ]), ['controller' => 'Vacancies', 'action'=>'index'], ['escape' => false, 'class' => 'btn btn-primary']); ?>
+              <?= $this->Html->link($this->Html->tag('i', 'vacancies', ['class' => 'fa fa-facebook']), ['controller' => 'Vacancies', 'action'=>'index'], ['escape' => false, 'class' => 'itemsubs list-group-item']); ?>
             </div>
           </div>
 
@@ -158,6 +155,21 @@
               </a>
             </div>
           </div>
+
+          <a class="list-group-item active" role="button" data-toggle="collapse" data-parent="#accordion" href="#companies" aria-expanded="true" aria-controls="collapseOne">
+            <i class="fa fa-envelope"></i> Companies <i class="fa fa-angle-down pull-right"></i>
+          </a>
+          <div id="companies" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div>
+              <a href="index.html" class="itemsubs list-group-item">
+                <i class="fa fa-search"></i> Create Companies
+              </a>
+              <a href="#" class="itemsubs list-group-item">
+                <i class="fa fa-search"></i> Manage Companies
+              </a>
+            </div>
+          </div>
+
         </div>         
       </div>
           <!-- END NAVBAR  -->
