@@ -46,46 +46,17 @@ class CreateApplicants extends AbstractMigration
       ->addColumn('have_friend', 'string', ['null'=>true])
       ->addColumn('located_all', 'string', ['null'=>true])
       ->addColumn('business_trip', 'string', ['null'=>true])
-      ->addColumn('active', 'boolean', ['default' => false, 'null'=>true])      
       ->addColumn('slug', 'string', ['null' => false])
+      ->addColumn('active', 'boolean', ['null' => false, 'default' => false])
+      ->addColumn('token', 'string', ['default' => null, 'limit' => 255, 'null' => true,])
+      ->addColumn('token_expires', 'datetime', ['default' => null, 'limit' => null, 'null' => true,])
+      ->addColumn('api_token', 'string', ['default' => null, 'limit' => 255, 'null' => true,])
+      ->addColumn('activation_date', 'datetime', ['default' => null, 'limit' => null, 'null' => true,])
+      ->addColumn('tos_date', 'datetime', ['default' => null, 'limit' => null, 'null' => true,])
+      ->addColumn('created', 'datetime', ['default' => null, 'limit' => null, 'null' => false,])
+      ->addColumn('modified', 'datetime', ['default' => null, 'limit' => null, 'null' => false,])
       ->addIndex('slug',['unique'=>1])
       ->addIndex('email',['unique'=>1])
-      ->addColumn('token', 'string', [
-          'default' => null,
-          'limit' => 255,
-          'null' => true,
-      ])
-      ->addColumn('token_expires', 'datetime', [
-          'default' => null,
-          'limit' => null,
-          'null' => true,
-      ])
-      ->addColumn('api_token', 'string', [
-          'default' => null,
-          'limit' => 255,
-          'null' => true,
-      ])
-      ->addColumn('activation_date', 'datetime', [
-          'default' => null,
-          'limit' => null,
-          'null' => true,
-      ])
-      ->addColumn('tos_date', 'datetime', [
-          'default' => null,
-          'limit' => null,
-          'null' => true,
-      ])      
-      
-      ->addColumn('created', 'datetime', [
-          'default' => null,
-          'limit' => null,
-          'null' => false,
-      ])
-      ->addColumn('modified', 'datetime', [
-          'default' => null,
-          'limit' => null,
-          'null' => false,
-      ])
       ->create();
   }
 }
