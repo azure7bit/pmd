@@ -17,7 +17,7 @@ use Cake\Core\Configure;
     <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __d('Users', 'Please enter your username and password') ?></legend>
-        <?= $this->Form->input('username', ['required' => true]) ?>
+        <?= $this->Form->input('email', ['required' => true]) ?>
         <?= $this->Form->input('password', ['required' => true]) ?>
         <?php
         if (Configure::check('Users.RememberMe.active')) {

@@ -42,10 +42,10 @@ class CreateApplicants extends AbstractMigration
       ->addColumn('blood_type', 'string', ['limit'=>2, 'null'=>true])  
       ->addColumn('place_of_birth', 'string', ['null'=>true])
       ->addColumn('birthdate','date', ['null'=>true, 'default'=>null])
-      ->addColumn('interest', 'string', ['null'=>true])
+      ->addColumn('job_id', 'integer', ['null'=>true])
       ->addColumn('have_friend', 'string', ['null'=>true])
-      ->addColumn('located_all', 'string', ['null'=>true])
-      ->addColumn('business_trip', 'string', ['null'=>true])
+      ->addColumn('located_all', 'boolean', ['null'=>true, 'default'=>false])
+      ->addColumn('business_trip', 'boolean', ['null'=>true, 'default'=>false])
       ->addColumn('slug', 'string', ['null' => false])
       ->addColumn('active', 'boolean', ['null' => false, 'default' => false])
       ->addColumn('token', 'string', ['default' => null, 'limit' => 255, 'null' => true,])
@@ -57,6 +57,7 @@ class CreateApplicants extends AbstractMigration
       ->addColumn('modified', 'datetime', ['default' => null, 'limit' => null, 'null' => false,])
       ->addIndex('slug',['unique'=>1])
       ->addIndex('email',['unique'=>1])
+      ->addIndex('job_id', ['unique'=>1])
       ->create();
   }
 }

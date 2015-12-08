@@ -6,7 +6,7 @@
       <div class="col-md-4 col-md-offset-4">
         <div class="box-login">
           <?= $this->Flash->render('auth') ?>
-          <center><h2><legend><?= __d('Users', 'Please enter your username and password') ?></legend></h2></center>           
+          <center><h2><legend><?= __d('Users', 'Please enter your email and password') ?></legend></h2></center>           
            <?= $this->Form->create(null,['class' => 'form-horizontal']) ?>
             <fieldset>
               <!-- Text input-->
@@ -44,6 +44,8 @@
                   echo $this->Html->link(__d('users', 'Reset Password'), ['action' => 'requestResetPassword']);
               }
               ?>
+
+              <?= $this->Html->link(__d('users', 'Sign Up'), ['action' => 'register']); ?>
               <br><br>
               <!-- Button -->
               <div class="form-group nomargin">

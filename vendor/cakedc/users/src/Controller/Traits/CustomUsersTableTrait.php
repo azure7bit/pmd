@@ -33,7 +33,7 @@ trait CustomUsersTableTrait
         if ($this->_usersTable instanceof Table) {
             return $this->_usersTable;
         }
-        $this->_usersTable = !empty($default) ? TableRegistry::get(Configure::read('Users.table')) : TableRegistry::get(Configure::read('applicants.table'));
+        $this->_usersTable = TableRegistry::get(Configure::read('Users.table'));
         return $this->_usersTable;
     }
 

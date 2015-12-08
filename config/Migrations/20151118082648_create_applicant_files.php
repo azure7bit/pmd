@@ -19,6 +19,7 @@ class CreateApplicantFiles extends AbstractMigration
             ->addColumn('asset_type', 'string', ['null'=>false])                        
             ->addColumn('creation_date', 'timestamp')            
             ->addColumn('last_update_date', 'timestamp')
+            ->addIndex('applicant_id')
             ->create();
     }
 }

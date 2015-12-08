@@ -17,6 +17,6 @@ use CakeDC\Users\Controller\Traits\RegisterTrait;
 class AuthenticationsController extends AppController
 {
 
-	 use LoginTrait;
-   use RegisterTrait;
+ use LoginTrait;
+ use RegisterTrait;
 }

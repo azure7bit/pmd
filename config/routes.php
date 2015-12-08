@@ -50,7 +50,9 @@ Router::scope('/', function ($routes) {
     $routes->connect('/', ['controller' => 'Dashboards', 'action' => 'index']);
     $routes->connect('/login', ['controller' => 'Authentications', 'action' => 'login', 'plugin' => null]);
     $routes->connect('/logout', ['controller' => 'Authentications', 'action' => 'logout']);
-    $routes->connect('/validateEmail', ['controller' => 'Authentications', 'action' => 'validateEmail', 'plugin' => null]);
+    $routes->connect('/register', ['controller' => 'Authentications', 'action' => 'register']);
+    $routes->connect('/validateEmail', ['controller' => 'Authentications', 
+        'action' => 'validateEmail', 'plugin' => null]);
     
     $routes->resources('Applicants');
 

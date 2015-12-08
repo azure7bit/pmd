@@ -12,7 +12,7 @@ $activationUrl = [
     '_full' => true,
     'plugin' => null,
     'controller' => 'Authentications',
-    'action' => 'validateEmail','prefix' => 'admin',
+    'action' => 'validateEmail',
     isset($token) ? $token : ''
 ];
 

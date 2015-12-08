@@ -20,6 +20,7 @@ class CreateApplicantSkills extends AbstractMigration
               ->addColumn('description', 'text', ['null'=>true, 'default'=>null])              
               ->addColumn('creation_date', 'timestamp')
               ->addColumn('last_update_date', 'timestamp')
+              ->addIndex('applicant_id')
               ->create();
     }
 }

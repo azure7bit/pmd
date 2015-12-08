@@ -15,7 +15,6 @@ public function initialize()
         // Always enable the MyUtils Helper
         parent::initialize();
         $this->loadComponent('Flash');
-        $this->loadComponent('CakeDC/Users.UsersAuth'); //CAKEDC
         $this->viewBuilder()->layout('admin');
     }
    

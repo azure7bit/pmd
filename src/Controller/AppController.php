@@ -33,35 +33,41 @@ class AppController extends Controller {
     public function initialize()
     {
       // Always enable the MyUtils Helper
-      parent::initialize();        
-      $this->viewBuilder()->layout('admin');        
+      parent::initialize();
+      $this->loadComponent('Flash');
+      $this->loadComponent('UsersAuth');
+      // $this->Auth->fields = array(
+      //   'username' => 'email',
+      //   'password' => 'password'
+      // );
+      $this->viewBuilder()->layout('admin');
     }
 
-    public $components = [
-      'Auth' ,
-      'Flash',
-    ];
+    // public $components = [
+    //   'Auth' ,
+    //   'Flash',
+    // ];
 
-    protected $_UsersAutentication = array(
-      'authenticate'=> [
-        AuthComponent::ALL => ['userModel' => 'Users'],
-        'Form' => [
-          'fields' => ['username' => 'email', 'password' => 'password']
-        ],
-      ],
-      'sessionKey' => 'Auth.Admin', 
-      'loginAction' => ['controller' => 'Authentications', 'action' => 'login', 'admin' => true], 
-      'loginRedirect' => '/', 
-      'logoutRedirect' => '/login');
+    // protected $_UsersAutentication = array(
+    //   'authenticate'=> [
+    //     AuthComponent::ALL => ['userModel' => 'Users'],
+    //     'Form' => [
+    //       'fields' => ['username' => 'email', 'password' => 'password']
+    //     ],
+    //   ],
+    //   'sessionKey' => 'Auth.Admin', 
+    //   'loginAction' => ['controller' => 'Authentications', 'action' => 'login', 'admin' => true], 
+    //   'loginRedirect' => '/', 
+    //   'logoutRedirect' => '/login');
 
 
-    public $helpers = ['Form'];
+    // public $helpers = ['Form'];
 
-    public function beforeFilter(Event $e) 
-    {
-      $name = $this->request->session()->read();
-      $this->_manageAuthConfigs();
-    }
+    // public function beforeFilter(Event $e) 
+    // {
+    //   $name = $this->request->session()->read();
+    //   $this->_manageAuthConfigs();
+    // }
 
     // protected function isPrefix($prefix)
     // {
@@ -71,23 +77,23 @@ class AppController extends Controller {
 
     public function beforeRender(Event $e) {
       // set in the view the currentUser
-
+      $user = $this->Auth->user();
       $authUser = !empty($this->Auth->user()) ? $this->Auth->user() : null;
-      $this->set(['authUser'=>$authUser]);
+      $this->set(['authUser'=>$authUser, 'user' => $user]);
 
       // set in view the body class
       $this->set('bodyClass', 
         sprintf('%s %s', strtolower($this->name), strtolower($this->name) . '-' . strtolower($this->request->params['action'])));
     }
 
-    private function _manageAuthConfigs() {
+    // private function _manageAuthConfigs() {
 
-      $this->Auth->config($this->_ApplicantsAutentication);          
+    //   $this->Auth->config($this->_ApplicantsAutentication);          
 
-      $this->Auth->config($this->_UsersAutentication);
-      $this->Auth->allow();
+    //   $this->Auth->config($this->_UsersAutentication);
+    //   $this->Auth->allow();
 
-    }
+    // }
 
 
 }

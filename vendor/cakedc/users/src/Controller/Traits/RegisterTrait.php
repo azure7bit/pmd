@@ -37,7 +37,7 @@ trait RegisterTrait
         if (!Configure::read('Users.Registration.active')) {
             throw new NotFoundException();
         }
-        $usersTable = $this->isPrefix('admin') ? $this->getUsersTable('admins') : $this->getUsersTable();
+        $usersTable = $this->getUsersTable();
         $user = $usersTable->newEntity();
 
         $validateEmail = (bool)Configure::read('Users.Email.validate');
@@ -76,8 +76,10 @@ trait RegisterTrait
             $this->Flash->error(__d('Users', 'The reCaptcha could not be validated'));
             return;
         }
+
+        debug($usersTable);
         $userSaved = $usersTable->register($user, $requestData, $options);
-     
+    
         if (!$userSaved) {
             $this->Flash->error(__d('Users', 'The user could not be saved'));
             return;

@@ -36,7 +36,7 @@
           <h1><a href=""><?= $this->fetch('title') ?></a></h1>
         </li>
         <?php if (!empty($authUser)): ?>
-          <li><?= $is_admin ? $this->User->admin_logout() : $this->User->applicant_logout() ?> </li>
+          <li><?= $this->User->logout() ?> </li>
         <?php endif ?>
       </ul>
       <section class="top-bar-section"></section>

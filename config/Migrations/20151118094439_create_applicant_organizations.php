@@ -20,6 +20,7 @@ class CreateApplicantOrganizations extends AbstractMigration
               ->addColumn('end_year', 'date', ['null'=>false])
               ->addColumn('creation_date', 'timestamp')
               ->addColumn('last_update_date', 'timestamp')
+              ->addIndex('applicant_id')
               ->create();
     }
 }

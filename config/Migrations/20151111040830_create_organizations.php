@@ -28,14 +28,15 @@ class CreateOrganizations extends AbstractMigration
     public function change()
     {
       $table = $this->table('organizations', ['id' => true, 'primary_key' => ['id']]);
-      $table->addColumn('organization_id', 'integer', ['null' => false, 'limit' => 15])
+      $table->addColumn('organization_code', 'integer', ['null' => false, 'limit' => 15])
             ->addColumn('organization_name', 'string', ['limit' => 150])
             ->addColumn('remark', 'text')
+            ->addColumn('slug', 'string', ['null' => false])
             ->addColumn('created_by', 'integer', ['null'=>false])
             ->addColumn('creation_date', 'timestamp')
             ->addColumn('last_updated_by', 'integer', ['limit'=>15])
             ->addColumn('last_update_date', 'timestamp')
-            ->addIndex('organization_id', ['unique'=>1])
+            ->addIndex('organization_code', ['unique'=>1])
             ->create();
     }
 }

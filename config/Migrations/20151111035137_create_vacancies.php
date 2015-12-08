@@ -47,11 +47,12 @@ class CreateVacancies extends AbstractMigration
             ->addColumn('updated_by', 'integer', ['limit' => 3, 'null'=>false])
             ->addColumn('creation_date', 'timestamp')
             ->addColumn('last_update_date', 'timestamp')
-            ->addIndex('vacancy_code')
+            ->addIndex('vacancy_code', ['unique'=>1])
             ->addIndex('company_id')
             ->addIndex('branch_id')
             ->addIndex('organization_id')
             ->addIndex('job_id')
+            ->addIndex('slug',['unique'=>1])
             ->create();
     }
   }

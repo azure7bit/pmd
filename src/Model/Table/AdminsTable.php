@@ -1,19 +1,37 @@
 <?php
+/**
+ * Copyright 2010 - 2015, Cake Development Corporation (http://cakedc.com)
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright Copyright 2010 - 2015, Cake Development Corporation (http://cakedc.com)
+ * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
+ */
+
 namespace App\Model\Table;
 
-use App\Model\Entity\User;
-use Cake\ORM\Query;
+use CakeDC\Users\Exception\WrongPasswordException;
+use App\Model\Entity\Admin;
+use Cake\Datasource\EntityInterface;
+use Cake\Mailer\Email;
 use Cake\ORM\RulesChecker;
+use Cake\ORM\Table;
+use Cake\Utility\Hash;
 use Cake\Validation\Validator;
-use CakeDC\Users\Model\Table\UsersTable;
 
 /**
  * Users Model
- *
- * @property \Cake\ORM\Association\HasMany $SocialAccounts
  */
-class AdminsTable extends UsersTable
+class AdminsTable extends Table
 {
+
+    /**
+     * Flag to set email check in buildRules or not
+     *
+     * @var bool
+     */
+    public $isValidateEmail = false;
 
     /**
      * Initialize method
@@ -28,33 +46,63 @@ class AdminsTable extends UsersTable
         $this->table('users');
         $this->displayField('id');
         $this->primaryKey('id');
-
         $this->addBehavior('Timestamp');
-
+        $this->addBehavior('CakeDC/Users.Register');
+        $this->addBehavior('CakeDC/Users.Password');
+        $this->addBehavior('CakeDC/Users.Social');
         $this->hasMany('SocialAccounts', [
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'className' => 'CakeDC/Users.SocialAccounts'
         ]);
+
+        $this->addBehavior('Sluggable', [
+          'field' => 'name',
+          'implementedFinders' => [
+            'slugged' => 'findSlug',
+          ]
+        ]);
+    }
+
+    /**
+     * Adds some rules for password confirm
+     * @param Validator $validator Cake validator object.
+     * @return Validator
+     */
+    public function validationPasswordConfirm(Validator $validator)
+    {
+        $validator
+            ->requirePresence('password_confirm', 'create')
+            ->notEmpty('password_confirm');
+
+        $validator->add('password', 'custom', [
+            'rule' => function ($value, $context) {
+                $confirm = Hash::get($context, 'data.password_confirm');
+                if (!is_null($confirm) && $value != $confirm) {
+                    return false;
+                }
+                return true;
+            },
+            'message' => __d('Users', 'Your password does not match your confirm password. Please try again'),
+            'on' => ['create', 'update'],
+            'allowEmpty' => false
+        ]);
+
+        return $validator;
     }
 
     /**
      * Default validation rules.
      *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
+     * @param Validator $validator Validator instance.
+     * @return Validator
      */
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->add('id', 'valid', ['rule' => 'uuid'])
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('username', 'create')
-            ->notEmpty('username');
-
-        $validator
-            ->add('email', 'valid', ['rule' => 'email'])
-            ->allowEmpty('email');
+            ->allowEmpty('username');
 
         $validator
             ->requirePresence('password', 'create')
@@ -84,19 +132,19 @@ class AdminsTable extends UsersTable
             ->add('tos_date', 'valid', ['rule' => 'datetime'])
             ->allowEmpty('tos_date');
 
-        $validator
-            ->add('active', 'valid', ['rule' => 'boolean'])
-            ->requirePresence('active', 'create')
-            ->notEmpty('active');
+        return $validator;
+    }
 
-        $validator
-            ->add('is_superuser', 'valid', ['rule' => 'boolean'])
-            ->requirePresence('is_superuser', 'create')
-            ->notEmpty('is_superuser');
-
-        $validator
-            ->allowEmpty('role');
-
+    /**
+     * Wrapper for all validation rules for register
+     * @param Validator $validator Cake validator object.
+     *
+     * @return Validator
+     */
+    public function validationRegister(Validator $validator)
+    {
+        $validator = $this->validationDefault($validator);
+        $validator = $this->validationPasswordConfirm($validator);
         return $validator;
     }
 
@@ -104,13 +152,23 @@ class AdminsTable extends UsersTable
      * Returns a rules checker object that will be used for validating
      * application integrity.
      *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
+     * @param RulesChecker $rules The rules object to be modified.
+     * @return RulesChecker
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['username']));
-        $rules->add($rules->isUnique(['email']));
+        // $rules->add($rules->isUnique(['username']), [
+        //     'errorField' => 'username',
+        //     'message' => __d('Users', 'Username already exists')
+        // ]);
+
+        if ($this->isValidateEmail) {
+            $rules->add($rules->isUnique(['email']), [
+                'errorField' => 'email',
+                'message' => __d('Users', 'Email already exists')
+            ]);
+        }
+
         return $rules;
     }
 }

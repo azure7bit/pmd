@@ -45,7 +45,6 @@ trait LoginTrait
         if (!$this->request->is('post') && !$socialLogin) {
             return;
         }
-
         try {
             $user = $this->Auth->identify();
             return $this->_afterIdentifyUser($user, $socialLogin);
@@ -68,7 +67,6 @@ trait LoginTrait
      */
     protected function _afterIdentifyUser($user, $socialLogin = false)
     {
-        debug($user);
         $socialKey = Configure::read('Users.Key.Session.social');
         if (!empty($user)) {
             $this->request->session()->delete($socialKey);
@@ -78,10 +76,10 @@ trait LoginTrait
                 return $this->redirect($event->result);
             }
             $url = $this->Auth->redirectUrl();
-            debug($url);
+            // debug($url);
             return $this->redirect($url);
         } else {
-            $message = __d('Users', 'Username or password is incorrect');
+            $message = __d('Users', 'Email or password is incorrect');
             if ($socialLogin) {
                 $socialData = $this->request->session()->read($socialKey);
                 $socialDataEmail = null;

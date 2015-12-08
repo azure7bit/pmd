@@ -7,5 +7,9 @@ return [
     'reCaptcha.key' => '6LfmVvcSAAAAAIgnKNvh3dlmhQbT-FJbTkv93YTE',
     'reCaptcha.privateKey'=>'6LfmVvcSAAAAAOCOontVPlQkpLiuLcPnYjJ0CXBw',
     'Users.table' => 'Admins',
-    //etc
+    'Auth.loginAction.plugin' => null,
+    'Auth.loginAction.controller' => 'Authentications',
+    'Auth.loginAction.action' => 'login',
+    'Auth.authenticate.Form.fields.username' => 'email',
+    'Auth.authenticate.Form.fields.password' => 'password',        
 ];

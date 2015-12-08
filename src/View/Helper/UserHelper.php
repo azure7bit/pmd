@@ -80,15 +80,8 @@ class UserHelper extends Helper
      * @param array $options Array with option data.
      * @return string
      */
-    public function admin_logout($message = null, $options = [])
-    {
-       return $this->Html->link(empty($message) ? __d('Users', 'Logout') : $message, [
-        'plugin' => null, 'controller' => 'Authentications', 'action' => 'logout', 'prefix' => 'admin'
-        ], $options);
-    
-    }
 
-    public function applicant_logout($message = null, $options = [])
+    public function logout($message = null, $options = [])
     {
         return $this->Html->link(empty($message) ? __d('Users', 'Logout') : $message, [
         'plugin' => null, 'controller' => 'Authentications', 'action' => 'logout'
