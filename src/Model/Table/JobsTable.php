@@ -30,20 +30,14 @@ class JobsTable extends Table
 
         $this->table('jobs');
         $this->displayField('id');
-        $this->primaryKey('id');
+        $this->primaryKey('JOB_ID');
 
-        $this->belongsTo('Jobs', [
-            'foreignKey' => 'job_id',
-            'joinType' => 'INNER'
-        ]);
         $this->hasMany('ApplicantJobLists', [
-            'foreignKey' => 'job_id'
+            'foreignKey' => 'JOB_ID'
         ]);
-        $this->hasMany('Jobs', [
-            'foreignKey' => 'job_id'
-        ]);
+        
         $this->hasMany('Vacancies', [
-            'foreignKey' => 'job_id'
+            'foreignKey' => 'JOB_ID'
         ]);
     }
 
@@ -62,10 +56,6 @@ class JobsTable extends Table
         $validator
             ->requirePresence('job_name', 'create')
             ->notEmpty('job_name');
-
-        $validator
-            ->requirePresence('remark', 'create')
-            ->notEmpty('remark');
 
         $validator
             ->add('created_by', 'valid', ['rule' => 'numeric'])

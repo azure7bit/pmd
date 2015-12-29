@@ -28,8 +28,8 @@ class BranchesTable extends Table
         parent::initialize($config);
 
         $this->table('branches');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->displayField('branch_id');
+        $this->primaryKey('branch_id');
 
         $this->belongsTo('Branches', [
             'foreignKey' => 'branch_id',

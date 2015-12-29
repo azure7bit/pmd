@@ -748,7 +748,8 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
                 ->execute();
         }
 
-        $result = $statement->fetch('assoc')['count'];
+        // $result = $statement->fetch('assoc')['count'];
+        $result = $statement->fetch('assoc');
         $statement->closeCursor();
         return (int)$result;
     }

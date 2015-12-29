@@ -6,7 +6,7 @@ return [
     'Opauth.Strategy.Twitter.secret' => 'YOUR APP SECRET',
     'reCaptcha.key' => '6LfmVvcSAAAAAIgnKNvh3dlmhQbT-FJbTkv93YTE',
     'reCaptcha.privateKey'=>'6LfmVvcSAAAAAOCOontVPlQkpLiuLcPnYjJ0CXBw',
-    'Users.table' => 'Admins',
+    'Users.table' => 'Applicants',
     'Auth.loginAction.plugin' => null,
     'Auth.loginAction.controller' => 'Authentications',
     'Auth.loginAction.action' => 'login',

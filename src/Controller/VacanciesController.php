@@ -18,11 +18,11 @@ class VacanciesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Companies', 'Branches', 'Organizations', 'Jobs']
-        ];
-        $this->set('vacancies', $this->paginate($this->Vacancies));
-        $this->set('_serialize', ['vacancies']);
+      $this->paginate = [
+      'contain' => ['Companies', 'Branches', 'Organizations', 'Jobs']
+      ];
+      $this->set('vacancies', $this->paginate($this->Vacancies));
+      $this->set('_serialize', ['vacancies']);
     }
 
     /**
@@ -34,11 +34,11 @@ class VacanciesController extends AppController
      */
     public function view($id = null)
     {
-        $vacancy = $this->Vacancies->get($id, [
-            'contain' => ['Companies', 'Branches', 'Organizations', 'Jobs']
+      $vacancy = $this->Vacancies->get($id, [
+        'contain' => ['Companies', 'Branches', 'Organizations', 'Jobs']
         ]);
-        $this->set('vacancy', $vacancy);
-        $this->set('_serialize', ['vacancy']);
+      $this->set('vacancy', $vacancy);
+      $this->set('_serialize', ['vacancy']);
     }
 
     /**
@@ -48,23 +48,23 @@ class VacanciesController extends AppController
      */
     public function add()
     {
-        $vacancy = $this->Vacancies->newEntity();
-        if ($this->request->is('post')) {
-            $vacancy = $this->Vacancies->patchEntity($vacancy, $this->request->data);
-            if ($this->Vacancies->save($vacancy)) {
-                $this->Flash->success(__('The vacancy has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The vacancy could not be saved. Please, try again.'));
-            }
+      $vacancy = $this->Vacancies->newEntity();
+      if ($this->request->is('post')) {
+        $vacancy = $this->Vacancies->patchEntity($vacancy, $this->request->data);
+        if ($this->Vacancies->save($vacancy)) {
+          $this->Flash->success(__('The vacancy has been saved.'));
+          return $this->redirect(['action' => 'index']);
+        } else {
+          $this->Flash->error(__('The vacancy could not be saved. Please, try again.'));
         }
-        $companies = $this->Vacancies->Companies->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'company_name']);
-        $branches = $this->Vacancies->Branches->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'branch_name']);
-        $organizations = $this->Vacancies->Organizations->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'organization_name']);
-        $jobs = $this->Vacancies->Jobs->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'job_name']);
+      }
+      $companies = $this->Vacancies->Companies->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'company_name']);
+      $branches = $this->Vacancies->Branches->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'branch_name']);
+      $organizations = $this->Vacancies->Organizations->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'organization_name']);
+      $jobs = $this->Vacancies->Jobs->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'job_name']);
 
-        $this->set(compact('vacancy', 'companies', 'branches', 'organizations', 'jobs'));
-        $this->set('_serialize', ['vacancy']);
+      $this->set(compact('vacancy', 'companies', 'branches', 'organizations', 'jobs'));
+      $this->set('_serialize', ['vacancy']);
     }
 
     /**
@@ -76,24 +76,24 @@ class VacanciesController extends AppController
      */
     public function edit($id = null)
     {
-        $vacancy = $this->Vacancies->get($id, [
-            'contain' => []
+      $vacancy = $this->Vacancies->get($id, [
+        'contain' => []
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $vacancy = $this->Vacancies->patchEntity($vacancy, $this->request->data);
-            if ($this->Vacancies->save($vacancy)) {
-                $this->Flash->success(__('The vacancy has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The vacancy could not be saved. Please, try again.'));
-            }
+      if ($this->request->is(['patch', 'post', 'put'])) {
+        $vacancy = $this->Vacancies->patchEntity($vacancy, $this->request->data);
+        if ($this->Vacancies->save($vacancy)) {
+          $this->Flash->success(__('The vacancy has been saved.'));
+          return $this->redirect(['action' => 'index']);
+        } else {
+          $this->Flash->error(__('The vacancy could not be saved. Please, try again.'));
         }
-        $companies = $this->Vacancies->Companies->find('list', ['limit' => 200]);
-        $branches = $this->Vacancies->Branches->find('list', ['limit' => 200]);
-        $organizations = $this->Vacancies->Organizations->find('list', ['limit' => 200]);
-        $jobs = $this->Vacancies->Jobs->find('list', ['limit' => 200]);
-        $this->set(compact('vacancy', 'companies', 'branches', 'organizations', 'jobs'));
-        $this->set('_serialize', ['vacancy']);
+      }
+      $companies = $this->Vacancies->Companies->find('list', ['limit' => 200]);
+      $branches = $this->Vacancies->Branches->find('list', ['limit' => 200]);
+      $organizations = $this->Vacancies->Organizations->find('list', ['limit' => 200]);
+      $jobs = $this->Vacancies->Jobs->find('list', ['limit' => 200]);
+      $this->set(compact('vacancy', 'companies', 'branches', 'organizations', 'jobs'));
+      $this->set('_serialize', ['vacancy']);
     }
 
     /**
@@ -105,13 +105,13 @@ class VacanciesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $vacancy = $this->Vacancies->get($id);
-        if ($this->Vacancies->delete($vacancy)) {
-            $this->Flash->success(__('The vacancy has been deleted.'));
-        } else {
-            $this->Flash->error(__('The vacancy could not be deleted. Please, try again.'));
-        }
-        return $this->redirect(['action' => 'index']);
+      $this->request->allowMethod(['post', 'delete']);
+      $vacancy = $this->Vacancies->get($id);
+      if ($this->Vacancies->delete($vacancy)) {
+        $this->Flash->success(__('The vacancy has been deleted.'));
+      } else {
+        $this->Flash->error(__('The vacancy could not be deleted. Please, try again.'));
+      }
+      return $this->redirect(['action' => 'index']);
     }
-}
+  }

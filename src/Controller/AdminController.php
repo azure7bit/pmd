@@ -1,21 +1,19 @@
 <?php
-namespace App\Controller\Admin;
+  namespace App\Controller;
 
-use App\Controller\AppController;
+  use App\Controller\AppController;
 
-/**
- * Admin Controller
- *
- * @property \App\Model\Table\AdminTable $Admin
- */
-class AdminController extends AppController
-{
-public function initialize()
+  /**
+  * Admin Controller
+  *
+  * @property \App\Model\Table\AdminTable $Admin
+  */
+  class AdminController extends AppController
+  {
+    public function initialize()
     {
-        // Always enable the MyUtils Helper
-        parent::initialize();
-        $this->loadComponent('Flash');
-        $this->viewBuilder()->layout('admin');
+      // Always enable the MyUtils Helper
+      parent::initialize();
+      $this->viewBuilder()->layout('admin');
     }
-   
-}
+  }

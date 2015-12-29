@@ -2,6 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\I18n\Time;
 
 /**
  * Vacancy Entity.
@@ -46,7 +47,14 @@ class Vacancy extends Entity
      * @var array
      */
     protected $_accessible = [
-        '*' => true,
-        'id' => false,
+    '*' => true,
     ];
-}
+
+    protected function _getVacancyName(){
+      return $this->_properties['VACANCY_NAME'];
+    }
+
+    protected function _getValidDateTo(){
+        return date_format($this->_properties['VALID_DATE_TO'], "d M Y");
+    }
+  }

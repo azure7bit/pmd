@@ -107,6 +107,7 @@ class UsersAuthComponent extends Component
             'login',
             'socialEmail',
             // 'opauthInit',
+            'home',
             'resetPassword',
             'requestResetPassword',
             'changePassword',

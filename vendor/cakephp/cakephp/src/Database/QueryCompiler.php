@@ -121,6 +121,7 @@ class QueryCompiler
             if (isset($this->_templates[$name])) {
                 $parts = $this->_stringifyExpressions((array)$parts, $generator);
                 return $sql .= sprintf($this->_templates[$name], implode(', ', $parts));
+
             }
             return $sql .= $this->{'_build' . ucfirst($name) . 'Part'}($parts, $query, $generator);
         };

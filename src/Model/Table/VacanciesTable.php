@@ -33,22 +33,22 @@ class VacanciesTable extends Table
 
         $this->table('vacancies');
         $this->displayField('id');
-        $this->primaryKey('id');
+        $this->primaryKey('VACANCY_ID');
 
         $this->belongsTo('Companies', [
-            'foreignKey' => 'company_id',
+            'foreignKey' => 'COMPANY_ID',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Branches', [
-            'foreignKey' => 'branch_id',
+            'foreignKey' => 'BRANCH_ID',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Organizations', [
-            'foreignKey' => 'organization_id',
+            'foreignKey' => 'ORGANIZATION_ID',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Jobs', [
-            'foreignKey' => 'job_id',
+            'foreignKey' => 'JOB_ID',
             'joinType' => 'INNER'
         ]);
 
@@ -135,12 +135,11 @@ class VacanciesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['vacancy_id'], 'Vacancies'));
-        $rules->add($rules->existsIn(['company_id'], 'Companies'));
-        $rules->add($rules->existsIn(['branch_id'], 'Branches'));
-        $rules->add($rules->existsIn(['organization_id'], 'Organizations'));
-        $rules->add($rules->existsIn(['job_id'], 'Jobs'));
-        $rules->add($rules->existsIn(['process_version_id'], 'ProcessVersions'));
+        $rules->add($rules->existsIn(['VACANCY_ID'], 'Vacancies'));
+        $rules->add($rules->existsIn(['COMPANY_ID'], 'Companies'));
+        $rules->add($rules->existsIn(['BRANCH_ID'], 'Branches'));
+        $rules->add($rules->existsIn(['ORGANIZATION_ID'], 'Organizations'));
+        $rules->add($rules->existsIn(['JOB_ID'], 'Jobs'));
         return $rules;
     }
 }

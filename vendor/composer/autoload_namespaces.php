@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'yajra\\' => array($vendorDir . '/yajra/laravel-pdo-via-oci8/src'),
     'tmhOAuth' => array($vendorDir . '/themattharris/tmhoauth'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'JakubOnderka\\PhpConsoleHighlighter' => array($vendorDir . '/jakub-onderka/php-console-highlighter/src'),

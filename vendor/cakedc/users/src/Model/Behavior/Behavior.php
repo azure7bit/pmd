@@ -51,7 +51,7 @@ class Behavior extends BaseBehavior
     protected function _removeValidationToken(EntityInterface $user)
     {
         $user->token = null;
-        $user->token_expires = null;
+        $user->token_exp = null;
         $result = $this->_table->save($user);
 
         return $result;

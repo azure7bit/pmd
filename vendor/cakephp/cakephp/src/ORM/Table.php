@@ -1525,7 +1525,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             return $success;
         }
 
-        $statement = $this->query()->insert(array_keys($data))
+        $statement = $this->query()->insert(array_keys(array_change_key_case($data, CASE_UPPER)))
             ->values($data)
             ->execute();
 

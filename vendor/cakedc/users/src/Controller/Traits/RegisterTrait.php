@@ -77,9 +77,8 @@ trait RegisterTrait
             return;
         }
 
-        debug($usersTable);
         $userSaved = $usersTable->register($user, $requestData, $options);
-    
+   
         if (!$userSaved) {
             $this->Flash->error(__d('Users', 'The user could not be saved'));
             return;

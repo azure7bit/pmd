@@ -28,18 +28,11 @@ class CompaniesTable extends Table
         parent::initialize($config);
 
         $this->table('companies');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->displayField('COMPANY_ID');
+        $this->primaryKey('COMPANY_ID');
 
-        $this->belongsTo('Companies', [
-            'foreignKey' => 'company_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->hasMany('Companies', [
-            'foreignKey' => 'company_id'
-        ]);
         $this->hasMany('Vacancies', [
-            'foreignKey' => 'company_id'
+            'foreignKey' => 'COMPANY_ID'
         ]);
     }
 
@@ -52,34 +45,34 @@ class CompaniesTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
+            ->add('COMPANY_ID', 'valid', ['rule' => 'numeric'])
+            ->allowEmpty('COMPANY_ID', 'create');
 
         $validator
-            ->requirePresence('company_name', 'create')
-            ->notEmpty('company_name');
+            ->requirePresence('COMPANY_NAME', 'create')
+            ->notEmpty('COMPANY_NAME');
 
-        $validator
-            ->requirePresence('remark', 'create')
-            ->notEmpty('remark');
+        // $validator
+        //     ->requirePresence('remark', 'create')
+        //     ->notEmpty('remark');
 
-        $validator
-            ->add('created_by', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('created_by', 'create')
-            ->notEmpty('created_by');
+        // $validator
+        //     ->add('created_by', 'valid', ['rule' => 'numeric'])
+        //     ->requirePresence('created_by', 'create')
+        //     ->notEmpty('created_by');
 
-        $validator
-            ->requirePresence('creation_date', 'create')
-            ->notEmpty('creation_date');
+        // $validator
+        //     ->requirePresence('creation_date', 'create')
+        //     ->notEmpty('creation_date');
 
-        $validator
-            ->add('last_updated_by', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('last_updated_by', 'create')
-            ->notEmpty('last_updated_by');
+        // $validator
+        //     ->add('last_updated_by', 'valid', ['rule' => 'numeric'])
+        //     ->requirePresence('last_updated_by', 'create')
+        //     ->notEmpty('last_updated_by');
 
-        $validator
-            ->requirePresence('last_update_date', 'create')
-            ->notEmpty('last_update_date');
+        // $validator
+        //     ->requirePresence('last_update_date', 'create')
+        //     ->notEmpty('last_update_date');
 
         return $validator;
     }

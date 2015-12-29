@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c456bdbf29c66a1821f6191a1873d0f",
-    "content-hash": "9aaec775c5ed47848a4acb0cd17fa90c",
+    "hash": "3cdbe28fe5e9e1c7e2c1d188205c26c4",
+    "content-hash": "c9c17bfb12a7da8836fb9a8ad099b42f",
     "packages": [
         {
             "name": "asaladino/oracle_datasource",
@@ -1067,7 +1067,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/06740769d9b02365cfbed104f9a44776a3d14478",
+                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/f1115cad0888b3c6d25b9d0b91ba828fa7ac5410",
                 "reference": "06740769d9b02365cfbed104f9a44776a3d14478",
                 "shasum": ""
             },
@@ -1159,6 +1159,42 @@
                 "plugin"
             ],
             "time": "2015-05-23 05:53:49"
+        },
+        {
+            "name": "snelg/cakephp-3-oracle",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/snelg/cakephp-3-oracle.git",
+                "reference": "35bf0fa9dd47a43630ebb41e0e597a7c82fa2905"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/snelg/cakephp-3-oracle/zipball/35bf0fa9dd47a43630ebb41e0e597a7c82fa2905",
+                "reference": "35bf0fa9dd47a43630ebb41e0e597a7c82fa2905",
+                "shasum": ""
+            },
+            "require": {
+                "ext-oci8": "*",
+                "yajra/laravel-pdo-via-oci8": "~0.12"
+            },
+            "require-dev": {
+                "cakephp/cakephp": "~3.0",
+                "phpunit/phpunit": "~4.0",
+                "psr/log": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cake\\Oracle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Oracle datasource for CakePHP 3",
+            "time": "2015-11-11 22:42:02"
         },
         {
             "name": "symfony/config",
@@ -1465,6 +1501,42 @@
                 "twitter"
             ],
             "time": "2013-02-20 15:57:52"
+        },
+        {
+            "name": "yajra/laravel-pdo-via-oci8",
+            "version": "0.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yajra/pdo-via-oci8.git",
+                "reference": "e3532627dc4400baf3cc9f032dd48b95dceddde2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yajra/pdo-via-oci8/zipball/e3532627dc4400baf3cc9f032dd48b95dceddde2",
+                "reference": "e3532627dc4400baf3cc9f032dd48b95dceddde2",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "yajra\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "yajra - Arjay Angeles",
+                    "email": "aqangeles@gmail.com"
+                }
+            ],
+            "description": "PDO userspace driver proxying calls to PHP OCI8 driver",
+            "time": "2015-10-15 05:45:46"
         }
     ],
     "packages-dev": [
@@ -1930,6 +2002,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "cakephp/migrations": 0,
         "opauth/opauth": 20,
         "opauth/facebook": 20,
         "opauth/twitter": 20,

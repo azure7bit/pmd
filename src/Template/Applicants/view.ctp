@@ -1,14 +1,22 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
   <ul class="side-nav">
     <li class="heading"><?= __('Actions') ?></li>
-    <li><?= $this->Html->link(__('Edit Applicant'), ['action' => 'edit', $applicant->id]) ?> </li>
-    <li><?= $this->Form->postLink(__('Delete Applicant'), ['action' => 'delete', $applicant->id], ['confirm' => __('Are you sure you want to delete # {0}?', $applicant->id)]) ?> </li>
+    <li>
+      <?= $this->Html->link(__('Edit Applicant'), 
+      ['action' => 'edit', $applicant->id]) ?> </li>
+    <li><?= $this->Form->postLink(__('Delete Applicant'), 
+      ['action' => 'delete', $applicant->id], 
+      ['confirm' => __('Are you sure you want to delete # {0}?', $applicant->id)]) ?> </li>
     <li><?= $this->Html->link(__('List Applicants'), ['action' => 'index']) ?> </li>
     <li><?= $this->Html->link(__('New Applicant'), ['action' => 'add']) ?> </li>
-    <li><?= $this->Html->link(__('List Applicant Job Lists'), ['controller' => 'ApplicantJobLists', 'action' => 'index']) ?> </li>
-    <li><?= $this->Html->link(__('New Applicant Job List'), ['controller' => 'ApplicantJobLists', 'action' => 'add']) ?> </li>
+    <li>
+      <?= $this->Html->link(__('List Applicant Job Lists'), 
+      ['controller' => 'ApplicantJobLists', 'action' => 'index']) ?> </li>
+    <li><?= $this->Html->link(__('New Applicant Job List'), 
+      ['controller' => 'ApplicantJobLists', 'action' => 'add']) ?> </li>
   </ul>
 </nav>
+
 <div class="applicants view large-9 medium-8 columns content">
   <h3><?= h($applicant->id) ?></h3>
   <table class="vertical-table">
@@ -61,10 +69,12 @@
       <td><?= $applicant->active ? __('Yes') : __('No'); ?></td>
     </tr>
   </table>
+
   <div class="row">
     <h4><?= __('Address') ?></h4>
     <?= $this->Text->autoParagraph(h($applicant->address)); ?>
   </div>
+  
   <div class="related">
     <h4><?= __('Related Applicant Job Lists') ?></h4>
     <?php if (!empty($applicant->applicant_job_lists)): ?>
@@ -90,11 +100,8 @@
             <td><?= h($applicantJobLists->last_update_date) ?></td>
             <td class="actions">
               <?= $this->Html->link(__('View'), ['controller' => 'ApplicantJobLists', 'action' => 'view', $applicantJobLists->id]) ?>
-
               <?= $this->Html->link(__('Edit'), ['controller' => 'ApplicantJobLists', 'action' => 'edit', $applicantJobLists->id]) ?>
-
               <?= $this->Form->postLink(__('Delete'), ['controller' => 'ApplicantJobLists', 'action' => 'delete', $applicantJobLists->id], ['confirm' => __('Are you sure you want to delete # {0}?', $applicantJobLists->id)]) ?>
-
             </td>
           </tr>
         <?php endforeach; ?>

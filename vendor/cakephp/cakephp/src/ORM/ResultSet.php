@@ -254,28 +254,28 @@ class ResultSet implements ResultSetInterface
      */
     public function valid()
     {
-        if ($this->_useBuffering) {
-            $valid = $this->_index < $this->_count;
-            if ($valid && $this->_results[$this->_index] !== null) {
-                $this->_current = $this->_results[$this->_index];
-                return true;
-            }
-            if (!$valid) {
-                return $valid;
-            }
+      if ($this->_useBuffering) {
+        $valid = $this->_index < $this->_count;
+        if ($valid && $this->_results[$this->_index] !== null) {
+          $this->_current = $this->_results[$this->_index];
+          return true;
         }
-
-        $this->_current = $this->_fetchResult();
-        $valid = $this->_current !== false;
-
-        if ($valid && $this->_useBuffering) {
-            $this->_results[$this->_index] = $this->_current;
+        if (!$valid) {
+          return $valid;
         }
-        if (!$valid && $this->_statement !== null) {
-            $this->_statement->closeCursor();
-        }
+      }
 
-        return $valid;
+      $this->_current = $this->_fetchResult();
+      $valid = $this->_current !== false;
+
+      if ($valid && $this->_useBuffering) {
+        $this->_results[$this->_index] = $this->_current;
+      }
+      if (!$valid && $this->_statement !== null) {
+        $this->_statement->closeCursor();
+      }
+
+      return $valid;
     }
 
     /**
@@ -287,12 +287,12 @@ class ResultSet implements ResultSetInterface
      */
     public function first()
     {
-        foreach ($this as $result) {
-            if ($this->_statement && !$this->_useBuffering) {
-                $this->_statement->closeCursor();
-            }
-            return $result;
+      foreach ($this as $result) {
+        if ($this->_statement && !$this->_useBuffering) {
+          $this->_statement->closeCursor();
         }
+        return $result;
+      }
     }
 
     /**
@@ -304,10 +304,10 @@ class ResultSet implements ResultSetInterface
      */
     public function serialize()
     {
-        while ($this->valid()) {
-            $this->next();
-        }
-        return serialize($this->_results);
+      while ($this->valid()) {
+        $this->next();
+      }
+      return serialize($this->_results);
     }
 
     /**
@@ -320,9 +320,9 @@ class ResultSet implements ResultSetInterface
      */
     public function unserialize($serialized)
     {
-        $this->_results = unserialize($serialized);
-        $this->_useBuffering = true;
-        $this->_count = count($this->_results);
+      $this->_results = unserialize($serialized);
+      $this->_useBuffering = true;
+      $this->_count = count($this->_results);
     }
 
     /**
@@ -334,13 +334,13 @@ class ResultSet implements ResultSetInterface
      */
     public function count()
     {
-        if ($this->_count !== null) {
-            return $this->_count;
-        }
-        if ($this->_statement) {
-            return $this->_count = $this->_statement->rowCount();
-        }
-        return $this->_count = count($this->_results);
+      if ($this->_count !== null) {
+        return $this->_count;
+      }
+      if ($this->_statement) {
+        return $this->_count = $this->_statement->rowCount();
+      }
+      return $this->_count = count($this->_results);
     }
 
     /**
@@ -351,16 +351,16 @@ class ResultSet implements ResultSetInterface
      */
     protected function _calculateAssociationMap()
     {
-        $map = $this->_query->eagerLoader()->associationsMap($this->_defaultTable);
-        $this->_matchingMap = (new Collection($map))
-            ->match(['matching' => true])
-            ->indexBy('alias')
-            ->toArray();
+      $map = $this->_query->eagerLoader()->associationsMap($this->_defaultTable);
+      $this->_matchingMap = (new Collection($map))
+          ->match(['matching' => true])
+          ->indexBy('alias')
+          ->toArray();
 
-        $this->_containMap = (new Collection(array_reverse($map)))
-            ->match(['matching' => false])
-            ->indexBy('nestKey')
-            ->toArray();
+      $this->_containMap = (new Collection(array_reverse($map)))
+          ->match(['matching' => false])
+          ->indexBy('nestKey')
+          ->toArray();
     }
 
     /**
@@ -371,26 +371,26 @@ class ResultSet implements ResultSetInterface
      */
     protected function _calculateColumnMap()
     {
-        $map = [];
-        foreach ($this->_query->clause('select') as $key => $field) {
-            $key = trim($key, '"`[]');
-            if (strpos($key, '__') > 0) {
-                $parts = explode('__', $key, 2);
-                $map[$parts[0]][$key] = $parts[1];
-            } else {
-                $map[$this->_defaultAlias][$key] = $key;
-            }
+      $map = [];
+      foreach ($this->_query->clause('select') as $key => $field) {
+        $key = trim($key, '"`[]');
+        if (strpos($key, '__') > 0) {
+          $parts = explode('__', $key, 2);
+          $map[$parts[0]][$key] = $parts[1];
+        } else {
+          $map[$this->_defaultAlias][$key] = $key;
         }
+      }
 
-        foreach ($this->_matchingMap as $alias => $assoc) {
-            if (!isset($map[$alias])) {
-                continue;
-            }
-            $this->_matchingMapColumns[$alias] = $map[$alias];
-            unset($map[$alias]);
+      foreach ($this->_matchingMap as $alias => $assoc) {
+        if (!isset($map[$alias])) {
+          continue;
         }
+        $this->_matchingMapColumns[$alias] = $map[$alias];
+        unset($map[$alias]);
+      }
 
-        $this->_map = $map;
+      $this->_map = $map;
     }
 
     /**
@@ -401,30 +401,30 @@ class ResultSet implements ResultSetInterface
      */
     protected function _calculateTypeMap()
     {
-        if (isset($this->_map[$this->_defaultAlias])) {
-            $this->_types[$this->_defaultAlias] = $this->_getTypes(
-                $this->_defaultTable,
-                $this->_map[$this->_defaultAlias]
-            );
-        }
+      if (isset($this->_map[$this->_defaultAlias])) {
+        $this->_types[$this->_defaultAlias] = $this->_getTypes(
+          $this->_defaultTable,
+          $this->_map[$this->_defaultAlias]
+        );
+      }
 
-        foreach ($this->_matchingMapColumns as $alias => $keys) {
-            $this->_types[$alias] = $this->_getTypes(
-                $this->_matchingMap[$alias]['instance']->target(),
-                $keys
-            );
-        }
+      foreach ($this->_matchingMapColumns as $alias => $keys) {
+        $this->_types[$alias] = $this->_getTypes(
+          $this->_matchingMap[$alias]['instance']->target(),
+          $keys
+        );
+      }
 
-        foreach ($this->_containMap as $assoc) {
-            $alias = $assoc['alias'];
-            if (isset($this->_types[$alias]) || !$assoc['canBeJoined'] || !isset($this->_map[$alias])) {
-                continue;
-            }
-            $this->_types[$alias] = $this->_getTypes(
-                $assoc['instance']->target(),
-                $this->_map[$alias]
-            );
+      foreach ($this->_containMap as $assoc) {
+        $alias = $assoc['alias'];
+        if (isset($this->_types[$alias]) || !$assoc['canBeJoined'] || !isset($this->_map[$alias])) {
+          continue;
         }
+        $this->_types[$alias] = $this->_getTypes(
+          $assoc['instance']->target(),
+          $this->_map[$alias]
+        );
+      }
     }
 
     /**
@@ -515,7 +515,7 @@ class ResultSet implements ResultSetInterface
         }
 
         foreach ($this->_map as $table => $keys) {
-            $results[$table] = array_combine($keys, array_intersect_key($row, $keys));
+            $results[$table] = array_combine(array_change_key_case($keys, CASE_UPPER), array_intersect_key(array_change_key_case($row, CASE_UPPER), array_change_key_case($keys, CASE_UPPER)));
             $presentAliases[$table] = true;
         }
 

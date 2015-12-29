@@ -349,7 +349,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/robmorgan/phinx/zipball/06740769d9b02365cfbed104f9a44776a3d14478",
+            "url": "https://api.github.com/repos/robmorgan/phinx/zipball/f1115cad0888b3c6d25b9d0b91ba828fa7ac5410",
             "reference": "06740769d9b02365cfbed104f9a44776a3d14478",
             "shasum": ""
         },
@@ -1989,5 +1989,81 @@
             "oci8",
             "oracle"
         ]
+    },
+    {
+        "name": "yajra/laravel-pdo-via-oci8",
+        "version": "0.15.0",
+        "version_normalized": "0.15.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yajra/pdo-via-oci8.git",
+            "reference": "e3532627dc4400baf3cc9f032dd48b95dceddde2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yajra/pdo-via-oci8/zipball/e3532627dc4400baf3cc9f032dd48b95dceddde2",
+            "reference": "e3532627dc4400baf3cc9f032dd48b95dceddde2",
+            "shasum": ""
+        },
+        "require-dev": {
+            "phpunit/phpunit": "3.7.*"
+        },
+        "time": "2015-10-15 05:45:46",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "yajra\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "yajra - Arjay Angeles",
+                "email": "aqangeles@gmail.com"
+            }
+        ],
+        "description": "PDO userspace driver proxying calls to PHP OCI8 driver"
+    },
+    {
+        "name": "snelg/cakephp-3-oracle",
+        "version": "1.0.5",
+        "version_normalized": "1.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/snelg/cakephp-3-oracle.git",
+            "reference": "35bf0fa9dd47a43630ebb41e0e597a7c82fa2905"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/snelg/cakephp-3-oracle/zipball/35bf0fa9dd47a43630ebb41e0e597a7c82fa2905",
+            "reference": "35bf0fa9dd47a43630ebb41e0e597a7c82fa2905",
+            "shasum": ""
+        },
+        "require": {
+            "ext-oci8": "*",
+            "yajra/laravel-pdo-via-oci8": "~0.12"
+        },
+        "require-dev": {
+            "cakephp/cakephp": "~3.0",
+            "phpunit/phpunit": "~4.0",
+            "psr/log": "~1.0"
+        },
+        "time": "2015-11-11 22:42:02",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Cake\\Oracle\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Oracle datasource for CakePHP 3"
     }
 ]

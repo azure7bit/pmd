@@ -50,8 +50,6 @@ class Applicant extends Entity
   //   'securitycode' => true
   // ];
 
-
-
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -107,6 +105,11 @@ class Applicant extends Entity
         return $tos;
     }
 
+    protected function _setTosDate($tos_date)
+    {
+      return date_format($tos_date, 'Y-m-d');
+    }
+
     /**
      * Hash a password using the configured password hasher,
      * use DefaultPasswordHasher if no one was configured
@@ -154,7 +157,8 @@ class Applicant extends Entity
      */
     public function tokenExpired()
     {
-        return empty($this->token_expires) || strtotime($this->token_expires) < strtotime("now");
+      debug($this->token_exp);
+      return empty($this->token_exp) || strtotime($this->token_exp) < strtotime("now");
     }
 
     /**
@@ -180,9 +184,13 @@ class Applicant extends Entity
     public function updateToken($tokenExpiration)
     {
         $expires = new DateTime();
-        $expires->modify("+ $tokenExpiration secs");
-        $this->token_expires = $expires;
+        // $expires->modify("+ $tokenExpiration secs");
+        // $expires->modify("$tokenExpiration");
+        // debug($expires);
+        $expires = date_format($expires, 'Y-m-d');
+        $this->token_exp = $expires;
         $this->token = str_replace('-', '', Text::uuid());
+
     }
 
   protected function _setGender($gender)
@@ -214,15 +222,15 @@ class Applicant extends Entity
   //   return $value;
   // }
 
-  // public function avatar_url($thumbnailtype=null)
-  // {
-  //   if(!empty($thumbnailtype)){
-  //     $value = '/files/applicants/avatar/'. $this->avatar_dir . '/'. $thumbnailtype . "_". $this->avatar;
-  //   }else{
-  //     $value = '/files/applicants/avatar/'. $this->avatar_dir . '/'. $this->avatar;
-  //   }
-  //   return $value;
-  // }
+  public function avatar_url($thumbnailtype=null)
+  {
+    if(!empty($thumbnailtype)){
+      $value = '/files/applicants/avatar/'. $this->avatar_dir . '/'. $thumbnailtype . "_". $this->avatar;
+    }else{
+      $value = '/files/applicants/avatar/'. $this->avatar_dir . '/'. $this->avatar;
+    }
+    return $value;
+  }
 
   /**
    * Creates an activation hash for the current user.

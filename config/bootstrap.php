@@ -204,7 +204,7 @@ Plugin::load('Siezi/SimpleCaptcha');
 
 //PLUGIN SEEDER
 Plugin::load('BasicSeed', ['bootstrap' => false, 'routes' => false]);
-
+Plugin::loadAll();
 
 
 Configure::write('reCaptcha.key', '6LfmVvcSAAAAAIgnKNvh3dlmhQbT-FJbTkv93YTE');

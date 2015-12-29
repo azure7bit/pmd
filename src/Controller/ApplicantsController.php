@@ -20,6 +20,7 @@ class ApplicantsController extends AppController
     {
         $this->set('applicants', $this->paginate($this->Applicants));
         $this->set('_serialize', ['applicants']);
+        // debug($this->Applicants);
     }
 
     /**

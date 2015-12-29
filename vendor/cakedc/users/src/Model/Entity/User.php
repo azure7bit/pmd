@@ -37,7 +37,7 @@ class User extends Entity
         'first_name' => true,
         'last_name' => true,
         'token' => true,
-        'token_expires' => true,
+        'token_exp' => true,
         'api_token' => true,
         'activation_date' => true,
         //tos is a boolean, coming from the "accept the terms of service" checkbox but it is not stored onto database
@@ -125,7 +125,7 @@ class User extends Entity
      */
     public function tokenExpired()
     {
-        return empty($this->token_expires) || strtotime($this->token_expires) < strtotime("now");
+        return empty($this->token_exp) || strtotime($this->token_exp) < strtotime("now");
     }
 
     /**
@@ -150,9 +150,10 @@ class User extends Entity
      */
     public function updateToken($tokenExpiration)
     {
-        $expires = new DateTime();
-        $expires->modify("+ $tokenExpiration secs");
-        $this->token_expires = $expires;
+       $expires = new DateTime();
+        // $expires->modify("+ $tokenExpiration secs");
+        $expires->modify("$tokenExpiration");
+        $this->token_exp = setTimestamp($expires);
         $this->token = str_replace('-', '', Text::uuid());
     }
 }
