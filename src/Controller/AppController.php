@@ -43,10 +43,15 @@
     // $this->viewBuilder()->layout('admin');
   // }
 
+
    public $components = [
      'UsersAuth' ,
      'Flash',
    ];
+   
+    public function initialize(){
+      $this->viewBuilder()->layout('applicant');
+    }
 
    protected $_UsersAutentication = array(
      'authenticate'=> [

@@ -1524,8 +1524,8 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
         if (empty($data)) {
             return $success;
         }
-
-        $statement = $this->query()->insert(array_keys(array_change_key_case($data, CASE_UPPER)))
+// array_map('strtolower', $yourArray);
+        $statement = $this->query()->insert(array_keys(array_map('strtolower',$data)))
             ->values($data)
             ->execute();
 

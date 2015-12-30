@@ -105,6 +105,7 @@ class Oci8 extends PDO {
 	 */
 	public function prepare($statement, $options = null)
 	{
+		$statement = strtoupper($statement);//"INSERT INTO ERC_APPLICANTS (IS_SUPERUSER, FULL_NAME, EMAIL, PASSWORD, SLUG, ACTIVE, TOKEN, TOKEN_EXP, TOS_DATE) VALUES ('true', 'aaaaaa', 'aaaaaa', 'aaaaaa', 'aaaaaa', 'true', 'dfsgdfgdgdf', '2014-09-09', '2014-09-09')";
 		// Get instance options
 		if ($options == null)
 		{
@@ -130,7 +131,6 @@ class Oci8 extends PDO {
 			}
 			$statement = $newStatement;
 		}
-
 		// check if statement is insert function
 		if (strpos(strtolower($statement), 'insert into') !== false)
 		{
@@ -152,6 +152,8 @@ class Oci8 extends PDO {
 		{
 			$options = array();
 		}
+
+		debug($statement);
 
 		return new Statement($sth, $this, $options);
 	}

@@ -49,6 +49,17 @@ src: url('/fonts/applicant/Lato-Light.eot');
     font-style: normal;
 }
 
+@font-face {
+font-family: "titil-bold";
+src: url("/fonts/applicant/TitilliumWeb-Bold.ttf");
+font-weight: normal;
+}
+@font-face {
+font-family: "titil-reg";
+src: url("/fonts/applicant/TitilliumWeb-Regular.ttf");
+font-weight: normal;
+}
+
 body {
     background-color: #f2f2f2;
     font-family: 'lato-reg';
@@ -121,79 +132,79 @@ main > section {
 
 /* Sweep To Right */
 .btn-effect {
-	vertical-align: middle;
-	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-	position: relative;
-	display: inline-block;
+    vertical-align: middle;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    display: inline-block;
 
-	-webkit-transform: translateZ(0);
-	   -moz-transform: translateZ(0);
-		-ms-transform: translateZ(0);
-		 -o-transform: translateZ(0);
-			transform: translateZ(0);
-		  
-	-webkit-backface-visibility: hidden;
-	   -moz-backface-visibility: hidden;
-			backface-visibility: hidden;
-		  
-	-webkit-transition-property: color;
-	   -moz-transition-property: color;
-		-ms-transition-property: color;
-			transition-property: color;
-		  
-	-webkit-transition-duration: 0.3s;
-	   -moz-transition-duration: 0.3s;
-		-ms-transition-duration: 0.3s;
-			transition-duration: 0.3s;
-		  
-	-moz-osx-font-smoothing: grayscale;
+    -webkit-transform: translateZ(0);
+       -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+         -o-transform: translateZ(0);
+            transform: translateZ(0);
+          
+    -webkit-backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+            backface-visibility: hidden;
+          
+    -webkit-transition-property: color;
+       -moz-transition-property: color;
+        -ms-transition-property: color;
+            transition-property: color;
+          
+    -webkit-transition-duration: 0.3s;
+       -moz-transition-duration: 0.3s;
+        -ms-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+          
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .btn-effect:before {
-	content: "";
-	position: absolute;
-	z-index: -1;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: #fff;
-	
-	-webkit-transform: scaleX(0);
-	   -moz-transform: scaleX(0);
-		-ms-transform: scaleX(0);
-			transform: scaleX(0);
-			
-	-webkit-transform-origin: 0 50%;
-	   -moz-transform-origin: 0 50%;
-		-ms-transform-origin: 0 50%;
-			transform-origin: 0 50%;
-			
-	-webkit-transition-property: transform;
-	   -moz-transition-property: transform;
-		-ms-transition-property: transform;
-			transition-property: transform;
-			
-	-webkit-transition-duration: 0.3s;
-	   -moz-transition-duration: 0.3s;
-		-ms-transition-duration: 0.3s;
-			transition-duration: 0.3s;
-			
-	-webkit-transition-timing-function: ease-out;
-	   -moz-transition-timing-function: ease-out;
-		-ms-transition-timing-function: ease-out;
-			transition-timing-function: ease-out;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    
+    -webkit-transform: scaleX(0);
+       -moz-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+            transform: scaleX(0);
+            
+    -webkit-transform-origin: 0 50%;
+       -moz-transform-origin: 0 50%;
+        -ms-transform-origin: 0 50%;
+            transform-origin: 0 50%;
+            
+    -webkit-transition-property: transform;
+       -moz-transition-property: transform;
+        -ms-transition-property: transform;
+            transition-property: transform;
+            
+    -webkit-transition-duration: 0.3s;
+       -moz-transition-duration: 0.3s;
+        -ms-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            
+    -webkit-transition-timing-function: ease-out;
+       -moz-transition-timing-function: ease-out;
+        -ms-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
 }
 
 .btn-effect:hover, .btn-effect:focus, .btn-effect:active {
-	color: #009EE3;
+    color: #009EE3;
 }
 
 .btn-effect:hover:before, .btn-effect:focus:before, .btn-effect:active:before {
-	-webkit-transform: scaleX(1);
-	   -moz-transform: scaleX(1);
-	    -ms-transform: scaleX(1);
-			transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+       -moz-transform: scaleX(1);
+        -ms-transform: scaleX(1);
+            transform: scaleX(1);
 }
 
 .sec-title {
@@ -239,7 +250,7 @@ main > section {
 
 
 /**
-/*	Preloader
+/*  Preloader
 /* ==========================================*/
 
 #preloader {
@@ -307,7 +318,7 @@ main > section {
 
 
 /**
-/*	Header
+/*  Header
 /* ==========================================*/
 
 #navigation {
@@ -344,7 +355,7 @@ h1.navbar-brand {
 
 
 /*=================================================================
-	Home Slider
+    Home Slider
 ==================================================================*/
 
 
@@ -411,7 +422,7 @@ h1.navbar-brand {
 .caption-content > span a {
     color: #67ab44;
     display: block;
-    font-family: "latobold";
+    font-family: "lato-bold";
     font-size: 24px;
     margin-bottom: 45px;
     text-transform: capitalize;
@@ -529,7 +540,7 @@ h1.navbar-brand {
 /* Project laughtbox setup */
 
 .fancybox-item.fancybox-close {
-    background: url("img/applicant/icons/close.png") no-repeat scroll 0 0 transparent;
+    background: url("/img/applicant/icons/close.png") no-repeat scroll 0 0 transparent;
     height: 50px;
     right: 0;
     top: 0;
@@ -537,21 +548,21 @@ h1.navbar-brand {
 }
 
 .fancybox-next span {
-    background: url("img/applicant/right.png") no-repeat scroll center center #009ee3;
+    background: url("/img/applicant/right.png") no-repeat scroll center center #009ee3;
     height: 50px;
     width: 50px;
     right: 0;
 }
 
 .fancybox-prev span {
-    background: url("img/applicant/left.png") no-repeat scroll center center #009ee3;
+    background: url("/img/applicant/left.png") no-repeat scroll center center #009ee3;
     height: 50px;
     width: 50px;
     left: 0;
 }
 
 /*=================================================================
-	About
+    About
 ==================================================================*/
 
 #about {
@@ -611,7 +622,7 @@ h1.navbar-brand {
 }
 
 /*=================================================================
-	Services
+    Services
 ==================================================================*/
 
 .service-icon {
@@ -654,7 +665,7 @@ h1.navbar-brand {
 }
 
 /*=================================================================
-	Portfolio
+    Portfolio
 ==================================================================*/
 
 .project-wrapper {
@@ -765,12 +776,12 @@ ul.external li a:hover {
 }
 
 /*=================================================================
-	Testimonials
+    Testimonials
 ==================================================================*/
 
 
 #testimonials {
-    background-image: url('/img/applicant/parallax/testimonial.jpg');
+    background-image: url(/img/applicant/parallax/testimonial.jpg);
     padding: 0;
     color: #fff;
 }
@@ -936,11 +947,11 @@ ul.external li a:hover {
 
 
 /*=================================================================
-	Price
+    Price
 ==================================================================*/
 
 #social {
-    background-image: url('/img/applicant/slider/banner.jpg');
+    background-image: url(/img/applicant/slider/banner.jpg);
     padding: 0;
 }
 
@@ -987,7 +998,7 @@ ul.external li a:hover {
 
 
 /*=================================================================
-	Contact
+    Contact
 ==================================================================*/
 
 .input-field {
@@ -1043,7 +1054,7 @@ textarea.form-control {
 
 
 /*============================================================
-	Google Maps
+    Google Maps
 ==============================================================*/
 
 #google-map {
@@ -1057,7 +1068,7 @@ textarea.form-control {
 
 
 /*============================================================
-	Footer
+    Footer
 ==============================================================*/
 
 #footer {
@@ -1174,11 +1185,11 @@ textarea.form-control {
 
 
 /*============================================================ 
-	Responsive Styles
+    Responsive Styles
  ============================================================*/
 
 /*============================================================
-	For Small Desktop
+    For Small Desktop
 ==============================================================*/
 
 @media (min-width: 980px) and (max-width: 1150px) {
@@ -1200,7 +1211,7 @@ textarea.form-control {
 
 
 /*============================================================
-	Tablet (Portrait) Design for a width of 768px
+    Tablet (Portrait) Design for a width of 768px
 ==============================================================*/
 
 @media (min-width: 768px) and (max-width: 979px) {
@@ -1258,7 +1269,7 @@ textarea.form-control {
 
 
 /*============================================================
-	Mobile (Portrait) Design for a width of 320px
+    Mobile (Portrait) Design for a width of 320px
 ==============================================================*/
 
 @media only screen and (max-width: 767px) {
@@ -1404,7 +1415,7 @@ textarea.form-control {
 
 
 /*============================================================
-	Mobile (Landscape) Design for a width of 480px
+    Mobile (Landscape) Design for a width of 480px
 ==============================================================*/
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
@@ -1488,9 +1499,11 @@ textarea.form-control {
 /*custom homepage*/
 
 .container.block-vac {
-    background: #2461a2 url("/img/applicant/bg-vacancy.png") repeat-x scroll 13px 53px;
+    background-image: url("/img/applicant/bg-vacancy.png");
+    background-repeat: repeat-x;
+    background-size: contain;
     color: #fff;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 .block-vac h2 {
     border-bottom: 2px solid #1b99d4;
@@ -1656,12 +1669,12 @@ a.view-more {
     border-bottom: 3px solid #fff;
     color: #fff;
     display: inline-block;
-    font-family: "lato-bold";
+    font-family: "titil-bold";
     padding-bottom: 10px;
 }
 .separator p {
     color: #fff;
-    font-family: "lato-reg";
+    font-family: "titil-reg";
 }
 
 /*HOW TO*/
@@ -1705,4 +1718,201 @@ a.view-more {
 /*PROFILE*/
 body.white #content {
     margin-top: 100px;
+}
+.block-photo-profile .img-photo {
+    border: 2px solid #555;
+    border-radius: 200px;
+    height: 200px;
+    overflow: hidden;
+    width: 200px;
+}
+.img-photo img {
+    height: 100%;
+    width: 100%;
+}
+.block-photo-profile {
+    border: 1px solid #f2f2f2;
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 100%;
+}
+.block-content-profile {
+    border: 1px solid #f2f2f2;
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 100%;
+}
+a.menu-profile {
+    background: #333 none repeat scroll 0 0;
+    color: #fff;
+    display: inline-block;
+    font-family: "lato-bold";
+    margin-bottom: 5px;
+    padding: 14px;
+    text-align: center;
+    width: 100%;
+}
+.ttl .form-control {
+    display: inline;
+    width: 200px;
+}
+body.grey #content {
+    margin-top: 100px;
+}
+.grey .block-photo-profile {
+    border: 1px solid #ccc;
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 100%;
+}
+.grey .block-content-profile {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 20px;
+    width: 100%;
+}
+.badge.badge-info {
+    background: #2461a2 none repeat scroll 0 0;
+}
+.block-profile > h2 {
+    font-family: "titil-bold";
+    margin-bottom: 20px;
+}
+.username-profile h4 {
+    font-family: "lato-reg";
+}
+.title h3 {
+    font-family: "titil-bold";
+}
+.form-content table th {
+    color: #333;
+    font-family: "lato-bold";
+}
+.form-content table td {
+    color: #555;
+    font-family: "lato-reg";
+}
+.form-content .table .btn {
+    font-family: "lato-bold";
+    padding: 0;
+}
+.block-content-profile .pagination.pagination-large {
+    margin-bottom: 0;
+}
+.menu-profile.active {
+    background: #2460a2 none repeat scroll 0 0;
+}
+.menu-profile.active .badge.badge-info {
+    background: #333 none repeat scroll 0 0;
+}
+.form-content .modal-body .back {
+    background: #333 none repeat scroll 0 0;
+    border-radius: 9px;
+    color: #fff;
+    font-family: "lato-bold";
+    padding: 15px 30px;
+}
+.head-modal > h4 {
+    font-family: "lato-bold";
+}
+.modal-body .form-group > p {
+    text-transform: uppercase;
+}
+.title-detail h3 {
+    font-family: "titil-bold";
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+.block-content-profile-vac .form-group > p {
+    font-size: 13px;
+}
+.btn.searh-vac {
+    background: #333 none repeat scroll 0 0;
+    color: #fff;
+    display: inherit;
+    font-family: "lato-bold";
+    padding: 10px;
+}
+.search-vac .block-search {
+    background: #2461a2 none repeat scroll 0 0;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+.block-search .form-group {
+    margin-bottom: 0;
+}
+.block-desc-vac small {
+    color: #555;
+    font-family: "lato-reg";
+}
+.block-desc-vac {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 40px;
+    padding-bottom: 25px;
+}
+.head-setting {
+    margin-bottom: 30px;
+}
+.head-setting > h2 {
+    border-bottom: 3px solid #888;
+    display: inline-block;
+    margin-top: 30px;
+    padding-bottom: 10px;
+}
+.block-profile-form .block-content-setting {
+    background: #fff none repeat scroll 0 0;
+    padding: 20px;
+}
+.form-group.line-bottom {
+    border-bottom: 3px solid #999999;
+    margin-bottom: 5px;
+    margin-top: 30px;
+}
+.form-group th {
+    font-size: 12px;
+}
+.form-group td {
+    padding-right: 5px;
+}
+.form-group .add {
+    background: #333 none repeat scroll 0 0;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    font-family: "lato-bold";
+    margin-top: 10px;
+    padding: 6px 20px;
+}
+.form-group .delete {
+    background: #333 none repeat scroll 0 0;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    font-family: "lato-bold";
+    margin-top: 10px;
+    padding: 6px 20px;
+}
+.form-control.no-border {
+    border: medium none;
+    padding: 0;
+}
+span.mandatory {
+    color: #ff0000;
+}
+.block-content-edit-profile .button-find .find-job {
+    background: #2461a2 none repeat scroll 0 0;
+    border-radius: 10px;
+    color: #fff;
+    display: inline-block;
+    font-family: "lato-bold";
+    padding: 6px 30px;
+}
+.disabled {
+   pointer-events: none;
+   cursor: default;
+   background: #888!important;
 }
