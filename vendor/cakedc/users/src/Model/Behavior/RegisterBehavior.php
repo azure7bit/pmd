@@ -66,8 +66,6 @@ class RegisterBehavior extends Behavior
         $this->_table->isValidateEmail = $validateEmail;
         $userSaved = $this->_table->save($user);
 
-        debug($user);
-
         if ($userSaved && $validateEmail) {
             $this->Email->sendValidationEmail($user, $emailClass);
         }

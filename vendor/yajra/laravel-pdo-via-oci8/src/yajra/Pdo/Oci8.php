@@ -105,7 +105,8 @@ class Oci8 extends PDO {
 	 */
 	public function prepare($statement, $options = null)
 	{
-		$statement = strtoupper($statement);//"INSERT INTO ERC_APPLICANTS (IS_SUPERUSER, FULL_NAME, EMAIL, PASSWORD, SLUG, ACTIVE, TOKEN, TOKEN_EXP, TOS_DATE) VALUES ('true', 'aaaaaa', 'aaaaaa', 'aaaaaa', 'aaaaaa', 'true', 'dfsgdfgdgdf', '2014-09-09', '2014-09-09')";
+		// $statement = strtolower("INSERT INTO ERC_APPLICANTS (IS_SUPERUSER, FULL_NAME, EMAIL, PASSWORD, SLUG, ACTIVE, TOKEN, TOKEN_EXP, TOS_DATE) VALUES ('true', 'aaaaaa', 'aaaaaa', 'aaaaaa', 'aaaaaa', 'true', 'dfsgdfgdgdf', TO_DATE('1989-12-09','YYYY-MM-DD'), TO_DATE('1989-12-09','YYYY-MM-DD'))");
+		
 		// Get instance options
 		if ($options == null)
 		{
@@ -129,6 +130,7 @@ class Oci8 extends PDO {
 				$newStatement = preg_replace('/\?/', ':autoparam' . $parameter, $statement, 1);
 				$parameter++;
 			}
+
 			$statement = $newStatement;
 		}
 		// check if statement is insert function
@@ -142,6 +144,7 @@ class Oci8 extends PDO {
 		// Prepare the statement
 		$sth = @oci_parse($this->_dbh, $statement);
 
+
 		if ( ! $sth)
 		{
 			$e = oci_error($this->_dbh);
@@ -152,9 +155,6 @@ class Oci8 extends PDO {
 		{
 			$options = array();
 		}
-
-		debug($statement);
-
 		return new Statement($sth, $this, $options);
 	}
 

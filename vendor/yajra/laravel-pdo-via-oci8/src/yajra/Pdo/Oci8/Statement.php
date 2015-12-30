@@ -447,7 +447,7 @@ class Statement extends PDOStatement {
 			$schema = isset($options['schema']) ? $options['schema'] : '';
 			$type_name = isset($options['type_name']) ? $options['type_name'] : '';
 
-				// set params required to use custom type.
+			// set params required to use custom type.
 			$variable = oci_new_collection($this->_pdoOci8->_dbh, $type_name, $schema);
 			break;
 
@@ -461,6 +461,7 @@ class Statement extends PDOStatement {
 		}
 
 		return oci_bind_by_name($this->_sth, $parameter, $variable, $maxLength, $oci_type);
+
 	}
 
 	/**

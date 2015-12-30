@@ -88,6 +88,7 @@ class Oracle extends Driver
         $oci8Statement = new Oci8Statement($yajraStatement); //Need to override some un-implemented methods in yajra Oci8 "Statement" class
         $statement = new OracleStatement(new PDOStatement($oci8Statement, $this), $this); //And now wrap in a Cake-ified, bufferable Statement
         $statement->queryString = $queryStringRaw; //Oci8PDO does not correctly set read-only $queryString property, so we have a manual override
+        
         if ($isObject && $query->bufferResults() === false) {
             $statement->bufferResults(false);
         }
