@@ -1525,6 +1525,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             return $success;
         }
 // array_map('strtolower', $yourArray);
+        // debug($data);
         $statement = $this->query()->insert(array_keys(array_map('strtolower',$data)))
             ->values($data)
             ->execute();
@@ -1595,7 +1596,6 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             ->set($data)
             ->where($primaryKey)
             ->execute();
-
         $success = false;
         if ($statement->errorCode() === '00000') {
             $success = $entity;

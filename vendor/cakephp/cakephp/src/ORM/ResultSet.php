@@ -516,6 +516,7 @@ class ResultSet implements ResultSetInterface
 
         foreach ($this->_map as $table => $keys) {
             $results[$table] = array_combine(array_change_key_case($keys, CASE_UPPER), array_intersect_key(array_change_key_case($row, CASE_UPPER), array_change_key_case($keys, CASE_UPPER)));
+            // $results[$table] = array_combine(keys, values)
             $presentAliases[$table] = true;
         }
 

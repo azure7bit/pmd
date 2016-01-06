@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
 use Cake\Utility\Text;
 use DateTime;
 use Cake\Core\Configure;
-
+use Cake\ORM\TableRegistry;
 
 /**
  * Applicant Entity.
@@ -31,6 +31,7 @@ use Cake\Core\Configure;
  * @property \Cake\I18n\Time $last_update_date
  * @property \App\Model\Entity\ApplicantJobList[] $applicant_job_lists
  */
+
 class Applicant extends Entity
 {
 
@@ -49,6 +50,7 @@ class Applicant extends Entity
   //   'password_confirmation' => true,
   //   'securitycode' => true
   // ];
+
 
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

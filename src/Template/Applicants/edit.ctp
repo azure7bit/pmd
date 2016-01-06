@@ -1,3 +1,4 @@
+<br/><br/><br/><br/>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
   <ul class="side-nav">
     <li class="heading"><?= __('Actions') ?></li>
@@ -26,14 +27,14 @@
       echo $this->Form->input('id_card');
       echo $this->Form->input('full_name');
       echo $this->Form->input('email');
-      echo $this->Form->input('password');
+      // echo $this->Form->input('password');
       echo $this->Form->input('address');
-      echo $this->Form->input('place_of_birth');
-      echo $this->Form->input('birthdate');
+      echo $this->Form->input('placebirth');
+      // echo $this->Form->input('birthdate');
       echo $this->Form->input('religion');
       echo $this->Form->input('blood_type');
-      echo $this->Form->input('phone_number');
-      echo $this->Form->input('gender');
+      echo $this->Form->input('phone');
+      // echo $this->Form->input('gender');
       echo $this->Form->file('avatar');            
     ?>
   </fieldset>

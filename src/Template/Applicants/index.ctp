@@ -30,7 +30,7 @@
           <td><?= h($applicant->full_name) ?></td>
           <td><?= h($applicant->email) ?></td>
           <td><?= $this->Html->image($applicant->avatar_url("portrait")) ?></td>
-          <td><?= h($applicant->place_of_birth) ?></td>
+          <td><?= h($applicant->placebirth) ?></td>
           <td><?= h($applicant->birthdate) ?></td>
           <td class="actions">
             <?= $this->Html->link(__('View'), ['action' => 'view', $applicant->id]) ?>
