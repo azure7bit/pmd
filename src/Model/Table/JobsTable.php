@@ -90,4 +90,9 @@ class JobsTable extends Table
         $rules->add($rules->existsIn(['job_id'], 'Jobs'));
         return $rules;
     }
+
+           public static function defaultConnectionName()
+    {
+      return 'oracle';
+    }
 }

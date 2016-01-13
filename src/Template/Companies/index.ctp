@@ -24,7 +24,6 @@
         <tbody>
             <?php foreach ($companies as $company): ?>
             <tr>
-                <td><?= $this->Number->format($company->id) ?></td>
                 <td><?= $this->Number->format($company->company_id) ?></td>
                 <td><?= h($company->company_name) ?></td>
                 <td><?= $this->Number->format($company->created_by) ?></td>
@@ -32,9 +31,9 @@
                 <td><?= $this->Number->format($company->last_updated_by) ?></td>
                 <td><?= h($company->last_update_date) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $company->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $company->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $company->id], ['confirm' => __('Are you sure you want to delete # {0}?', $company->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $company->company_id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $company->company_id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $company->company_id], ['confirm' => __('Are you sure you want to delete # {0}?', $company->company_id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

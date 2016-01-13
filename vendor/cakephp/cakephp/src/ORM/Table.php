@@ -1406,8 +1406,9 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
     protected function _processSave($entity, $options)
     {
         $primaryColumns = (array)$this->primaryKey();
-
-        if ($options['checkExisting'] && $primaryColumns && $entity->isNew() && $entity->has($primaryColumns)) {
+        
+        // if ($options['checkExisting'] && $primaryColumns && $entity->isNew() && $entity->has($primaryColumns)) {
+        if ($options['checkExisting'] && $primaryColumns && $entity->isNew()) {
             $alias = $this->alias();
             $conditions = [];
             foreach ($entity->extract($primaryColumns) as $k => $v) {
@@ -1415,8 +1416,8 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             }
             $entity->isNew(!$this->exists($conditions));
         }
-
         $mode = $entity->isNew() ? RulesChecker::CREATE : RulesChecker::UPDATE;
+
         if ($options['checkRules'] && !$this->checkRules($entity, $mode, $options)) {
             return false;
         }
@@ -1464,6 +1465,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
                 }
                 $success = true;
             }
+        
         }
 
         if (!$success && $isNew) {
@@ -1473,6 +1475,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
         if ($success) {
             return $entity;
         }
+
         return false;
     }
 
@@ -1504,6 +1507,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
 
         $filteredKeys = array_filter($primary, 'strlen');
         $data = $data + $filteredKeys;
+        // $data = array_filter($data, 'strlen');
 
         if (count($primary) > 1) {
             $schema = $this->schema();
@@ -1523,12 +1527,14 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
         $success = false;
         if (empty($data)) {
             return $success;
+        }else{
+            $success = $entity;
         }
-// array_map('strtolower', $yourArray);
-        // debug($data);
+
         $statement = $this->query()->insert(array_keys(array_map('strtolower',$data)))
             ->values($data)
             ->execute();
+
 
         if ($statement->rowCount() !== 0) {
             $success = $entity;
@@ -1560,12 +1566,13 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     protected function _newId($primary)
     {
-        if (!$primary || count((array)$primary) > 1) {
-            return null;
-        }
-        $typeName = $this->schema()->columnType($primary[0]);
-        $type = Type::build($typeName);
-        return $type->newId();
+        // if (!$primary || count((array)$primary) > 1) {
+        //     return null;
+        // }
+        // $typeName = $this->schema()->columnType($primary[0]);
+        // $type = Type::build($typeName);
+        // return $type->newId();
+        return null;
     }
 
     /**
@@ -1706,6 +1713,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
 
         $query = $this->query();
         $conditions = (array)$entity->extract($primaryKey);
+        
         $statement = $query->delete()
             ->where($conditions)
             ->execute();

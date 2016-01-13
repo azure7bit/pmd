@@ -4,20 +4,19 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Company Entity.
+ * Question Entity.
  *
  * @property int $id
- * @property int $company_id
- * @property string $company_name
- * @property string $remark
+ * @property int $section_id
+ * @property \App\Model\Entity\Section $section
+ * @property string $question_name
+ * @property string $question_type
  * @property int $created_by
  * @property \Cake\I18n\Time $creation_date
  * @property int $last_updated_by
  * @property \Cake\I18n\Time $last_update_date
- * @property \App\Model\Entity\Company[] $companies
- * @property \App\Model\Entity\Vacancy[] $vacancies
  */
-class Company extends Entity
+class About extends Entity
 {
 
     /**
@@ -31,7 +30,14 @@ class Company extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'company_id' => false
+        'id' => false,
     ];
 
+    protected function _getTitle(){
+        return $this->_properties['TITLE'];
+    }
+
+    protected function _getContent(){
+        return $this->_properties['CONTENT'];
+    }
 }

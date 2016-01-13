@@ -218,7 +218,8 @@ trait QueryTrait
             $alias = $this->repository()->alias();
         }
 
-        $key = sprintf('%s__%s', $alias, $field);
+        $key = $field;
+
         if (!$namespaced) {
             $aliasedField = $alias . '.' . $field;
         }
@@ -244,7 +245,6 @@ trait QueryTrait
             }
             $aliased[$alias] = $field;
         }
-
         return $aliased;
     }
 

@@ -12,7 +12,7 @@ class CreateApplicantFiles extends AbstractMigration
      */
     public function change()
     {
-      $table = $this->table('applicant_files', ['id' => true, 'primary_key' => ['id']]);
+      $table = $this->table('erc_files', ['id' => true, 'primary_key' => ['id']]);
       $table->addColumn('asset_name', 'string', ['null'=>false])
             ->addColumn('asset_dir', 'string', ['null'=>false])
             ->addColumn('applicant_id', 'integer', ['null'=>false])

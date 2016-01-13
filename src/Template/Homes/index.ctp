@@ -81,7 +81,7 @@
           <?php foreach ($vacancies as $vacancy): ?>
             <div class="col-lg-4">
               <div class="block-vacancy">
-                <h4><?= $vacancy->job->JOB_NAME ?></h4>
+                <h4><?= $vacancy->vacancy_name ?></h4>
                 <h5 class="detail-job">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat</h5>
                 <p class="time"><i class="fa fa-clock-o">&nbsp;</i><?= $vacancy->valid_date_to ?></p>
               </div>

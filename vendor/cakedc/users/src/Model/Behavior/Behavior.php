@@ -14,7 +14,7 @@ namespace CakeDC\Users\Model\Behavior;
 use Cake\Datasource\EntityInterface;
 use Cake\I18n\Time;
 use Cake\ORM\Behavior as BaseBehavior;
-
+use DateTime;
 /**
  * Covers the user registration
  */
@@ -32,11 +32,11 @@ class Behavior extends BaseBehavior
     {
         $emailValidated = $user['validated'];
         if (!$emailValidated && $validateEmail) {
-            $user['active'] = false;
+            $user['active'] = 'false';
             $user->updateToken($tokenExpiration);
         } else {
-            $user['active'] = true;
-            $user['activation_date'] = new Time();
+            $user['active'] = 'true';
+            $user['activation_date'] = new DateTime();
         }
 
         return $user;

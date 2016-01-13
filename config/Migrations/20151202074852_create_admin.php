@@ -12,7 +12,7 @@ class CreateAdmin extends AbstractMigration
      */
     public function change()
     {
-      $table = $this->table('users', ['id' => true, 'primary_key' => ['id']]);        
+      $table = $this->table('erc_users', ['id' => true, 'primary_key' => ['id']]);        
       $table->addColumn('nik', 'string', ['null'=>true, 'limit' => 50])
             ->addColumn('full_name', 'string', ['null'=>true,'limit' => 50])
             ->addColumn('email', 'string', ['limit' => 50])

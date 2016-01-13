@@ -18,9 +18,10 @@ class VacanciesController extends AppController
      */
     public function index()
     {
-      $this->paginate = [
-      'contain' => ['Companies', 'Branches', 'Organizations', 'Jobs']
-      ];
+      // $this->paginate = [
+      // 'contain' => ['Companies', 'Branches', 'Organizations', 'Jobs']
+      // ];
+      $this->paginate = ['contain' => []];
       $this->set('vacancies', $this->paginate($this->Vacancies));
       $this->set('_serialize', ['vacancies']);
     }
@@ -48,6 +49,7 @@ class VacanciesController extends AppController
      */
     public function add()
     {
+      $this->viewBuilder()->layout('admin');
       $vacancy = $this->Vacancies->newEntity();
       if ($this->request->is('post')) {
         $vacancy = $this->Vacancies->patchEntity($vacancy, $this->request->data);

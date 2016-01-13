@@ -12,7 +12,7 @@ class CreateApplicantExperiences extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('applicant_experiences', ['id' => true, 'primary_key' => ['id']]);
+        $table = $this->table('erc_experiences', ['id' => true, 'primary_key' => ['id']]);
         $table->addColumn('applicant_id', 'integer', ['null'=>false])
               ->addColumn('company', 'string', ['null'=>false])
               ->addColumn('position', 'string', ['null'=>false])

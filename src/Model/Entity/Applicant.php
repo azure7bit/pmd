@@ -2,7 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\Auth\DefaultPasswordHasher;
-use App\Model\Value\Gender;
+// use App\Model\Value\Gender;
 use Cake\ORM\Entity;
 use Cake\Utility\Text;
 use DateTime;
@@ -159,7 +159,6 @@ class Applicant extends Entity
      */
     public function tokenExpired()
     {
-      debug($this->token_exp);
       return empty($this->token_exp) || strtotime($this->token_exp) < strtotime("now");
     }
 
@@ -195,10 +194,10 @@ class Applicant extends Entity
 
     }
 
-  protected function _setGender($gender)
-  {
-    return Gender::get($gender);
-  }
+  // protected function _setGender($gender)
+  // {
+  //   return Gender::get($gender);
+  // }
 
   // protected function _getGender($gender){
   //   if($gender)

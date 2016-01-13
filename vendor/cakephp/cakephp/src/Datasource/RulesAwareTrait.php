@@ -63,7 +63,7 @@ trait RulesAwareTrait
         }
 
         $result = $rules->check($entity, $operation, $options->getArrayCopy());
-
+// var_dump($rules);
         if ($hasEvents) {
             $event = $this->dispatchEvent(
                 'Model.afterRules',
@@ -95,6 +95,7 @@ trait RulesAwareTrait
         $class = defined('static::RULES_CLASS') ? static::RULES_CLASS : 'Cake\Datasource\RulesChecker';
         $this->_rulesChecker = $this->buildRules(new $class(['repository' => $this]));
         $this->dispatchEvent('Model.buildRules', ['rules' => $this->_rulesChecker]);
+        // var_dump($this->_rulesChecker);
         return $this->_rulesChecker;
     }
 

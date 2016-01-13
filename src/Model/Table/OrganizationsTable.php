@@ -27,7 +27,7 @@ class OrganizationsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('organizations');
+        $this->table('erc_organizations');
         $this->displayField('id');
         $this->primaryKey('id');
 
@@ -95,5 +95,10 @@ class OrganizationsTable extends Table
     {
         $rules->add($rules->existsIn(['organization_id'], 'Organizations'));
         return $rules;
+    }
+
+       public static function defaultConnectionName()
+    {
+      return 'oracle';
     }
 }

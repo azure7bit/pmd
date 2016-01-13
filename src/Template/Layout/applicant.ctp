@@ -65,8 +65,13 @@
        <li><?= $this->Html->link(__('About'), ['controller' => 'Homes', 'action' => 'about']) ?></li>
        <li><?= $this->Html->link(__('Vacancy'), ['controller' => 'Vacancies', 'action' => 'index']) ?></li>
        <li><?= $this->Html->link(__('FAQ'), ['controller' => 'Homes', 'action' => 'faq']) ?></li>
-       <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm2"><i class="fa fa-lock">&nbsp;</i>SIGN IN</a></li>
-       <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-user">&nbsp;</i>SIGNUP</a></li>
+      <?php if(empty($user)): ?>
+        <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm2"><i class="fa fa-lock">&nbsp;</i>SIGN IN</a></li>
+        <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-user">&nbsp;</i>SIGNUP</a></li>
+      <?php endif; ?>
+      <?php if(!empty($user)): ?>
+        <li><?= $this->Html->link(__('logout'), ['controller' => 'Authentications', 'action' => 'logout']) ?></li>
+      <?php endif; ?>
     </ul>
   </nav>
 
@@ -130,7 +135,7 @@
            <h2>REGISTRATION</h2>
          </div>
          <div class="clearfix"></div>
-          <?= $this->Form->create($user, ["url" => ["controller"=>"Authentications", "action"=>"register"]]); ?>
+          <?= $this->Form->create(null, ["url" => ["controller"=>"Authentications", "action"=>"register"]]); ?>
            <div class="form-group">
              <label for="exampleInputEmail1">FULL NAME</label>
              <!-- <input type="email" class="form-control" id="exampleInputname"> -->

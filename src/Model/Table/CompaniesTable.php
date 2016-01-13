@@ -27,10 +27,12 @@ class CompaniesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('companies');
-        $this->displayField('COMPANY_ID');
-        $this->primaryKey('COMPANY_ID');
-
+        $this->table('HCMS_COMPANIES');
+        // $this->alias('HCMS_COMPANIES');
+        // $this->registryAlias('HCMS_COMPANIES');
+        $this->displayField('id');
+        $this->primaryKey('company_id');
+        // $this->entityClass('App\Model\Entity\Company');
         $this->hasMany('Vacancies', [
             'foreignKey' => 'COMPANY_ID'
         ]);
@@ -48,9 +50,9 @@ class CompaniesTable extends Table
             ->add('COMPANY_ID', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('COMPANY_ID', 'create');
 
-        $validator
-            ->requirePresence('COMPANY_NAME', 'create')
-            ->notEmpty('COMPANY_NAME');
+        // $validator
+        //     ->requirePresence('COMPANY_NAME', 'create')
+        //     ->notEmpty('COMPANY_NAME');
 
         // $validator
         //     ->requirePresence('remark', 'create')
@@ -86,7 +88,12 @@ class CompaniesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['company_id'], 'Companies'));
+        $rules->add($rules->existsIn(['COMPANY_ID'], 'HCMS_COMPANIES'));
         return $rules;
+    }
+
+    public static function defaultConnectionName()
+    {
+      return 'oracle';
     }
 }

@@ -27,7 +27,7 @@ class CreateApplicantJobList extends AbstractMigration
      */
     public function change()
     {
-      $table = $this->table('applicant_job_lists', ['id' => true, 'primary_key' => ['id']]);
+      $table = $this->table('erc_job_lists', ['id' => true, 'primary_key' => ['id']]);
       $table->addColumn('job_id', 'integer', ['null' => false, 'limit' => 15])
             ->addColumn('applicant_id', 'string', ['limit' => 150])
             ->addColumn('created_by', 'integer', ['null'=>false])

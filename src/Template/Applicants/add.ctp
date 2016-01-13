@@ -18,7 +18,7 @@
       echo $this->Form->input('password');
       echo $this->Form->input('address');
       echo $this->Form->input('place_of_birth');
-      echo $this->Form->input('birthdate', ['minYear' => date('Y') - 40, 'maxYear' => date('Y') - 19,]);            
+      echo $this->Form->input('birthdate', ['minYear' => date('Y') - 40, 'maxYear' => date('Y') - 19]);            
       echo $this->Form->input('religion');
       echo $this->Form->input('blood_type');
       echo $this->Form->input('phone_number');

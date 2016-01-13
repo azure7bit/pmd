@@ -50,11 +50,11 @@ class Vacancy extends Entity
     '*' => true,
     ];
 
-    protected function _getVacancyName(){
-      return $this->_properties['VACANCY_NAME'];
-    }
-
     protected function _getValidDateTo(){
-        return date_format($this->_properties['VALID_DATE_TO'], "d M Y");
+        if(is_null($this->_properties['valid_date_to'])){
+            return $this->_properties['valid_date_to'];
+        }else{
+            return date_format($this->_properties['valid_date_to'], "d M Y");
+        }
     }
   }

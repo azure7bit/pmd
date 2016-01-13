@@ -43,7 +43,7 @@ class AdminsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('users');
+        $this->table('ERC_APPLICANTS');
         $this->displayField('id');
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
@@ -90,50 +90,50 @@ class AdminsTable extends Table
         return $validator;
     }
 
-    /**
-     * Default validation rules.
-     *
-     * @param Validator $validator Validator instance.
-     * @return Validator
-     */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->allowEmpty('id', 'create');
+    // /**
+    //  * Default validation rules.
+    //  *
+    //  * @param Validator $validator Validator instance.
+    //  * @return Validator
+    //  */
+    // public function validationDefault(Validator $validator)
+    // {
+    //     $validator
+    //         ->allowEmpty('id', 'create');
 
-        $validator
-            ->allowEmpty('username');
+    //     $validator
+    //         ->allowEmpty('username');
 
-        $validator
-            ->requirePresence('password', 'create')
-            ->notEmpty('password');
+    //     $validator
+    //         ->requirePresence('password', 'create')
+    //         ->notEmpty('password');
 
-        $validator
-            ->allowEmpty('first_name');
+    //     $validator
+    //         ->allowEmpty('first_name');
 
-        $validator
-            ->allowEmpty('last_name');
+    //     $validator
+    //         ->allowEmpty('last_name');
 
-        $validator
-            ->allowEmpty('token');
+    //     $validator
+    //         ->allowEmpty('token');
 
-        $validator
-            ->add('token_expires', 'valid', ['rule' => 'datetime'])
-            ->allowEmpty('token_expires');
+    //     $validator
+    //         ->add('token_expires', 'valid', ['rule' => 'datetime'])
+    //         ->allowEmpty('token_expires');
 
-        $validator
-            ->allowEmpty('api_token');
+    //     $validator
+    //         ->allowEmpty('api_token');
 
-        $validator
-            ->add('activation_date', 'valid', ['rule' => 'datetime'])
-            ->allowEmpty('activation_date');
+    //     $validator
+    //         ->add('activation_date', 'valid', ['rule' => 'datetime'])
+    //         ->allowEmpty('activation_date');
 
-        $validator
-            ->add('tos_date', 'valid', ['rule' => 'datetime'])
-            ->allowEmpty('tos_date');
+    //     $validator
+    //         ->add('tos_date', 'valid', ['rule' => 'datetime'])
+    //         ->allowEmpty('tos_date');
 
-        return $validator;
-    }
+    //     return $validator;
+    // }
 
     /**
      * Wrapper for all validation rules for register

@@ -56,15 +56,16 @@ class RegisterBehavior extends Behavior
     public function register($user, $data, $options)
     {
         $validateEmail = Hash::get($options, 'validate_email');
-        $tokenExpiration = Hash::get($options, 'token_exp');
+        $tokenExpiration = Hash::get($options, 'token_expiration');
         $emailClass = Hash::get($options, 'email_class');
         $user = $this->_table->patchEntity($user, $data, ['validate' => Hash::get($options, 'validator') ?: $this->_getValidators($options)]);
-        $user->validated = false;
-        $user->is_superuser = Hash::get($options, 'validate_email');
+        $user->validated = 'false';
+        $user->is_superuser = 'false';//Hash::get($options, 'validate_email');
         //@todo move updateActive to afterSave?
         $user = $this->_updateActive($user, $validateEmail, $tokenExpiration);
         $this->_table->isValidateEmail = $validateEmail;
         $userSaved = $this->_table->save($user);
+
 
         if ($userSaved && $validateEmail) {
             $this->Email->sendValidationEmail($user, $emailClass);
@@ -114,7 +115,7 @@ class RegisterBehavior extends Behavior
         }
         $user = $this->_removeValidationToken($user);
         $user->activation_date = new DateTime();
-        $user->active = true;
+        $user->active = "true";
         $result = $this->_table->save($user);
 
         return $result;

@@ -12,7 +12,7 @@ class CreateApplicantEducations extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('applicant_educations', ['id' => true, 'primary_key' => ['id']]);
+        $table = $this->table('erc_educations', ['id' => true, 'primary_key' => ['id']]);
         $table->addColumn('applicant_id', 'integer', ['null'=>false])
               ->addColumn('education_level', 'string', ['null'=>false])
               ->addColumn('institution', 'string', ['null'=>false])

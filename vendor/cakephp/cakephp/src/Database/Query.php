@@ -1310,6 +1310,7 @@ class Query implements ExpressionInterface, IteratorAggregate
      */
     public function values($data)
     {
+        
         if ($this->_type !== 'insert') {
             throw new Exception(
                 'You cannot add values before defining columns to use.'
@@ -1327,7 +1328,9 @@ class Query implements ExpressionInterface, IteratorAggregate
             return $this;
         }
 
+
         $this->_parts['values']->add($data);
+        
         return $this;
     }
 

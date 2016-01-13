@@ -46,7 +46,7 @@ trait RegisterTrait
         $options = [
             'token_expiration' => $tokenExpiration,
             'validate_email' => $validateEmail,
-            'use_tos' => $useTos
+            'use_tos' => $useTos,
         ];
         $requestData = $this->request->data;
         $event = $this->dispatchEvent(UsersAuthComponent::EVENT_BEFORE_REGISTER, [
@@ -76,7 +76,7 @@ trait RegisterTrait
             $this->Flash->error(__d('Users', 'The reCaptcha could not be validated'));
             return;
         }
-
+        
         $userSaved = $usersTable->register($user, $requestData, $options);
    
         if (!$userSaved) {

@@ -27,7 +27,7 @@ class BranchesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('branches');
+        $this->table('hcms_branches');
         $this->displayField('branch_id');
         $this->primaryKey('branch_id');
 
@@ -95,5 +95,10 @@ class BranchesTable extends Table
     {
         $rules->add($rules->existsIn(['branch_id'], 'Branches'));
         return $rules;
+    }
+
+       public static function defaultConnectionName()
+    {
+      return 'oracle';
     }
 }

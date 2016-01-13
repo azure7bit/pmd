@@ -27,7 +27,7 @@ class CreateApplicants extends AbstractMigration
    */
   public function change()
   {
-    $table = $this->table('applicants', ['id' => true, 'primary_key' => ['id']]);
+    $table = $this->table('erc_applicants', ['id' => true, 'primary_key' => ['id']]);
     $table->addColumn('id_card', 'string', ['null'=>true, 'default'=>null])
       ->addColumn('full_name', 'string', ['limit'=>50, 'null'=>false])
       ->addColumn('email', 'string', ['limit'=>50, 'null'=>false])

@@ -1,8 +1,7 @@
 <?php
   namespace App\Controller;
 
-  // use App\Controller\AppController;
-  use App\Controller\AdminController;
+  use App\Controller\AppController;
   use App\Model\Table\AdminsTable;
   use Cake\Event\Event;
   use CakeDC\Users\Controller\Component\UsersAuthComponent;
@@ -14,12 +13,12 @@
    *
    * @property \App\Model\Table\AuthenticationsTable $Authentications
    */
-  class AuthenticationsController extends AdminController
+  class AuthenticationsController extends AppController
   {
     use LoginTrait;
     use RegisterTrait;
 
-    // public function initialize(){
-    //   $this->viewbuilder()->layout('admin');
-    // }
+    public function initialize(){
+      $this->viewbuilder()->layout('admin');
+    }
   }

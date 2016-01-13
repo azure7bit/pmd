@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\ORM\TableRegistry;
 /**
  * Companies Controller
  *
@@ -18,6 +18,7 @@ class CompaniesController extends AppController
      */
     public function index()
     {
+        $this->viewBuilder()->layout('admin');
         $this->set('companies', $this->paginate($this->Companies));
         $this->set('_serialize', ['companies']);
     }
@@ -45,7 +46,9 @@ class CompaniesController extends AppController
      */
     public function add()
     {
+        $this->viewBuilder()->layout('admin');
         $company = $this->Companies->newEntity();
+
         if ($this->request->is('post')) {
             $company = $this->Companies->patchEntity($company, $this->request->data);
             if ($this->Companies->save($company)) {
@@ -68,6 +71,7 @@ class CompaniesController extends AppController
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->layout('admin');
         $company = $this->Companies->get($id, [
             'contain' => []
         ]);
@@ -95,11 +99,15 @@ class CompaniesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $company = $this->Companies->get($id);
-        if ($this->Companies->delete($company)) {
-            $this->Flash->success(__('The company has been deleted.'));
-        } else {
-            $this->Flash->error(__('The company could not be deleted. Please, try again.'));
-        }
+        $query = TableRegistry::get('Companies')->find()->where(['company_id' => $id]);;
+        $query->delete()
+            ->where(['company_id' => $id])
+            ->execute();
+        // if ($this->Companies->delete($company)) {
+        //     $this->Flash->success(__('The company has been deleted.'));
+        // } else {
+        //     $this->Flash->error(__('The company could not be deleted. Please, try again.'));
+        // }
         return $this->redirect(['action' => 'index']);
     }
 }

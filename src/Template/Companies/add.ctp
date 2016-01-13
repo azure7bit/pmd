@@ -13,13 +13,13 @@
     <fieldset>
         <legend><?= __('Add Company') ?></legend>
         <?php
-            echo $this->Form->input('company_id');
+            // echo $this->Form->input('company_id');
             echo $this->Form->input('company_name');
-            echo $this->Form->input('remark');
-            echo $this->Form->input('created_by');
-            echo $this->Form->input('creation_date');
-            echo $this->Form->input('last_updated_by');
-            echo $this->Form->input('last_update_date');
+            // echo $this->Form->input('remark');
+            // echo $this->Form->input('created_by');
+            // echo $this->Form->input('creation_date');
+            // echo $this->Form->input('last_updated_by');
+            // echo $this->Form->input('last_update_date');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

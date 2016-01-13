@@ -45,6 +45,7 @@ class ApplicantsController extends AppController
      */
     public function add()
     {
+        $this->viewBuilder()->layout('admin');
         $applicant = $this->Applicants->newEntity();
         if ($this->request->is('post')) {
             $applicant = $this->Applicants->patchEntity($applicant, $this->request->data);

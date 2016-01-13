@@ -41,18 +41,18 @@ class UsersTable extends Table
      */
     public function initialize(array $config)
     {
-        parent::initialize($config);
+      parent::initialize($config);
 
-        $this->table('users');
-        $this->displayField('id');
-        $this->primaryKey('id');
-        $this->addBehavior('Timestamp');
-        $this->addBehavior('CakeDC/Users.Register');
-        $this->addBehavior('CakeDC/Users.Password');
-        $this->addBehavior('CakeDC/Users.Social');
-        $this->hasMany('SocialAccounts', [
-            'foreignKey' => 'user_id',
-            'className' => 'CakeDC/Users.SocialAccounts'
+      $this->table('users');
+      $this->displayField('id');
+      $this->primaryKey('id');
+      $this->addBehavior('Timestamp');
+      $this->addBehavior('CakeDC/Users.Register');
+      $this->addBehavior('CakeDC/Users.Password');
+      $this->addBehavior('CakeDC/Users.Social');
+      $this->hasMany('SocialAccounts', [
+        'foreignKey' => 'user_id',
+        'className' => 'CakeDC/Users.SocialAccounts'
         ]);
     }
 
@@ -63,24 +63,24 @@ class UsersTable extends Table
      */
     public function validationPasswordConfirm(Validator $validator)
     {
-        $validator
-            ->requirePresence('password_confirm', 'create')
-            ->notEmpty('password_confirm');
+      $validator
+      ->requirePresence('password_confirm', 'create')
+      ->notEmpty('password_confirm');
 
-        $validator->add('password', 'custom', [
-            'rule' => function ($value, $context) {
-                $confirm = Hash::get($context, 'data.password_confirm');
-                if (!is_null($confirm) && $value != $confirm) {
-                    return false;
-                }
-                return true;
-            },
-            'message' => __d('Users', 'Your password does not match your confirm password. Please try again'),
-            'on' => ['create', 'update'],
-            'allowEmpty' => false
+      $validator->add('password', 'custom', [
+        'rule' => function ($value, $context) {
+          $confirm = Hash::get($context, 'data.password_confirm');
+          if (!is_null($confirm) && $value != $confirm) {
+            return false;
+          }
+          return true;
+        },
+        'message' => __d('Users', 'Your password does not match your confirm password. Please try again'),
+        'on' => ['create', 'update'],
+        'allowEmpty' => false
         ]);
 
-        return $validator;
+      return $validator;
     }
 
     /**
@@ -89,44 +89,44 @@ class UsersTable extends Table
      * @param Validator $validator Validator instance.
      * @return Validator
      */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->allowEmpty('id', 'create');
+    // public function validationDefault(Validator $validator)
+    // {
+    //   $validator
+    //   ->allowEmpty('id', 'create');
 
-        $validator
-            ->allowEmpty('username');
+    //   $validator
+    //   ->allowEmpty('username');
 
-        $validator
-            ->requirePresence('password', 'create')
-            ->notEmpty('password');
+    //   $validator
+    //   ->requirePresence('password', 'create')
+    //   ->notEmpty('password');
 
-        $validator
-            ->allowEmpty('first_name');
+    //   $validator
+    //   ->allowEmpty('first_name');
 
-        $validator
-            ->allowEmpty('last_name');
+    //   $validator
+    //   ->allowEmpty('last_name');
 
-        $validator
-            ->allowEmpty('token');
+    //   $validator
+    //   ->allowEmpty('token');
 
-        $validator
-            ->add('token_expires', 'valid', ['rule' => 'datetime'])
-            ->allowEmpty('token_expires');
+    //   $validator
+    //   ->add('token_expires', 'valid', ['rule' => 'date'])
+    //   ->allowEmpty('token_expires');
 
-        $validator
-            ->allowEmpty('api_token');
+    //   $validator
+    //   ->allowEmpty('api_token');
 
-        $validator
-            ->add('activation_date', 'valid', ['rule' => 'datetime'])
-            ->allowEmpty('activation_date');
+    //   $validator
+    //   ->add('activation_date', 'valid')
+    //   ->allowEmpty('activation_date');
 
-        $validator
-            ->add('tos_date', 'valid', ['rule' => 'datetime'])
-            ->allowEmpty('tos_date');
+    //   $validator
+    //   ->add('tos_date', 'valid', ['rule' => 'date'])
+    //   ->allowEmpty('tos_date');
 
-        return $validator;
-    }
+    //   return $validator;
+    // }
 
     /**
      * Wrapper for all validation rules for register
@@ -136,9 +136,9 @@ class UsersTable extends Table
      */
     public function validationRegister(Validator $validator)
     {
-        $validator = $this->validationDefault($validator);
-        $validator = $this->validationPasswordConfirm($validator);
-        return $validator;
+      $validator = $this->validationDefault($validator);
+      $validator = $this->validationPasswordConfirm($validator);
+      return $validator;
     }
 
     /**
@@ -150,18 +150,18 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['username']), [
-            'errorField' => 'username',
-            'message' => __d('Users', 'Username already exists')
+      $rules->add($rules->isUnique(['username']), [
+        'errorField' => 'username',
+        'message' => __d('Users', 'Username already exists')
         ]);
 
-        if ($this->isValidateEmail) {
-            $rules->add($rules->isUnique(['email']), [
-                'errorField' => 'email',
-                'message' => __d('Users', 'Email already exists')
-            ]);
-        }
+      if ($this->isValidateEmail) {
+        $rules->add($rules->isUnique(['email']), [
+          'errorField' => 'email',
+          'message' => __d('Users', 'Email already exists')
+          ]);
+      }
 
-        return $rules;
+      return $rules;
     }
-}
+  }
