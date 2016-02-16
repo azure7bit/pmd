@@ -79,7 +79,7 @@
      * You can add more fonts to this directory and then to the array below
      * @var array
      */
-    private $__fonts = array('404error', 'abighaustitul3d', 'ubuntu', 'ubuntub', 'ubuntuc');
+    private $__fonts = array('IndieFlower', 'Ubuntu-Regular');
 
     /**
      * Used in a mechanism to detect errors
@@ -144,9 +144,8 @@
 
 		public function initialize(array $config)
     {
-        //debug($this->Session->read());
-				$this->Session = $this->request->session();
-				$this->__init();
+			$this->Session = $this->request->session();
+			$this->__init();
     }
 
     /**
@@ -275,7 +274,6 @@
 
 
        $font_name = $this->__fonts[array_rand($this->__fonts)] . ".ttf";
-       // debug($font_name);
 
        $this->settings['font'] = $font_path . DS . $font_name;
 
@@ -329,9 +327,6 @@
         break;
       endswitch;
       $this->settings['stringOperation'] = $stringOperation;
-			//debug($this->settings['stringOperation']);
-			//debug($this->__getSessionKey());
-			//debug($code);
       $this->Session->write($this->__getSessionKey(), $code);
     }
 

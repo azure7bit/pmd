@@ -57,4 +57,5 @@ class Vacancy extends Entity
             return date_format($this->_properties['valid_date_to'], "d M Y");
         }
     }
+
   }

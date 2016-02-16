@@ -39,6 +39,10 @@ class VacanciesTable extends Table
             'foreignKey' => 'job_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('WosJobs', [
+            'foreignKey' => 'job_id',
+            'joinType' => 'INNER'
+        ]);
 
     }
 

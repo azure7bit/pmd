@@ -10,10 +10,8 @@
  */
 $activationUrl = [
     '_full' => true,
-    'plugin' => null,
     'controller' => 'Authentications',
-    'action' => 'validateEmail',
-    isset($token) ? $token : ''
+    'action' => 'login'
 ];
 
 ?>
@@ -21,11 +19,11 @@ $activationUrl = [
 <?= __d('Users', "Hi {0}", isset($first_name)? $first_name : $full_name) ?>,
 </p>
 <p>
-    <strong><?= $this->Html->link(__d('Users', 'Activate your account here'), $activationUrl) ?></strong>
+  <strong><?= $this->Html->link(__d('Applicant', 'Activate your account here'), $activationUrl) ?></strong>
 </p>
 <p>
     <?= __d('Users', "If the link is not correcly displayed, please copy the following address in your web browser {0}", $this->Url->build($activationUrl)) ?>
 </p>
 <p>
-    <?= __d('Users', 'Thank you') ?>,
+    <?= __d('Applicant', 'Thank you') ?>,
 </p>

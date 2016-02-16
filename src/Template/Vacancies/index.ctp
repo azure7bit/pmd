@@ -24,14 +24,14 @@
               <div class="row">
                 <div class="col-lg-4">
                   <div class="form-group">
-                    <select class="form-control">
+                    <!-- <select class="form-control">
                       <option value="0" selected>JOBLIST</option>
                       <option value="1">JOBLIST2</option>
                       <option value="2">JOBLIST3</option>
                       <option value="3">JOBLIST4</option>
                       <option value="4">JOBLIST5</option>
                       <option value="4">JOBLIST6</option>
-                    </select>
+                    </select> -->
                   </div>
                 </div>  
                 <div class="col-lg-4">
@@ -60,55 +60,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>FIF-IT</td>
-                    <td>Staff</td>
-                    <td>FIF HEAD PFFICE</td>
-                    <td>1 Oktober 2015</td>
-                    <td>25 Desember 2015</td>
-                    <td><a class='btn btn-xs' a href="#">View Detail</a></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>FIF-HR</td>
-                    <td>Staff</td>
-                    <td>FIF HEAD PFFICE</td>
-                    <td>1 Oktober 2015</td>
-                    <td>25 Desember 2015</td>
-                    <td><a class='btn btn-xs' a href="#">View Detail</a></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>FIF-FINANCE</td>
-                    <td>Staff</td>
-                    <td>FIF HEAD PFFICE</td>
-                    <td>1 Oktober 2015</td>
-                    <td>25 Desember 2015</td>
-                    <td><a class='btn btn-xs' a href="#">View Detail</a></td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>FIF-DESIGN GRAPHIC</td>
-                    <td>Staff</td>
-                    <td>FIF HEAD PFFICE</td>
-                    <td>1 Oktober 2015</td>
-                    <td>25 Desember 2015</td>
-                    <td><a class='btn btn-xs' a href="#">View Detail</a></td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>FIF-IT (NETWORKING)</td>
-                    <td>Staff</td>
-                    <td>FIF HEAD PFFICE</td>
-                    <td>1 Oktober 2015</td>
-                    <td>25 Desember 2015</td>
-                    <td><a class='btn btn-xs' a href="#">View Detail</a></td>
-                  </tr>
+                <?php $i=1; ?>
+                  <?php foreach ($vacancies as $vacancy): ?>
+                    <tr>
+                      <td><?= $i++ ?></td>
+                      <td><?= h($vacancy->vacancy_name) ?></td>
+                      <td><?= h($vacancy->job_name) ?></td>
+                      <td><?= h($vacancy->company_name) ?></td>
+                      <td><?= h($vacancy->valid_date_from) ?></td>
+                      <td><?= h($vacancy->valid_date_to) ?></td>
+                      <td>
+                        <?= $this->Html->link(__('View Details'), ['action' => 'view', $vacancy->vacancy_id], ['class'=>'btn btn']) ?>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                  
                 </tbody>
               </table>
             </div>
-            <div class="page-nation" align="center">
+            <!-- <div class="page-nation" align="center">
               <ul class="pagination pagination-large">
                 <li class="disabled"><span>«</span></li>
                 <li class="active"><span>1</span></li>
@@ -117,7 +87,7 @@
                 <li class="disabled"><span>...</span></li><li>
                 <li><a rel="next" href="#">»</a></li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

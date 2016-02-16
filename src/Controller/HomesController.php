@@ -11,6 +11,7 @@
 
     public function initialize(){
       parent::initialize();
+      $this->Auth->allow();
     }
 
     public function index(){
@@ -23,4 +24,10 @@
     public function about(){}
 
     public function faq(){}
+
+    function captcha()  {
+      $this->autoRender = false;
+      $this->layout='ajax';
+      $this->Captcha->create();
+    }
   }

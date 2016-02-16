@@ -189,9 +189,9 @@ Plugin::load('Proffer');
 //END FILE MANAGEMENT
 
 //CAKEDC
-Configure::write('Users.config', ['users']);
-Configure::write('Users.auth', false);
-Plugin::load('CakeDC/Users', ['routes' => false, 'bootstrap' => true]);
+// Configure::write('Users.config', ['users']);
+// Configure::write('Users.auth', false);
+// Plugin::load('CakeDC/Users', ['routes' => false, 'bootstrap' => true]);
 //ENDCAKEDC
 
 
@@ -208,7 +208,7 @@ Plugin::loadAll();
 
 
 Configure::write('reCaptcha.key', '6LfmVvcSAAAAAIgnKNvh3dlmhQbT-FJbTkv93YTE');
-Configure::write('applicants.table', 'erc_applicants');
+// Configure::write('applicants.table', 'erc_applicants');
 // Only try to load DebugKit in development mode
 // Debug Kit should not be installed on a production system
 if (Configure::read('debug')) {

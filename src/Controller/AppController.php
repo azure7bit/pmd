@@ -19,7 +19,6 @@
   use Cake\Event\Event;
   use Cake\Network\Exception\NotFoundException;
   use Cake\Network\Exception\UnauthorizedException;
-
   /**
   * Application Controller
   *
@@ -28,85 +27,52 @@
   *
   * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
   */
+  
   class AppController extends Controller {
  
-  // public function initialize()
-  // {
-    // Always enable the MyUtils Helper
-    // parent::initialize();
-    // $this->loadComponent('Flash');
-    // $this->loadComponent('UsersAuth');
-    // $this->Auth->fields = array(
-    //   'username' => 'email',
-    //   'password' => 'password'
-    // );
+  public $helpers = ['Html','Form','Captcha'];
+   public function initialize(){
+    $this->loadComponent('Flash');
+    $this->loadComponent('Captcha');
+    $this->loadComponent('Auth', [
+
+      'authenticate'=> [
+        AuthComponent::ALL => ['userModel' => 'Applicants'],
+        'Form' => [
+          'fields' => ['username' => 'email', 'password' => 'password']
+        ],
+      ],
+      'loginAction' => ['controller' => 'Authentications', 'action' => 'login'], 
+      'loginRedirect' => '/', 
+      'logoutRedirect' => '/'
+      
+    ]);
     // $this->viewBuilder()->layout('admin');
-  // }
-
-
-   public $components = [
-     'UsersAuth' ,
-     'Flash',
-   ];
-   
-    public function initialize(){
-      $this->viewBuilder()->layout('applicant');
-    }
-
-   // protected $_UsersAutentication = array(
-   //   'authenticate'=> [
-   //     AuthComponent::ALL => ['userModel' => 'Users'],
-   //     'Form' => [
-   //       'fields' => ['username' => 'email', 'password' => 'password']
-   //     ],
-   //   ],
-   //   'sessionKey' => 'Auth.Admin', 
-   //   'loginAction' => ['controller' => 'AdminAuthentications', 'action' => 'login', 'admin' => true], 
-   //   'loginRedirect' => '/admin', 
-   //   'logoutRedirect' => '/admin/login');
-
-     protected $_ApplicantsAutentication = array(
-     'authenticate'=> [
-       AuthComponent::ALL => ['userModel' => 'Applicants'],
-       'Form' => [
-         'fields' => ['username' => 'email', 'password' => 'password']
-       ],
-     ],
-     'sessionKey' => 'Auth.Applicant', 
-     'loginAction' => ['controller' => 'Authentications', 'action' => 'login'], 
-     'loginRedirect' => '/', 
-     'logoutRedirect' => '/login');
-
-
-   public $helpers = ['Form'];
-
-   public function beforeFilter(Event $e) 
-   {
-     $name = $this->request->session()->read();
-     $this->_manageAuthConfigs();
-   }
-
-   protected function isPrefix($prefix)
-   {
-     $params = $this->request->params;
-     return isset($params['prefix']) && $params['prefix'] === $prefix;
-   }
-
-  public function beforeRender(Event $e) {
-    // set in the view the currentUser
-    $user = $this->Auth->user();
-    $this->set('user', $user);
-// print_r($user);
-    // $this->set('_serialize', ['user']);
-
-    // set in view the body class
-    // $this->set('bodyClass', 
-      // sprintf('%s %s', strtolower($this->name), strtolower($this->name) . '-' . strtolower($this->request->params['action'])));
+    $this->Auth->allow(['login', 'register']);
+    $this->viewBuilder()->layout('applicant');
   }
 
-   private function _manageAuthConfigs() {
-     $this->Auth->config($this->_ApplicantsAutentication);
-     // $this->Auth->config($this->_UsersAutentication);
-     $this->Auth->allow();
-   }
+
+  public function beforeFilter(Event $e) 
+  {
+    $name = $this->request->session()->read();
+    // $this->_manageAuthConfigs();
+    // $this->Auth->allow();
+  }
+
+   // protected function isPrefix($prefix)
+   // {
+   //   $params = $this->request->params;
+   //   return isset($params['prefix']) && $params['prefix'] === $prefix;
+   // }
+
+  public function beforeRender(Event $e) {
+    $user = $this->Auth->user() ? $this->Auth->user() : null;
+    $this->set('user', $user);
+    $this->set('_serialize', ['user']);
+
+    // set in view the body class
+    $this->set('bodyClass', 
+      sprintf('%s %s', strtolower($this->name), strtolower($this->name) . '-' . strtolower($this->request->params['action'])));
+  }
 }

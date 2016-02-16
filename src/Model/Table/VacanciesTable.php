@@ -51,6 +51,10 @@
           'foreignKey' => 'JOB_ID',
           'joinType' => 'INNER'
         ]);
+        $this->belongsTo('WosJobs', [
+          'foreignKey' => 'JOB_ID',
+          'joinType' => 'INNER'
+        ]);
 
       }
 

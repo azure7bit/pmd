@@ -50,9 +50,11 @@ Router::scope('/', function ($routes) {
     $routes->connect('/', ['controller' => 'Homes', 'action' => 'index']);
     $routes->connect('/about',['controller'=>'Homes', 'action'=>'about']);
     $routes->connect('/faq',['controller'=>'Homes', 'action'=>'faq']);
-    $routes->connect('/login', ['controller' => 'Authentications', 'action' => 'login', 'plugin' => null]);
+    $routes->connect('/login', ['controller' => 'Authentications', 'action' => 'login']);
     $routes->connect('/logout', ['controller' => 'Authentications', 'action' => 'logout']);
     $routes->connect('/register', ['controller' => 'Authentications', 'action' => 'register']);
+    $routes->connect('/profile', ['controller' => 'Applicants', 'action' => 'profile']);
+    $routes->connect('/setting', ['controller' => 'Authentications', 'action' => 'setting']);
     $routes->connect('/validateEmail', ['controller' => 'Authentications', 
         'action' => 'validateEmail', 'plugin' => null]);
     $routes->resources('Applicants');

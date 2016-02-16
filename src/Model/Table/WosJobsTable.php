@@ -1,19 +1,21 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\ApplicantJobList;
+use App\Model\Entity\Job;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * ApplicantJobLists Model
+ * Jobs Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Jobs
- * @property \Cake\ORM\Association\BelongsTo $Applicants
+ * @property \Cake\ORM\Association\HasMany $ApplicantJobLists
+ * @property \Cake\ORM\Association\HasMany $Jobs
+ * @property \Cake\ORM\Association\HasMany $Vacancies
  */
-class ApplicantJobListsTable extends Table
+class WosJobsTable extends Table
 {
 
     /**
@@ -26,17 +28,16 @@ class ApplicantJobListsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('ERC_JOBLISTS');
+        $this->table('hcms_jobs');
         $this->displayField('id');
-        $this->primaryKey('id');
+        $this->primaryKey('job_id');
 
-        $this->belongsTo('Jobs', [
-            'foreignKey' => 'job_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Applicants', [
-            'foreignKey' => 'applicant_id',
-            'joinType' => 'INNER'
+        // $this->hasMany('ApplicantJobLists', [
+        //     'foreignKey' => 'JOB_ID'
+        // ]);
+        
+        $this->hasMany('Vacancies', [
+            'foreignKey' => 'job_id'
         ]);
     }
 
@@ -53,12 +54,15 @@ class ApplicantJobListsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->requirePresence('job_name', 'create')
+            ->notEmpty('job_name');
+
+        $validator
             ->add('created_by', 'valid', ['rule' => 'numeric'])
             ->requirePresence('created_by', 'create')
             ->notEmpty('created_by');
 
         $validator
-            ->add('creation_date', 'valid', ['rule' => 'date'])
             ->requirePresence('creation_date', 'create')
             ->notEmpty('creation_date');
 
@@ -68,7 +72,6 @@ class ApplicantJobListsTable extends Table
             ->notEmpty('last_updated_by');
 
         $validator
-            ->add('last_update_date', 'valid', ['rule' => 'date'])
             ->requirePresence('last_update_date', 'create')
             ->notEmpty('last_update_date');
 
@@ -85,11 +88,10 @@ class ApplicantJobListsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['job_id'], 'Jobs'));
-        $rules->add($rules->existsIn(['applicant_id'], 'Applicants'));
         return $rules;
     }
 
-    public static function defaultConnectionName()
+           public static function defaultConnectionName()
     {
       return 'oracle';
     }

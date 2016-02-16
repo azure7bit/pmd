@@ -31,13 +31,13 @@ class BranchesTable extends Table
         $this->displayField('branch_id');
         $this->primaryKey('branch_id');
 
-        $this->belongsTo('Branches', [
-            'foreignKey' => 'branch_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->hasMany('Branches', [
-            'foreignKey' => 'branch_id'
-        ]);
+        // $this->belongsTo('Branches', [
+        //     'foreignKey' => 'branch_id',
+        //     'joinType' => 'INNER'
+        // ]);
+        // $this->hasMany('Branches', [
+        //     'foreignKey' => 'branch_id'
+        // ]);
         $this->hasMany('Vacancies', [
             'foreignKey' => 'branch_id'
         ]);

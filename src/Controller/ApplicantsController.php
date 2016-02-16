@@ -31,11 +31,11 @@ class ApplicantsController extends AppController
      */
     public function view($id = null)
     {
-        $applicant = $this->Applicants->get($id, [
-            'contain' => ['ApplicantJobLists']
-        ]);
-        $this->set('applicant', $applicant);
-        $this->set('_serialize', ['applicant']);
+      $applicant = $this->Applicants->get($id, [
+          'contain' => ['ApplicantJobLists']
+          ]);
+      $this->set('applicant', $applicant);
+      $this->set('_serialize', ['applicant']);
     }
 
     /**
@@ -45,19 +45,19 @@ class ApplicantsController extends AppController
      */
     public function add()
     {
-        $this->viewBuilder()->layout('admin');
-        $applicant = $this->Applicants->newEntity();
-        if ($this->request->is('post')) {
-            $applicant = $this->Applicants->patchEntity($applicant, $this->request->data);
-            if ($this->Applicants->save($applicant)) {
-                $this->Flash->success(__('The applicant has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The applicant could not be saved. Please, try again.'));
-            }
+      $this->viewBuilder()->layout('admin');
+      $applicant = $this->Applicants->newEntity();
+      if ($this->request->is('post')) {
+        $applicant = $this->Applicants->patchEntity($applicant, $this->request->data);
+        if ($this->Applicants->save($applicant)) {
+          $this->Flash->success(__('The applicant has been saved.'));
+          return $this->redirect(['action' => 'index']);
+        } else {
+          $this->Flash->error(__('The applicant could not be saved. Please, try again.'));
         }
-        $this->set(compact('applicant'));
-        $this->set('_serialize', ['applicant']);
+      }
+      $this->set(compact('applicant'));
+      $this->set('_serialize', ['applicant']);
     }
 
     /**
@@ -69,20 +69,18 @@ class ApplicantsController extends AppController
      */
     public function edit($id = null)
     {
-        $applicant = $this->Applicants->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $applicant = $this->Applicants->patchEntity($applicant, $this->request->data);
-            if ($this->Applicants->save($applicant)) {
-                $this->Flash->success(__('The applicant has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The applicant could not be saved. Please, try again.'));
-            }
+      $applicant = $this->Applicants->get($id, ['contain' => []]);
+      if ($this->request->is(['patch', 'post', 'put'])) {
+        $applicant = $this->Applicants->patchEntity($applicant, $this->request->data);
+        if ($this->Applicants->save($applicant)) {
+          $this->Flash->success(__('The applicant has been saved.'));
+          return $this->redirect(['action' => 'profile']);
+        } else {
+          $this->Flash->error(__('The applicant could not be saved. Please, try again.'));
         }
-        $this->set(compact('applicant'));
-        $this->set('_serialize', ['applicant']);
+      }
+      $this->set(compact('applicant'));
+      $this->set('_serialize', ['applicant']);
     }
 
     /**
@@ -102,5 +100,34 @@ class ApplicantsController extends AppController
             $this->Flash->error(__('The applicant could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function profile($id = null)
+    {
+        $id = $this->Auth->user()['id'];
+        
+        $applicant = $this->Applicants->get($id, [
+            'contain' => ['ApplicantJobLists','ApplicantEducations']
+            ]);
+        $this->set(compact('applicant'));
+        $this->set('_serialize', ['applicant']);
+    }
+
+    public function joblist($id=null)
+    {
+      $id = $this->Auth->user()['id'];
+        
+      $applicant = $this->Applicants->get($id, [
+        'contain' => ['ApplicantJobLists']
+      ]);
+      
+      $this->set(compact('applicant'));
+      $this->set('_serialize', ['applicant']);
+    }
+
+    function captcha()  {
+      $this->autoRender = false;
+      $this->layout='ajax';
+      $this->Captcha->create();
     }
 }

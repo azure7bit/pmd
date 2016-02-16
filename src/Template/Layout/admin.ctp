@@ -37,7 +37,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-        <?php if(!empty($authUser)): ?>
+        <?php if(!empty($user)): ?>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -86,7 +86,7 @@
 
     <?= $this->Flash->render() ?>
 
-    <?php if(!empty($authUser)): ?>
+    <?php if(!empty($user)): ?>
       <!-- NAVBAR  -->
       <div class="col-sm-3 col-md-3 sidebar">
         <div class="mini-submenu">
@@ -169,7 +169,7 @@
     <div class="col-lg-9"> 
       <div class="container">
         <div class="row">
-          <?= !empty($authUser) ? $this->Html->getCrumbs(' > ', 'Home') : null; ?>
+          <?= !empty($user) ? $this->Html->getCrumbs(' > ', 'Home') : null; ?>
           <?= $this->fetch('content') ?>    
         </div>
       </div>
@@ -197,12 +197,21 @@
           $('.mini-submenu').hide();
         })
       })
-    </script>
-    <script type="text/javascript">
+
       var room = 1;
       function add_fields() {
         $('.add_room_fields').append($('.form_table').html());
       }
+
+      $('.creload').on('click', function() {
+        var mySrc = $(this).prev().attr('src');
+        var glue = '?';
+        if(mySrc.indexOf('?')!=-1)  {
+          glue = '&';
+        }
+        $(this).prev().attr('src', mySrc + glue + new Date().getTime());
+        return false;
+      });
     </script>
   </body>
   </html>

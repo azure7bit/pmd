@@ -18,10 +18,10 @@ class VacanciesController extends AppController
      */
     public function index()
     {
-      // $this->paginate = [
-      // 'contain' => ['Companies', 'Branches', 'Organizations', 'Jobs']
-      // ];
-      $this->paginate = ['contain' => []];
+      $this->paginate = [
+      'contain' => ['Companies', 'Branches', 'WosJobs']
+      ];
+      // $this->paginate = ['contain' => []];
       $this->set('vacancies', $this->paginate($this->Vacancies));
       $this->set('_serialize', ['vacancies']);
     }
@@ -35,9 +35,11 @@ class VacanciesController extends AppController
      */
     public function view($id = null)
     {
-      $vacancy = $this->Vacancies->get($id, [
-        'contain' => ['Companies', 'Branches', 'Organizations', 'Jobs']
-        ]);
+      $this->viewBuilder()->layout('admin');
+      $vacancy = $this->Vacancies->find('all')
+        ->where(['vacancy_id' => $id])
+        ->contain(['Companies', 'Branches'])
+        ->first();
       $this->set('vacancy', $vacancy);
       $this->set('_serialize', ['vacancy']);
     }

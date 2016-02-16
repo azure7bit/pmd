@@ -13,7 +13,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Jobs
  * @property \Cake\ORM\Association\BelongsTo $Applicants
  */
-class ApplicantJobListsTable extends Table
+class ApplicantEducationsTable extends Table
 {
 
     /**
@@ -26,14 +26,10 @@ class ApplicantJobListsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('ERC_JOBLISTS');
+        $this->table('ERC_EDUCATIONS');
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Jobs', [
-            'foreignKey' => 'job_id',
-            'joinType' => 'INNER'
-        ]);
         $this->belongsTo('Applicants', [
             'foreignKey' => 'applicant_id',
             'joinType' => 'INNER'

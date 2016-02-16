@@ -59,23 +59,16 @@ class Applicant extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'username' => true,
-        'email' => true,
-        'password' => true,
-        'confirm_password' => true,
-        'first_name' => true,
-        'last_name' => true,
-        'token' => true,
-        'token_expires' => true,
-        'api_token' => true,
-        'activation_date' => true,
-        //tos is a boolean, coming from the "accept the terms of service" checkbox but it is not stored onto database
-        'tos' => true,
-        'tos_date' => true,
-        'active' => true,
-        'social_accounts' => true,
-        'current_password' => true
+        'AVATAR' => true,
+        'AVATAR_DIR' => true,
     ];
+
+    public $actsAs = array(
+        'Captcha' => array(
+            'field' => array('security_code'),
+            'error' => 'Incorrect captcha code value'
+        )
+    );
 
     /**
      * @param string $password password that will be set.
@@ -167,14 +160,14 @@ class Applicant extends Entity
      *
      * @return string|null avatar
      */
-    protected function _getAvatar()
-    {
-        $avatar = null;
-        if (!empty($this->_properties['social_accounts'][0])) {
-            $avatar = $this->_properties['social_accounts'][0]['avatar'];
-        }
-        return $avatar;
-    }
+    // protected function _getAvatar()
+    // {
+    //     $avatar = null;
+    //     if (!empty($this->_properties['social_accounts'][0])) {
+    //         $avatar = $this->_properties['social_accounts'][0]['avatar'];
+    //     }
+    //     return $avatar;
+    // }
 
     /**
      * Generate token_expires and token in a user
@@ -187,7 +180,6 @@ class Applicant extends Entity
         $expires = new DateTime();
         // $expires->modify("+ $tokenExpiration secs");
         // $expires->modify("$tokenExpiration");
-        // debug($expires);
         $expires = date_format($expires, 'Y-m-d');
         $this->token_exp = $expires;
         $this->token = str_replace('-', '', Text::uuid());
@@ -226,9 +218,9 @@ class Applicant extends Entity
   public function avatar_url($thumbnailtype=null)
   {
     if(!empty($thumbnailtype)){
-      $value = '/files/applicants/avatar/'. $this->avatar_dir . '/'. $thumbnailtype . "_". $this->avatar;
+      $value = '/filesAvatar/erc_applicants/avatar/'. $this->avatar_dir . '/'. $thumbnailtype . "_". $this->avatar;
     }else{
-      $value = '/files/applicants/avatar/'. $this->avatar_dir . '/'. $this->avatar;
+      $value = '/filesAvatar/erc_applicants/avatar/'. $this->avatar_dir . '/'. $this->avatar;
     }
     return $value;
   }

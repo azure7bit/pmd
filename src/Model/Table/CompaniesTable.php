@@ -31,8 +31,8 @@ class CompaniesTable extends Table
         // $this->alias('HCMS_COMPANIES');
         // $this->registryAlias('HCMS_COMPANIES');
         $this->displayField('id');
-        $this->primaryKey('company_id');
-        // $this->entityClass('App\Model\Entity\Company');
+        $this->primaryKey('COMPANY_ID');
+        $this->entityClass('App\Model\Entity\Company');
         $this->hasMany('Vacancies', [
             'foreignKey' => 'COMPANY_ID'
         ]);

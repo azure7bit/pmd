@@ -3,11 +3,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 use App\Controller\Admin\AdminController;
-use App\Model\Table\MyUsersTable;
 use Cake\Event\Event;
-use CakeDC\Users\Controller\Component\UsersAuthComponent;
-use CakeDC\Users\Controller\Traits\UserValidationTrait;
-
 
 /**
  * Users Controller

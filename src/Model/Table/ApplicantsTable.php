@@ -39,28 +39,35 @@
       $this->alias('ERC_APPLICANTS');
       $this->registryAlias('ERC_APPLICANTS');
       $this->displayField('id');
-      $this->primaryKey('ID');
+      $this->primaryKey('id');
       $this->entityClass('App\Model\Entity\Applicant');
       
-      $this->addBehavior('CakeDC/Users.Register');
-      $this->addBehavior('CakeDC/Users.Password');
-      $this->addBehavior('CakeDC/Users.Social');
+       $this->addBehavior('Captcha', [
+          'field' => 'captcha',
+          'message' => 'Incorrect captcha code value'
+        ]);
+      // $this->addBehavior('CakeDC/Users.Password');
+      // $this->addBehavior('CakeDC/Users.Social');
       
       // $this->hasMany('SocialAccounts', [
       //   'foreignKey' => 'user_id',
       //   'className' => 'CakeDC/Users.SocialAccounts'
       // ]);
 
-      // $this->hasMany('ApplicantJobLists', [
-      //   'foreignKey' => 'applicant_id'
-      // ]);
+      $this->hasMany('ApplicantJobLists', [
+        'foreignKey' => 'applicant_id'
+      ]);
 
-      // $this->addBehavior('Sluggable', [
-      //   'field' => 'full_name',
-      //   'implementedFinders' => [
-      //     'slugged' => 'findSlug',
-      //   ]
-      // ]);
+      $this->hasMany('ApplicantEducations', [
+        'foreignKey' => 'applicant_id'
+      ]);
+
+      $this->addBehavior('Sluggable', [
+        'field' => 'full_name',
+        'implementedFinders' => [
+          'slugged' => 'findSlug',
+        ]
+      ]);
       
       // Add the behaviour and configure any options you want
       // $this->addBehavior('Captcha', [
@@ -68,19 +75,19 @@
       //   'message' => 'Incorrect captcha code value'
       // ]);
 
-      // $this->addBehavior('Timestamp', [
-      //   'events' => [
-      //     'Model.beforeSave' => [
-      //       'created' => 'new',
-      //       'modified' => 'always'
-      //     ]
-      //   ]
-      // ]);
+      $this->addBehavior('Timestamp', [
+        'events' => [
+          'Model.beforeSave' => [
+            'created' => 'new',
+            'modified' => 'always'
+          ]
+        ]
+      ]);
 
       $this->addBehavior('Proffer.Proffer', [
-        'AVATAR' => [
+        'avatar' => [
           'root' => WWW_ROOT . 'files' . 'AVATAR',
-          'dir' => 'AVATAR_DIR',
+          'dir' => 'avatar_dir',
           'thumbnailSizes' => [
             'square' => [
               'w' => 200,
@@ -93,8 +100,7 @@
               'w' => 85,
               'h' => 113
             ],
-          ],
-          'thumbnailMethod' => 'imagick'
+          ]
         ],
         'CV' => [
           'root' => WWW_ROOT . 'files'. 'CV',
@@ -157,114 +163,114 @@
       return $validator;
     }
     
-    public function validationDefault(Validator $validator)
-    {
-      // $validator
-      //   ->allowEmpty('id', 'create');
+    // public function validationDefault(Validator $validator)
+    // {
+    //   // $validator
+    //   //   ->allowEmpty('id', 'create');
 
-      $validator
-        ->requirePresence('password', 'create')
-        ->allowEmpty('password', 'edit')
-        ->add('password', 'validFormat', [
-          'rule' => [
-            'custom', 
-            '/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/', 
-            'provider' => 'table'
-          ], 
-          'message' => '* Your password must be include at least one lowercase letter, one uppercase letter and a number'
-          ])
-        ->add('password', [
-          'length' => [
-            'rule' => ['minLength', 8],
-              'message' => 'Password need to be 8 characters long',
-          ]
-        ]);
+    //   $validator
+    //     ->requirePresence('password', 'create')
+    //     ->allowEmpty('password', 'edit')
+    //     ->add('password', 'validFormat', [
+    //       'rule' => [
+    //         'custom', 
+    //         '/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/', 
+    //         'provider' => 'table'
+    //       ], 
+    //       'message' => '* Your password must be include at least one lowercase letter, one uppercase letter and a number'
+    //       ])
+    //     ->add('password', [
+    //       'length' => [
+    //         'rule' => ['minLength', 8],
+    //           'message' => 'Password need to be 8 characters long',
+    //       ]
+    //     ]);
 
-      $validator
-        ->allowEmpty('token');
+    //   $validator
+    //     ->allowEmpty('token');
 
-      $validator
-        ->add('token_exp', 'valid')
-        ->allowEmpty('token_exp');
+    //   $validator
+    //     ->add('token_exp', 'valid')
+    //     ->allowEmpty('token_exp');
 
-      $validator
-        ->allowEmpty('api_token');
+    //   $validator
+    //     ->allowEmpty('api_token');
 
-      $validator
-        ->add('activate', 'valid')
-        ->allowEmpty('activate');
+    //   $validator
+    //     ->add('activate', 'valid')
+    //     ->allowEmpty('activate');
 
-         $validator
-        ->add('activation_date', 'valid')
-        ->allowEmpty('activate');
+    //      $validator
+    //     ->add('activation_date', 'valid')
+    //     ->allowEmpty('activate');
 
-      $validator
-        ->add('tos_date', 'valid')
-        ->allowEmpty('tos_date');
+    //   $validator
+    //     ->add('tos_date', 'valid')
+    //     ->allowEmpty('tos_date');
 
-      // $validator
-      //   ->add('id', 'valid', ['rule' => 'numeric'])
-      //   ->allowEmpty('id', 'create');
+    //   // $validator
+    //   //   ->add('id', 'valid', ['rule' => 'numeric'])
+    //   //   ->allowEmpty('id', 'create');
 
-      $validator
-        ->requirePresence('id_card', 'update')
-        ->allowEmpty('id_card', 'create')
-        ->add('id_card', 'unique', [
-          'rule' => 'validateUnique', 
-          'provider' => 'table'
-        ]);
+    //   $validator
+    //     ->requirePresence('id_card', 'update')
+    //     ->allowEmpty('id_card', 'create')
+    //     ->add('id_card', 'unique', [
+    //       'rule' => 'validateUnique', 
+    //       'provider' => 'table'
+    //     ]);
 
-      $validator
-        ->requirePresence('full_name', 'create')
-        ->notEmpty('full_name');
+    //   $validator
+    //     ->requirePresence('full_name', 'create')
+    //     ->notEmpty('full_name');
 
-      $validator
-        ->requirePresence('address', 'update')
-        ->allowEmpty('address', 'create');
+    //   $validator
+    //     ->requirePresence('address', 'update')
+    //     ->allowEmpty('address', 'create');
 
-      $validator
-        ->requirePresence('religion', 'update')
-        ->allowEmpty('religion', 'create');
+    //   $validator
+    //     ->requirePresence('religion', 'update')
+    //     ->allowEmpty('religion', 'create');
 
-      $validator
-        ->requirePresence('blood_type', 'update')
-        ->allowEmpty('blood_type', 'create')
-        ->add('blood_type', 'validValue', [
-          'rule' => [
-            'inList', array('A', 'AB', 'O', 'B')]
-          ]);
+    //   $validator
+    //     ->requirePresence('blood_type', 'update')
+    //     ->allowEmpty('blood_type', 'create')
+    //     ->add('blood_type', 'validValue', [
+    //       'rule' => [
+    //         'inList', array('A', 'AB', 'O', 'B')]
+    //       ]);
 
-      $validator
-        ->requirePresence('phone', 'update')
-        ->allowEmpty('phone_number', 'create')
-        ->add('phone_number', 'validFormat', [
-          'rule' => [
-            'custom', '/62\d{8}\d/', 
-            'provider' => 'table'
-          ], 
-          'message' => 'Please put phone number correctly'
-        ]);
+    //   $validator
+    //     ->requirePresence('phone', 'update')
+    //     ->allowEmpty('phone_number', 'create')
+    //     ->add('phone_number', 'validFormat', [
+    //       'rule' => [
+    //         'custom', '/62\d{8}\d/', 
+    //         'provider' => 'table'
+    //       ], 
+    //       'message' => 'Please put phone number correctly'
+    //     ]);
 
-      $validator
-        ->requirePresence('gender', 'update')
-        ->allowEmpty('gender', 'create')
-        ->add('gender', 'validValue', [
-          'rule' => [
-            'inList', array('m', 'M', 'f', 'F')
-          ]
-        ]);
+    //   $validator
+    //     ->requirePresence('gender', 'update')
+    //     ->allowEmpty('gender', 'create')
+    //     ->add('gender', 'validValue', [
+    //       'rule' => [
+    //         'inList', array('m', 'M', 'f', 'F')
+    //       ]
+    //     ]);
 
-      $validator
-        ->allowEmpty('birthdate', 'create');
-        // ->add('birthdate', 'date', [
-        //   'rule' => [
-        //     'date', 'DMY', 'range'=>date('Y')-18, date('Y')-50
-        //   ]
-        // ]);
+    //   $validator
+    //     ->allowEmpty('birthdate', 'create');
+    //     // ->add('birthdate', 'date', [
+    //     //   'rule' => [
+    //     //     'date', 'DMY', 'range'=>date('Y')-18, date('Y')-50
+    //     //   ]
+    //     // ]);
 
-      return $validator;
+    //   return $validator;
 
-    }
+    // }
 
     /**
     * Default validation rules.

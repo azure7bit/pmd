@@ -28,7 +28,7 @@ class JobsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('jobs');
+        $this->table('erc_jobs');
         $this->displayField('id');
         $this->primaryKey('JOB_ID');
 
