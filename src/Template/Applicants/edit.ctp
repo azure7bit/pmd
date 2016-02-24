@@ -41,6 +41,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">GENDER<span class="mandatory">*</span></label>
+                    <div class="clearfix"></div>
                     <?= $this->Form->radio('gender', [['value'=>'Male','text'=>'Male'],['value'=>'Female','text'=>'Female']],['value'=>$applicant->gender, 'class'=>'form-control']) ?>
                   </div>
                   <div class="form-group">
@@ -134,7 +135,7 @@
                                 <option value="2">2014</option>
                               </select>
                             </td>
-                            <td><input type="text" class="form-control" id="gpa" value="" ></td>     
+                            <td><input type="text" class="form-control" id="gpa" value="" ></td> 
                           </tr>
                           <?php } ?>
                         </tbody>
@@ -304,6 +305,7 @@
                     <label for="exampleInputEmail1">EXPECTED SALARY</label>
                     <input type="email" class="form-control" id="exampleSalary" >
                   </div>
+
                   <div class="form-group">
                     <label for="inlineRadio1">ARE YOU HAVE FRIEND OR RELATIVE IN FIFGROUP?</label><br>
                     <label class="radio-inline">
@@ -311,13 +313,14 @@
                     </label>
                     <label class="radio-inline">
                       <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" > No
-                    </label><br>
+                    </label>
+
+                    <div class="clearfix"></div>
+
                     <div class="form-group ttl">
                       <label for="filter">WHO ?</label>
                       <div class="clearfix"></div>
-                      <div class="form-control no-border">
-                        <input type="email" class="form-control" id="exampleNameSibing" >
-                      </div>
+                      
                       <select class="form-control" >
                         <option value="0" selected>Sibling</option>
                         <option value="1">1</option>

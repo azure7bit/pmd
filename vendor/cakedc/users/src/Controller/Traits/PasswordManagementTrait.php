@@ -111,7 +111,6 @@ trait PasswordManagementTrait
         } catch (UserNotFoundException $exception) {
             $this->Flash->error(__d('Users', 'User {0} was not found', $reference));
         } catch (Exception $exception) {
-            debug($exception);
             $this->Flash->error(__d('Users', 'Token could not be reset'));
         }
     }

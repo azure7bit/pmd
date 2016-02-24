@@ -1,14 +1,14 @@
 <?php
 namespace App\Controller;
 
-use App\Controller\AppController;
+use App\Controller\FrontsController;
 use Cake\Event\Event;
 /**
  * Applicants Controller
  *
  * @property \App\Model\Table\ApplicantsTable $Applicants
  */
-class ApplicantsController extends AppController
+class ApplicantsController extends FrontsController
 {
 
     /**
@@ -18,8 +18,8 @@ class ApplicantsController extends AppController
      */
     public function index()
     {
-        $this->set('applicants', $this->paginate($this->Applicants));
-        $this->set('_serialize', ['applicants']);
+      $this->set('applicants', $this->paginate($this->Applicants));
+      $this->set('_serialize', ['applicants']);
     }
 
     /**
@@ -45,7 +45,6 @@ class ApplicantsController extends AppController
      */
     public function add()
     {
-      $this->viewBuilder()->layout('admin');
       $applicant = $this->Applicants->newEntity();
       if ($this->request->is('post')) {
         $applicant = $this->Applicants->patchEntity($applicant, $this->request->data);
@@ -92,25 +91,26 @@ class ApplicantsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $applicant = $this->Applicants->get($id);
-        if ($this->Applicants->delete($applicant)) {
-            $this->Flash->success(__('The applicant has been deleted.'));
-        } else {
-            $this->Flash->error(__('The applicant could not be deleted. Please, try again.'));
-        }
-        return $this->redirect(['action' => 'index']);
+      $this->request->allowMethod(['post', 'delete']);
+      $applicant = $this->Applicants->get($id);
+      if ($this->Applicants->delete($applicant)) {
+          $this->Flash->success(__('The applicant has been deleted.'));
+      } else {
+          $this->Flash->error(__('The applicant could not be deleted. Please, try again.'));
+      }
+      return $this->redirect(['action' => 'index']);
     }
 
     public function profile($id = null)
     {
-        $id = $this->Auth->user()['id'];
-        
-        $applicant = $this->Applicants->get($id, [
-            'contain' => ['ApplicantJobLists','ApplicantEducations']
-            ]);
-        $this->set(compact('applicant'));
-        $this->set('_serialize', ['applicant']);
+      $id = $this->Auth->user()['id'];
+      
+      $applicant = $this->Applicants->get($id, 
+        [
+          'contain' => ['ApplicantJobLists','ApplicantEducations']
+        ]);
+      $this->set(compact('applicant'));
+      $this->set('_serialize', ['applicant']);
     }
 
     public function joblist($id=null)
@@ -125,9 +125,9 @@ class ApplicantsController extends AppController
       $this->set('_serialize', ['applicant']);
     }
 
-    function captcha()  {
-      $this->autoRender = false;
-      $this->layout='ajax';
-      $this->Captcha->create();
-    }
+    // public function captcha()  {
+    //   $this->autoRender = false;
+    //   $this->layout='ajax';
+    //   $this->Captcha->create();
+    // }
 }

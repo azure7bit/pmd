@@ -30,49 +30,49 @@
   
   class AppController extends Controller {
  
-  public $helpers = ['Html','Form','Captcha'];
-   public function initialize(){
-    $this->loadComponent('Flash');
-    $this->loadComponent('Captcha');
-    $this->loadComponent('Auth', [
+    public $helpers = ['Html','Form','Captcha'];
+    
+    // public $token = $this->request->param('_csrfToken');
 
-      'authenticate'=> [
-        AuthComponent::ALL => ['userModel' => 'Applicants'],
-        'Form' => [
-          'fields' => ['username' => 'email', 'password' => 'password']
-        ],
-      ],
-      'loginAction' => ['controller' => 'Authentications', 'action' => 'login'], 
-      'loginRedirect' => '/', 
-      'logoutRedirect' => '/'
-      
-    ]);
-    // $this->viewBuilder()->layout('admin');
-    $this->Auth->allow(['login', 'register']);
-    $this->viewBuilder()->layout('applicant');
+    public function initialize(){
+      $this->loadComponent('Csrf');
+      $this->loadComponent('Flash');
+      $this->loadComponent('Captcha');
+      // $this->loadComponent('Auth', 
+      // [
+      //   'authenticate'=> 
+      //     [
+      //       AuthComponent::ALL => ['userModel' => 'Applicants'],
+      //       'Form' => 
+      //       [
+      //         'fields' => ['username' => 'email', 'password' => 'password']
+      //       ],
+      //     ],
+      //   'loginAction' => ['controller' => 'Authentications', 'action' => 'login'], 
+      //   'loginRedirect' => '/', 
+      //   'logoutRedirect' => '/'
+      // ]);
+
+      // $this->Auth->allow(['login', 'register']);
+      // $this->viewBuilder()->layout('applicant');
+    }
+
+    // public function beforeFilter(Event $e) 
+    // {
+    //   $name = $this->request->session()->read();
+    // }
+
+    // public function beforeRender(Event $e) {
+    //   $user = $this->Auth->user() ? $this->Auth->user() : null;
+    //   $this->set('user', $user);
+    //   $this->set('_serialize', ['user']);
+
+    //   $this->set('bodyClass', sprintf('%s %s', strtolower($this->name), strtolower($this->name) . '-' . strtolower($this->request->params['action'])));
+    // }
+
+    public function captcha()  {
+      $this->autoRender = false;
+      $this->layout='ajax';
+      $this->Captcha->create();
+    }
   }
-
-
-  public function beforeFilter(Event $e) 
-  {
-    $name = $this->request->session()->read();
-    // $this->_manageAuthConfigs();
-    // $this->Auth->allow();
-  }
-
-   // protected function isPrefix($prefix)
-   // {
-   //   $params = $this->request->params;
-   //   return isset($params['prefix']) && $params['prefix'] === $prefix;
-   // }
-
-  public function beforeRender(Event $e) {
-    $user = $this->Auth->user() ? $this->Auth->user() : null;
-    $this->set('user', $user);
-    $this->set('_serialize', ['user']);
-
-    // set in view the body class
-    $this->set('bodyClass', 
-      sprintf('%s %s', strtolower($this->name), strtolower($this->name) . '-' . strtolower($this->request->params['action'])));
-  }
-}

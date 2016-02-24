@@ -21,28 +21,30 @@
           </div>
           <div class="search-vac">
             <div class="col-lg-12 block-search">
-              <div class="row">
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <!-- <select class="form-control">
-                      <option value="0" selected>JOBLIST</option>
-                      <option value="1">JOBLIST2</option>
-                      <option value="2">JOBLIST3</option>
-                      <option value="3">JOBLIST4</option>
-                      <option value="4">JOBLIST5</option>
-                      <option value="4">JOBLIST6</option>
-                    </select> -->
+              <?= $this->Form->create() ?>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <select class="form-control">
+                        <option value="" selected>JOBLIST</option>
+                        <option value="vacancy_name">Name</option>
+                        <option value="job_name">Position</option>
+                        <option value="company_name">Placed</option>
+                        <option value="valid_date_from">Post Date</option>
+                        <option value="valid_date_to">Closed Date</option>
+                      </select>
+                    </div>
+                  </div>  
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <input type="email" class="form-control" id="vacancy" placeholder="Enter Keywoards..">
+                    </div>
+                  </div>  
+                  <div class="col-lg-4">
+                    <a class="btn searh-vac" href=""><i class="fa fa-send">&nbsp;&nbsp;</i>SEARCH</a>
                   </div>
-                </div>  
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <input type="email" class="form-control" id="vacancy" placeholder="Enter Keywoards..">
-                  </div>
-                </div>  
-                <div class="col-lg-4">
-                  <a class="btn searh-vac" href=""><i class="fa fa-send">&nbsp;&nbsp;</i>SEARCH</a>
-                </div>  
-              </div>
+                </div>
+              <?= $this->Form->end() ?>
             </div>
           </div>
           <div class="block-content-profile">
@@ -70,7 +72,7 @@
                       <td><?= h($vacancy->valid_date_from) ?></td>
                       <td><?= h($vacancy->valid_date_to) ?></td>
                       <td>
-                        <?= $this->Html->link(__('View Details'), ['action' => 'view', $vacancy->vacancy_id], ['class'=>'btn btn']) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $vacancy->vacancy_id], ['class'=>'btn btn']) ?>
                       </td>
                     </tr>
                   <?php endforeach; ?>

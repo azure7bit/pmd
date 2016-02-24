@@ -58,4 +58,12 @@ class Vacancy extends Entity
         }
     }
 
+    protected function _getValidDateFrom(){
+        if(is_null($this->_properties['valid_date_from'])){
+            return $this->_properties['valid_date_from'];
+        }else{
+            return date_format($this->_properties['valid_date_from'], "d M Y");
+        }
+    }
+
   }

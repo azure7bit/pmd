@@ -1,16 +1,21 @@
 <?php
-namespace App\Controller;
+  namespace App\Controller;
 
-use App\Controller\AppController;
+  use App\Controller\FrontsController;
 
-/**
- * Vacancies Controller
- *
- * @property \App\Model\Table\VacanciesTable $Vacancies
- */
-class VacanciesController extends AppController
-{
+  /**
+   * Vacancies Controller
+   *
+   * @property \App\Model\Table\VacanciesTable $Vacancies
+   */
+  class VacanciesController extends FrontsController
+  {
 
+    public function initialize()
+    {
+      parent::initialize();
+      $this->Auth->allow(['index']);
+    }
     /**
      * Index method
      *
@@ -21,8 +26,15 @@ class VacanciesController extends AppController
       $this->paginate = [
       'contain' => ['Companies', 'Branches', 'WosJobs']
       ];
-      // $this->paginate = ['contain' => []];
+
+      // $jobs = $this->Vacancies->WosJobs->find('list', ['keyField' => 'job_id','valueField' => 'job_name']);
+
+      // $vacancies = $this->paginate($this->Vacancies);
+
       $this->set('vacancies', $this->paginate($this->Vacancies));
+
+      // $this->set(compact('vacancies', 'jobs'));
+
       $this->set('_serialize', ['vacancies']);
     }
 
@@ -35,10 +47,9 @@ class VacanciesController extends AppController
      */
     public function view($id = null)
     {
-      $this->viewBuilder()->layout('admin');
       $vacancy = $this->Vacancies->find('all')
         ->where(['vacancy_id' => $id])
-        ->contain(['Companies', 'Branches'])
+        ->contain(['Companies', 'Branches', 'WosJobs'])
         ->first();
       $this->set('vacancy', $vacancy);
       $this->set('_serialize', ['vacancy']);
@@ -51,8 +62,8 @@ class VacanciesController extends AppController
      */
     public function add()
     {
-      $this->viewBuilder()->layout('admin');
       $vacancy = $this->Vacancies->newEntity();
+
       if ($this->request->is('post')) {
         $vacancy = $this->Vacancies->patchEntity($vacancy, $this->request->data);
         if ($this->Vacancies->save($vacancy)) {
@@ -62,9 +73,13 @@ class VacanciesController extends AppController
           $this->Flash->error(__('The vacancy could not be saved. Please, try again.'));
         }
       }
+
       $companies = $this->Vacancies->Companies->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'company_name']);
+
       $branches = $this->Vacancies->Branches->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'branch_name']);
+
       $organizations = $this->Vacancies->Organizations->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'organization_name']);
+      
       $jobs = $this->Vacancies->Jobs->find('list', ['limit' => 200, 'keyField' => 'id','valueField' => 'job_name']);
 
       $this->set(compact('vacancy', 'companies', 'branches', 'organizations', 'jobs'));
@@ -83,7 +98,9 @@ class VacanciesController extends AppController
       $vacancy = $this->Vacancies->get($id, [
         'contain' => []
         ]);
-      if ($this->request->is(['patch', 'post', 'put'])) {
+      
+      if ($this->request->is(['patch', 'post', 'put'])) 
+      {
         $vacancy = $this->Vacancies->patchEntity($vacancy, $this->request->data);
         if ($this->Vacancies->save($vacancy)) {
           $this->Flash->success(__('The vacancy has been saved.'));
@@ -92,10 +109,12 @@ class VacanciesController extends AppController
           $this->Flash->error(__('The vacancy could not be saved. Please, try again.'));
         }
       }
+
       $companies = $this->Vacancies->Companies->find('list', ['limit' => 200]);
       $branches = $this->Vacancies->Branches->find('list', ['limit' => 200]);
       $organizations = $this->Vacancies->Organizations->find('list', ['limit' => 200]);
       $jobs = $this->Vacancies->Jobs->find('list', ['limit' => 200]);
+      
       $this->set(compact('vacancy', 'companies', 'branches', 'organizations', 'jobs'));
       $this->set('_serialize', ['vacancy']);
     }
@@ -118,4 +137,7 @@ class VacanciesController extends AppController
       }
       return $this->redirect(['action' => 'index']);
     }
+
+   
   }
+ 

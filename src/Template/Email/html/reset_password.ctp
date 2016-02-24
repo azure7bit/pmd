@@ -13,8 +13,7 @@ $activationUrl = [
     '_full' => true,
     'plugin' => null,
     'controller' => 'Authentications',
-    'action' => 'resetPassword',
-    'prefix' => 'admin',
+    'action' => 'setting',
     isset($token) ? $token : ''
 ];
 ?>

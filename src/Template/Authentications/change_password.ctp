@@ -1,6 +1,6 @@
 <div class="users form">
     <?= $this->Flash->render('auth') ?>
-    <?= $this->Form->create($user) ?>
+    <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __d('Users', 'Please enter the new password') ?></legend>
         <?php if ($validatePassword) : ?>

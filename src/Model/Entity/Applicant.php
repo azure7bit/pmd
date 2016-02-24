@@ -64,10 +64,10 @@ class Applicant extends Entity
     ];
 
     public $actsAs = array(
-        'Captcha' => array(
-            'field' => array('security_code'),
-            'error' => 'Incorrect captcha code value'
-        )
+      'Captcha' => array(
+          'field' => array('security_code'),
+          'error' => 'Incorrect captcha code value'
+      )
     );
 
     /**
@@ -125,11 +125,11 @@ class Applicant extends Entity
      */
     public function getPasswordHasher()
     {
-        $passwordHasher = Configure::read('Users.passwordHasher');
-        if (!class_exists($passwordHasher)) {
-            $passwordHasher = '\Cake\Auth\DefaultPasswordHasher';
-        }
-        return new $passwordHasher;
+      $passwordHasher = Configure::read('Users.passwordHasher');
+      if (!class_exists($passwordHasher)) {
+        $passwordHasher = '\Cake\Auth\DefaultPasswordHasher';
+      }
+      return new $passwordHasher;
     }
 
     /**
@@ -177,13 +177,22 @@ class Applicant extends Entity
      */
     public function updateToken($tokenExpiration)
     {
-        $expires = new DateTime();
-        // $expires->modify("+ $tokenExpiration secs");
-        // $expires->modify("$tokenExpiration");
-        $expires = date_format($expires, 'Y-m-d');
-        $this->token_exp = $expires;
-        $this->token = str_replace('-', '', Text::uuid());
+      $expires = new DateTime();
+      // $expires->modify("+ $tokenExpiration secs");
+      // $expires->modify("$tokenExpiration");
+      $expires = date_format($expires, 'Y-m-d');
+      $this->token_exp = $expires;
+      $this->token = str_replace('-', '', Text::uuid());
 
+    }
+
+    public function setToken()
+    {
+      $expires = new DateTime();
+      $expires = date_format($expires, 'Y-m-d');
+      $value = $expires + $this->email;
+      $hasher = new DefaultPasswordHasher();
+      $this->token = $hasher->hash($value);
     }
 
   // protected function _setGender($gender)

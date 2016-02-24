@@ -57,7 +57,8 @@ Router::scope('/', function ($routes) {
     $routes->connect('/setting', ['controller' => 'Authentications', 'action' => 'setting']);
     $routes->connect('/validateEmail', ['controller' => 'Authentications', 
         'action' => 'validateEmail', 'plugin' => null]);
-    $routes->resources('Applicants');
+    // $routes->resources('Applicants');
+    $routes->connect('/forgot-password', ['controller' => 'Authentications', 'action' => 'requestResetPassword']);
 
     $routes->fallbacks('DashedRoute');
 });
