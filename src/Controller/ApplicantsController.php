@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Controller\FrontsController;
 use Cake\Event\Event;
+use DateTime;
+
 /**
  * Applicants Controller
  *
@@ -68,18 +70,28 @@ class ApplicantsController extends FrontsController
      */
     public function edit($id = null)
     {
-      $applicant = $this->Applicants->get($id, ['contain' => []]);
-      if ($this->request->is(['patch', 'post', 'put'])) {
-        $applicant = $this->Applicants->patchEntity($applicant, $this->request->data);
-        if ($this->Applicants->save($applicant)) {
-          $this->Flash->success(__('The applicant has been saved.'));
-          return $this->redirect(['action' => 'profile']);
-        } else {
-          $this->Flash->error(__('The applicant could not be saved. Please, try again.'));
+      if(empty($applicant->status)){
+        $applicant = $this->Applicants->get($id, ['contain' => []]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+          $value = new DateTime($this->request->data['birthdate']);
+          $applicant = $this->Applicants->patchEntity($applicant, $this->request->data);
+          // date('d-m-Y h:i:s', strtotime($this->request->data['birthdate']))
+          // $applicant->birthdate = $value;
+          // var_dump($applicant->birthdate);
+          if ($this->Applicants->save($applicant)) {
+            $this->Flash->success(__('The applicant has been saved.'));
+            return $this->redirect(['action' => 'profile']);
+          } else {
+            $this->Flash->error(__('The applicant could not be saved. Please, try again.'));
+          }
         }
+        $this->set(compact('applicant'));
+        $this->set('_serialize', ['applicant']);  
+      }else{
+        $this->Flash->success(__('You cannot edit profile while processed.'));
+        return $this->redirect(['action' => 'profile']);
       }
-      $this->set(compact('applicant'));
-      $this->set('_serialize', ['applicant']);
+      
     }
 
     /**

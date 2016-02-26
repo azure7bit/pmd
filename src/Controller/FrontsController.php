@@ -52,7 +52,7 @@
       ]);
 
       $this->Auth->allow(['login', 'register']);
-      $this->viewBuilder()->layout('applicant');
+      $this->viewBuilder()->layout('admin');
     }
 
     public function beforeFilter(Event $e) 
@@ -67,4 +67,5 @@
 
       $this->set('bodyClass', sprintf('%s %s', strtolower($this->name), strtolower($this->name) . '-' . strtolower($this->request->params['action'])));
     }
+
   }

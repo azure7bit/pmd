@@ -48,25 +48,25 @@ class ApplicantEducationsTable extends Table
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
 
-        $validator
-            ->add('created_by', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('created_by', 'create')
-            ->notEmpty('created_by');
+        // $validator
+        //     ->add('created_by', 'valid', ['rule' => 'numeric'])
+        //     ->requirePresence('created_by', 'create')
+        //     ->notEmpty('created_by');
 
-        $validator
-            ->add('creation_date', 'valid', ['rule' => 'date'])
-            ->requirePresence('creation_date', 'create')
-            ->notEmpty('creation_date');
+        // $validator
+        //     ->add('creation_date', 'valid', ['rule' => 'date'])
+        //     ->requirePresence('creation_date', 'create')
+        //     ->notEmpty('creation_date');
 
-        $validator
-            ->add('last_updated_by', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('last_updated_by', 'create')
-            ->notEmpty('last_updated_by');
+        // $validator
+        //     ->add('last_updated_by', 'valid', ['rule' => 'numeric'])
+        //     ->requirePresence('last_updated_by', 'create')
+        //     ->notEmpty('last_updated_by');
 
-        $validator
-            ->add('last_update_date', 'valid', ['rule' => 'date'])
-            ->requirePresence('last_update_date', 'create')
-            ->notEmpty('last_update_date');
+        // $validator
+        //     ->add('last_update_date', 'valid', ['rule' => 'date'])
+        //     ->requirePresence('last_update_date', 'create')
+        //     ->notEmpty('last_update_date');
 
         return $validator;
     }
@@ -87,6 +87,6 @@ class ApplicantEducationsTable extends Table
 
     public static function defaultConnectionName()
     {
-      return 'oracle';
+      return 'erc';
     }
 }

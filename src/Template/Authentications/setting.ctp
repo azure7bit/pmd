@@ -20,9 +20,10 @@
 							<div class="form-group">
 								<?= $this->Form->input('password_confirmation', ['type' => 'password', 'required' => true, 'label' => __d('Users', 'Re-type password'), 'class'=>'form-control']); ?>
 							</div>
+							
+							<p><?= $this->Form->submit(__d('Users', 'SUBMIT'), ['class' => "btn btn-login btn-default"]) ?></p>
 							<?= $this->Form->end() ?>
 							<div class="clearfix"></div>
-							<p><a type="submit" class="btn btn-login btn-default">SUBMIT</a></p>
 						</div>
 					</div>
 				</div>

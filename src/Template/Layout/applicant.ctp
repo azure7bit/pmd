@@ -22,6 +22,7 @@
   <?= $this->Html->css('applicant/slit-slider.css') ?>
   <?= $this->Html->css('applicant/animate.css') ?>
   <?= $this->Html->css('applicant/main.css') ?>
+  <?= $this->Html->css('applicant/jquery.datetimepicker.css') ?>
 
   <?= $this->Html->script('applicant/modernizr-2.6.2.min.js') ?>
   <!-- Essential jQuery Plugins
@@ -30,6 +31,7 @@
   <?= $this->Html->script('applicant/jquery-1.11.1.min.js') ?>
   <!-- Twitter Bootstrap -->
   <?= $this->Html->script('applicant/bootstrap.min.js') ?>
+  <?= $this->Html->script('applicant/jquery.datetimepicker.full.min.js') ?>
   <!-- Single Page Nav -->
 
   <!-- jquery.fancybox.pack -->
@@ -45,6 +47,7 @@
   <?= $this->Html->script('applicant/wow.min.js') ?>
   <!-- Custom Functions -->
   <?= $this->Html->script('applicant/main.js') ?>
+
 </head>
 
 <body id="body">
@@ -70,15 +73,27 @@
         <ul id="nav" class="nav navbar-nav">
           <li><?= $this->Html->link(__('Home'), ['controller' => 'Homes', 'action' => 'index']) ?></li>
           <li><?= $this->Html->link(__('About'), ['controller' => 'Homes', 'action' => 'about']) ?></li>
-          <li><?= $this->Html->link(__('Vacancy'), ['controller' => 'Vacancies', 'action' => 'index']) ?></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Vacancy <i class="fa fa-angle-down  fa-lg"></i>
+            </a>
+            <ul class="dropdown-menu bg-blue">
+              <li><?= $this->Html->link(__('Vacancy'), ['controller' => 'Vacancies', 'action' => 'index']) ?></li>
+              <?php if(!empty($user)): ?>
+                <li><a href="#" class="last">My Joblist</a></li>
+              <?php endif; ?>
+            </ul>
+          </li>
           <li><?= $this->Html->link(__('FAQ'), ['controller' => 'Homes', 'action' => 'faq']) ?></li>
           <?php if(empty($user)): ?>
             <li>
-              <a href="#" data-toggle="modal" data-target=".bs-example-modal-sm2">
+              <!-- <a href="#" data-toggle="modal" data-target=".bs-example-modal-sm2"> -->
+              <a href="/login">
               <i class="fa fa-lock">&nbsp;</i>SIGN IN</a>
             </li>
             <li>
-              <a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">
+              <!-- <a href="#" data-toggle="modal" data-target=".bs-example-modal-sm"> -->
+              <a href="/register">
               <i class="fa fa-user">&nbsp;</i>SIGNUP</a>
             </li>
           <?php endif; ?>
@@ -91,7 +106,10 @@
                 <li>
                   <a href="/profile"><i class="fa fa-male fa-sm"></i> See Your Profile</a>
                 </li>
-                <li><a href="/setting"><i class="fa fa-cog fa-sm"></i> Setting</a></li>
+                <li>
+                  <a href="/setting"><i class="fa fa-cog fa-sm"></i> Setting</a>
+                </li>
+                <li><a href="#"><i class="fa fa-envelope fa-sm"></i> Inbox</a></li>
                 <li>
                   <a href="/logout" class="last"><i class="fa fa-power-off fa-sm"></i> Sign Out</a>
                 </li>
@@ -120,9 +138,22 @@
       </div>
     </div>
   </footer>
-
   <script type="text/javascript">
     $(document).ready(function(){
+      $('#birthdate').datetimepicker(
+        {
+          timepicker:false,
+          timepickerScrollbar:false,
+          formatDate:'d/m/Y',
+          defaultSelect:false,
+          startDate:'03/03/1960',
+          minDate:'03/03/1960',//yesterday is minimum date(for today use 0 or -1970/01/01)
+          maxDate:'03/03/2000',
+          onSelectDate:function(ct,$i){
+            this.val(ct.dateFormat('d/m/Y'))
+          }//tomorrow is maximum date calendar
+        }
+      );
       $('.creload').on('click', function() {
         var mySrc = $(this).prev().attr('src');
         var glue = '?';

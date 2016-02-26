@@ -28,7 +28,7 @@ class JobsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('erc_jobs');
+        $this->table('hcms_jobs');
         $this->displayField('id');
         $this->primaryKey('JOB_ID');
 
@@ -93,6 +93,6 @@ class JobsTable extends Table
 
            public static function defaultConnectionName()
     {
-      return 'oracle';
+      return 'hcms';
     }
 }

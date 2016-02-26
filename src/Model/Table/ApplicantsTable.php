@@ -42,10 +42,10 @@
       $this->primaryKey('id');
       $this->entityClass('App\Model\Entity\Applicant');
       
-       $this->addBehavior('Captcha', [
-          'field' => 'captcha',
-          'message' => 'Incorrect captcha code value'
-        ]);
+      $this->addBehavior('Captcha', [
+        'field' => 'captcha',
+        'message' => 'Incorrect captcha code value'
+      ]);
       // $this->addBehavior('CakeDC/Users.Password');
       // $this->addBehavior('CakeDC/Users.Social');
       
@@ -69,17 +69,11 @@
         ]
       ]);
       
-      // Add the behaviour and configure any options you want
-      // $this->addBehavior('Captcha', [
-      //   'field' => 'securitycode',
-      //   'message' => 'Incorrect captcha code value'
-      // ]);
-
       $this->addBehavior('Timestamp', [
         'events' => [
           'Model.beforeSave' => [
-            'created' => 'new',
-            'modified' => 'always'
+            'creation_date' => 'new',
+            'last_update_date' => 'always'
           ]
         ]
       ]);
@@ -144,12 +138,12 @@
     public function validationPasswordConfirm(Validator $validator)
     {
       $validator
-        ->requirePresence('password_confirm', 'create')
-        ->notEmpty('password_confirm');
+        ->requirePresence('password_confirmation', 'create')
+        ->notEmpty('password_confirmation');
 
       $validator->add('password', 'custom', [
         'rule' => function ($value, $context) {
-          $confirm = Hash::get($context, 'data.password_confirm');
+          $confirm = Hash::get($context, 'data.password_confirmation');
           if (!is_null($confirm) && $value != $confirm) {
             return false;
           }
@@ -163,114 +157,116 @@
       return $validator;
     }
     
-    // public function validationDefault(Validator $validator)
-    // {
-    //   // $validator
-    //   //   ->allowEmpty('id', 'create');
+    public function validationDefault(Validator $validator)
+    {
+      $validator
+        ->add('id', 'valid', ['rule' => 'numeric'])
+        ->allowEmpty('id', 'create');
 
-    //   $validator
-    //     ->requirePresence('password', 'create')
-    //     ->allowEmpty('password', 'edit')
-    //     ->add('password', 'validFormat', [
-    //       'rule' => [
-    //         'custom', 
-    //         '/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/', 
-    //         'provider' => 'table'
-    //       ], 
-    //       'message' => '* Your password must be include at least one lowercase letter, one uppercase letter and a number'
-    //       ])
-    //     ->add('password', [
-    //       'length' => [
-    //         'rule' => ['minLength', 8],
-    //           'message' => 'Password need to be 8 characters long',
-    //       ]
-    //     ]);
+      // $validator
+      //   ->allowEmpty('id_card', 'create')
+      //   ->add('id_card', 'unique', [
+      //     'rule' => 'validateUnique', 
+      //     'provider' => 'table'
+      //   ]);
+        
+      $validator
+        ->requirePresence('full_name', 'create')
+        ->notEmpty('full_name');
 
-    //   $validator
-    //     ->allowEmpty('token');
+      $validator
+        ->requirePresence('email');
 
-    //   $validator
-    //     ->add('token_exp', 'valid')
-    //     ->allowEmpty('token_exp');
+      $validator
+        ->requirePresence('password', 'create')
+        ->add('password', 'validFormat', [
+          'rule' => [
+            'custom', 
+            '/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/', 
+            'provider' => 'table'
+          ], 
+          'message' => '* Your password must be include at least one lowercase letter, one uppercase letter and a number'
+          ])
+        ->add('password', [
+          'length' => [
+            'rule' => ['minLength', 8],
+              'message' => 'Password need to be 8 characters long',
+          ]
+        ]);
 
-    //   $validator
-    //     ->allowEmpty('api_token');
+      // $validator
+      //   ->allowEmpty('current_address', 'create');
 
-    //   $validator
-    //     ->add('activate', 'valid')
-    //     ->allowEmpty('activate');
+      // $validator
+      //   ->allowEmpty('religion', 'create');
 
-    //      $validator
-    //     ->add('activation_date', 'valid')
-    //     ->allowEmpty('activate');
+      // $validator
+      //   ->requirePresence('domicile', 'update')
+      //   ->allowEmpty('domicile', 'create');
 
-    //   $validator
-    //     ->add('tos_date', 'valid')
-    //     ->allowEmpty('tos_date');
+      $validator
+        ->allowEmpty('handphone')
+        ->add('handphone', 'validFormat', [
+          'rule' => [
+            'custom', '/62\d{8}\d/', 
+            'provider' => 'table'
+          ], 
+          'message' => 'Please put phone number correctly'
+        ]);
 
-    //   // $validator
-    //   //   ->add('id', 'valid', ['rule' => 'numeric'])
-    //   //   ->allowEmpty('id', 'create');
+      // $validator
+      //   ->allowEmpty('gender', 'create')
+      //   ->add('gender', 'validValue', [
+      //     'rule' => [
+      //       'inList', array('m', 'M', 'f', 'F')
+      //     ]
+      //   ]);
 
-    //   $validator
-    //     ->requirePresence('id_card', 'update')
-    //     ->allowEmpty('id_card', 'create')
-    //     ->add('id_card', 'unique', [
-    //       'rule' => 'validateUnique', 
-    //       'provider' => 'table'
-    //     ]);
+      $validator
+        ->allowEmpty('avatar');
 
-    //   $validator
-    //     ->requirePresence('full_name', 'create')
-    //     ->notEmpty('full_name');
+      // $validator
+      //   ->allowEmpty('blood_type', 'create')
+      //   ->add('blood_type', 'validValue', [
+      //     'rule' => [
+      //       'inList', array('A', 'AB', 'O', 'B')]
+      //     ]);
 
-    //   $validator
-    //     ->requirePresence('address', 'update')
-    //     ->allowEmpty('address', 'create');
+      // $validator
+      //   ->allowEmpty('friend', 'create');
 
-    //   $validator
-    //     ->requirePresence('religion', 'update')
-    //     ->allowEmpty('religion', 'create');
+      // $validator
+      //   ->allowEmpty('located', 'create');
 
-    //   $validator
-    //     ->requirePresence('blood_type', 'update')
-    //     ->allowEmpty('blood_type', 'create')
-    //     ->add('blood_type', 'validValue', [
-    //       'rule' => [
-    //         'inList', array('A', 'AB', 'O', 'B')]
-    //       ]);
+      // $validator
+      //   ->allowEmpty('business', 'create');
 
-    //   $validator
-    //     ->requirePresence('phone', 'update')
-    //     ->allowEmpty('phone_number', 'create')
-    //     ->add('phone_number', 'validFormat', [
-    //       'rule' => [
-    //         'custom', '/62\d{8}\d/', 
-    //         'provider' => 'table'
-    //       ], 
-    //       'message' => 'Please put phone number correctly'
-    //     ]);
+      // $validator
+      //   ->requirePresence('activate')
+      //   ->add('activate', 'validValue', [
+      //     'rule' => [
+      //       'inList', array('true', 'false')]
+      //     ]);
 
-    //   $validator
-    //     ->requirePresence('gender', 'update')
-    //     ->allowEmpty('gender', 'create')
-    //     ->add('gender', 'validValue', [
-    //       'rule' => [
-    //         'inList', array('m', 'M', 'f', 'F')
-    //       ]
-    //     ]);
+     //  $validator
+     //    ->allowEmpty('token');
 
-    //   $validator
-    //     ->allowEmpty('birthdate', 'create');
-    //     // ->add('birthdate', 'date', [
-    //     //   'rule' => [
-    //     //     'date', 'DMY', 'range'=>date('Y')-18, date('Y')-50
-    //     //   ]
-    //     // ]);
+     //  $validator
+     //    ->allowEmpty('token_exp');
 
-    //   return $validator;
+     // $validator
+     //    ->allowEmpty('activation_date');
 
-    // }
+      // $validator
+      //   ->add('tos_date', 'valid')
+      //   ->allowEmpty('tos_date');
+
+      // $validator
+      //   ->allowEmpty('birthdate', 'create');
+
+      return $validator;
+
+    }
 
     /**
     * Default validation rules.
@@ -306,6 +302,6 @@
 
     public static function defaultConnectionName()
     {
-      return 'oracle';
+      return 'erc';
     }
   }

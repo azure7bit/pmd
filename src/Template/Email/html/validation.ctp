@@ -11,7 +11,8 @@
 $activationUrl = [
     '_full' => true,
     'controller' => 'Authentications',
-    'action' => 'login'
+    'action' => 'validateEmail',
+    isset($token) ? $token : ''
 ];
 
 ?>

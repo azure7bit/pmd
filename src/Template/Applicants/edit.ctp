@@ -24,10 +24,13 @@
                     <?= $this->Form->input('nickname', ['value'=>$applicant->nickname, 'class'=>'form-control']) ?>
                   </div>
                   <div class="form-group">
+                    <?= $this->Form->input('handphone', ['value'=>$applicant->handphone, 'class'=>'form-control']) ?>
+                  </div>
+                  <div class="form-group">
                     <?= $this->Form->input('place', ['value'=>$applicant->place, 'class'=>'form-control']) ?>
                   </div>
-                  <div class="form-group ttl">
-                    <?= $this->Form->input('birthdate', ['class'=>'form-control', 'value'=>$applicant->birthdate, 'type'=>'date']) ?>
+                  <div class='input-group date'>
+                    <?= $this->Form->input('birthdate', ['class'=>'form-control', 'id'=>'birthdate', 'value'=>$applicant->birthdate, 'type'=>'text']) ?>
                   </div>
                   <div class="form-group">
                     <?= $this->Form->input('domicile', ['class'=>'form-control', 'value'=>$applicant->domicile]) ?>

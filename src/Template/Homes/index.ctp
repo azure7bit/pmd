@@ -1,5 +1,4 @@
-﻿
-<section id="home-slider">
+﻿<section id="home-slider">
   <div id="slider" class="sl-slider-wrapper">
     <div class="sl-slider">
       <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
@@ -102,7 +101,7 @@
     </div>
   </section>
 
- <!--  <section id="link-homepage">
+  <section id="link-homepage">
     <div class="container block-home">
       <div class="row">
         <div class="col-lg-12" align="center">
@@ -138,4 +137,3 @@
       </div>
     </div>
   </section>
- -->

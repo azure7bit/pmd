@@ -23,7 +23,7 @@
 						</div>
 
 						<div class="form-group">
-							<?= $this->Form->input('password_confirm', ['class'=>"form-control",'id'=>"exampleInputrEpASSWORD",'type' => 'password', "label"=>'RETYPE PASSWORD']); ?>
+							<?= $this->Form->input('confirm_password', ['class'=>"form-control",'id'=>"exampleInputrEpASSWORD",'type' => 'password', "label"=>'RETYPE PASSWORD']); ?>
 						</div>
 
 						<div class="form-group">

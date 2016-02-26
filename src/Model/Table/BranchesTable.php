@@ -99,6 +99,6 @@ class BranchesTable extends Table
 
        public static function defaultConnectionName()
     {
-      return 'oracle';
+      return 'hcms';
     }
 }

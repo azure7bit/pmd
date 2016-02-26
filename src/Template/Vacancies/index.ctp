@@ -25,7 +25,7 @@
                 <div class="row">
                   <div class="col-lg-4">
                     <div class="form-group">
-                      <select class="form-control">
+                      <select name='criteria' class="form-control">
                         <option value="" selected>JOBLIST</option>
                         <option value="vacancy_name">Name</option>
                         <option value="job_name">Position</option>
@@ -37,11 +37,11 @@
                   </div>  
                   <div class="col-lg-4">
                     <div class="form-group">
-                      <input type="email" class="form-control" id="vacancy" placeholder="Enter Keywoards..">
+                      <?= $this->Form->input('search', ['class'=>'form-control', 'id'=>'vacancy', 'placeholder'=>'Enter Keywords..', 'label'=>false]) ?>
                     </div>
                   </div>  
                   <div class="col-lg-4">
-                    <a class="btn searh-vac" href=""><i class="fa fa-send">&nbsp;&nbsp;</i>SEARCH</a>
+                    <?= $this->Form->submit(__d('Vacancies', 'SEARCH'), ['class' => "btn searh-vac"]) ?>
                   </div>
                 </div>
               <?= $this->Form->end() ?>

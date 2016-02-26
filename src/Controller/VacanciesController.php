@@ -15,23 +15,34 @@
     {
       parent::initialize();
       $this->Auth->allow(['index']);
+      $this->viewbuilder()->layout('admin');
     }
     /**
      * Index method
      *
      * @return void
      */
-    public function index()
+    public function index($criteria = null, $search = null)
     {
+      if(!empty($this->request->data)){
+        $criteria = $this->request->data['criteria'];
+        $search = $this->request->data['search'];
+      }
+
       $this->paginate = [
       'contain' => ['Companies', 'Branches', 'WosJobs']
       ];
+
+      if(!empty($criteria)){
+        $this->set('vacancies', $this->paginate($this->Vacancies->find()->contain(['Companies','WosJobs','Branches'])->where([$criteria.' LIKE'=>'%'.$param.'%'])));
+      }else{
+        $this->set('vacancies', $this->paginate($this->Vacancies));
+      }
 
       // $jobs = $this->Vacancies->WosJobs->find('list', ['keyField' => 'job_id','valueField' => 'job_name']);
 
       // $vacancies = $this->paginate($this->Vacancies);
 
-      $this->set('vacancies', $this->paginate($this->Vacancies));
 
       // $this->set(compact('vacancies', 'jobs'));
 

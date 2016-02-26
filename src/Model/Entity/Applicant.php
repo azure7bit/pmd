@@ -52,184 +52,164 @@ class Applicant extends Entity
   // ];
 
 
-    /**
-     * Fields that can be mass assigned using newEntity() or patchEntity().
-     *
-     * @var array
-     */
-    protected $_accessible = [
-        '*' => true,
-        'AVATAR' => true,
-        'AVATAR_DIR' => true,
-    ];
+  /**
+   * Fields that can be mass assigned using newEntity() or patchEntity().
+   *
+   * @var array
+   */
+  protected $_accessible = [
+      '*' => true,
+      'avatar'=>true,
+      'AVATAR' => true,
+      'AVATAR_DIR' => true,
+      'current_password' => true,
+      'password_confirmation' => true,
+  ];
 
-    public $actsAs = array(
-      'Captcha' => array(
-          'field' => array('security_code'),
-          'error' => 'Incorrect captcha code value'
-      )
-    );
+  public $actsAs = array(
+    'Captcha' => array(
+        'field' => array('security_code'),
+        'error' => 'Incorrect captcha code value'
+    )
+  );
 
-    /**
-     * @param string $password password that will be set.
-     * @return bool|string
-     */
-    protected function _setPassword($password)
-    {
-        return $this->hashPassword($password);
+  protected function _getBirthdate(){
+    if(is_null($this->_properties['birthdate'])){
+        return $this->_properties['birthdate'];
+    }else{
+        return date_format($this->_properties['birthdate'], "d M Y");
     }
+  }
 
-    /**
-     * @param string $password password that will be confirm.
-     * @return bool|string
-     */
-    protected function _setConfirmPassword($password)
-    {
-        return $this->hashPassword($password);
-    }
+  /**
+   * @param string $password password that will be set.
+   * @return bool|string
+   */
+  protected function _setPassword($password)
+  {
+      return $this->hashPassword($password);
+  }
 
-    /**
-     * @param string $tos tos option. It will be set the tos_date
-     * @return bool
-     */
-    protected function _setTos($tos)
-    {
-        if ((bool)$tos === true) {
-            $this->set('tos_date', new DateTime());
-        }
-        return $tos;
-    }
+  /**
+   * @param string $password password that will be confirm.
+   * @return bool|string
+   */
+  protected function _setPasswordConfirmation($password)
+  {
+      return $this->hashPassword($password);
+  }
+  
 
-    protected function _setTosDate($tos_date)
-    {
-      return date_format($tos_date, 'Y-m-d');
-    }
+  // protected function _setCurrentPassword($password)
+  // {
+  //     return $this->hashPassword($password);
+  // }
 
-    /**
-     * Hash a password using the configured password hasher,
-     * use DefaultPasswordHasher if no one was configured
-     *
-     * @param string $password password to be hashed
-     * @return mixed
-     */
-    public function hashPassword($password)
-    {
-        $PasswordHasher = $this->getPasswordHasher();
-        return $PasswordHasher->hash($password);
-    }
-
-    /**
-     * Return the configured Password Hasher
-     *
-     * @return mixed
-     */
-    public function getPasswordHasher()
-    {
-      $passwordHasher = Configure::read('Users.passwordHasher');
-      if (!class_exists($passwordHasher)) {
-        $passwordHasher = '\Cake\Auth\DefaultPasswordHasher';
+  /**
+   * @param string $tos tos option. It will be set the tos_date
+   * @return bool
+   */
+  protected function _setTos($tos)
+  {
+      if ((bool)$tos === true) {
+          $this->set('tos_date', new DateTime());
       }
-      return new $passwordHasher;
-    }
+      return $tos;
+  }
 
-    /**
-     * Checks if a password is correctly hashed
-     *
-     * @param string $password password that will be check.
-     * @param string $hashedPassword hash used to check password.
-     * @return bool
-     */
-    public function checkPassword($password, $hashedPassword)
-    {
-        $PasswordHasher = $this->getPasswordHasher();
-        return $PasswordHasher->check($password, $hashedPassword);
-    }
+  protected function _setTosDate($tos_date)
+  {
+    return date_format($tos_date, 'Y-m-d');
+  }
 
-    /**
-     * Returns if the token has already expired
-     *
-     * @return bool
-     */
-    public function tokenExpired()
-    {
-      return empty($this->token_exp) || strtotime($this->token_exp) < strtotime("now");
-    }
+  /**
+   * Hash a password using the configured password hasher,
+   * use DefaultPasswordHasher if no one was configured
+   *
+   * @param string $password password to be hashed
+   * @return mixed
+   */
+  public function hashPassword($password)
+  {
+    $PasswordHasher = $this->getPasswordHasher();
+    return $PasswordHasher->hash($password);
+  }
 
-    /**
-     * Getter for user avatar
-     *
-     * @return string|null avatar
-     */
-    // protected function _getAvatar()
-    // {
-    //     $avatar = null;
-    //     if (!empty($this->_properties['social_accounts'][0])) {
-    //         $avatar = $this->_properties['social_accounts'][0]['avatar'];
-    //     }
-    //     return $avatar;
+  /**
+   * Return the configured Password Hasher
+   *
+   * @return mixed
+   */
+  public function getPasswordHasher()
+  {
+    // $passwordHasher = Configure::read('Users.passwordHasher');
+    // if (!class_exists($passwordHasher)) {
+      $passwordHasher = '\Cake\Auth\DefaultPasswordHasher';
     // }
+    return new $passwordHasher;
+  }
 
-    /**
-     * Generate token_expires and token in a user
-     * @param string $tokenExpiration new token_expires user.
-     *
-     * @return void
-     */
-    public function updateToken($tokenExpiration)
-    {
-      $expires = new DateTime();
-      // $expires->modify("+ $tokenExpiration secs");
-      // $expires->modify("$tokenExpiration");
-      $expires = date_format($expires, 'Y-m-d');
-      $this->token_exp = $expires;
-      $this->token = str_replace('-', '', Text::uuid());
+  /**
+   * Checks if a password is correctly hashed
+   *
+   * @param string $password password that will be check.
+   * @param string $hashedPassword hash used to check password.
+   * @return bool
+   */
+  public function checkPassword($password, $hashedPassword)
+  {
+      $PasswordHasher = $this->getPasswordHasher();
+      return $PasswordHasher->check($password, $hashedPassword);
+  }
 
-    }
+  /**
+   * Returns if the token has already expired
+   *
+   * @return bool
+   */
+  public function tokenExpired()
+  {
+    return empty($this->token_exp) || strtotime($this->token_exp) < strtotime("now");
+  }
 
-    public function setToken()
-    {
-      $expires = new DateTime();
-      $expires = date_format($expires, 'Y-m-d');
-      $value = $expires + $this->email;
-      $hasher = new DefaultPasswordHasher();
-      $this->token = $hasher->hash($value);
-    }
 
-  // protected function _setGender($gender)
-  // {
-  //   return Gender::get($gender);
-  // }
+  /**
+   * Generate token_expires and token in a user
+   * @param string $tokenExpiration new token_expires user.
+   *
+   * @return void
+   */
+  public function updateToken($tokenExpiration)
+  {
+    $expires = new DateTime();
+    // $expires->modify("+ $tokenExpiration secs");
+    // $expires->modify("$tokenExpiration");
+    $expires = date_format($expires, 'Y-m-d');
+    $this->token_exp = $expires;
+    $this->token = str_replace('-', '', Text::uuid());
 
-  // protected function _getGender($gender){
-  //   if($gender)
-  //     return Gender::get($gender);
-  // }
+  }
 
-  // protected function _setPassword($value)
-  // {
-  //   $hasher = new DefaultPasswordHasher();
-  //   return $hasher->hash($value);
-  // }
+  public function setToken()
+  {
+    $expires = new DateTime();
+    $expires = date_format($expires, 'Y-m-d');
+    $value = $expires + $this->email;
+    $hasher = new DefaultPasswordHasher();
+    $this->token = $hasher->hash($value);
+  }
 
-  // protected function _setSecurityCode($value)
-  // {
-  //   return $value;
-  // }
-
-  // protected function _setPasswordConfirmation($value)
-  // {
-  //   // $hasher = new DefaultPasswordHasher();
-  //   // return $hasher->hash($value);
-  //   $value = $this->password;
-  //   return $value;
-  // }
-
+  public function setActivationDate(){
+    $this->last_update_date;
+    return $this->last_update_date;
+  }
+ 
   public function avatar_url($thumbnailtype=null)
   {
     if(!empty($thumbnailtype)){
-      $value = '/filesAvatar/erc_applicants/avatar/'. $this->avatar_dir . '/'. $thumbnailtype . "_". $this->avatar;
+      $value = '/filesAVATAR/erc_applicants/AVATAR/'. $this->avatar_dir . '/'. $thumbnailtype . "_". $this->avatar;
     }else{
-      $value = '/filesAvatar/erc_applicants/avatar/'. $this->avatar_dir . '/'. $this->avatar;
+      $value = '/filesAVATAR/erc_applicants/AVATAR/'. $this->avatar_dir . '/'. $this->avatar;
     }
     return $value;
   }
@@ -246,5 +226,29 @@ class Applicant extends Entity
       return false;
     }
     return substr(Security::hash(Configure::read('Security.salt') . $this->field('creation_date') . date('Ymd')), 0, 8);
+  }
+
+  /**
+   * Change password method
+   *
+   * @param EntityInterface $user user data.
+   * @return mixed
+   */
+  public function changePassword($user)
+  {
+    $currentUser = $this->_table->get($user->id, [
+      'contain' => []
+    ]);
+
+    if (!empty($user->current_password)) {
+      if (!$user->checkPassword($user->current_password, $currentUser->password)) {
+        return 'The old password does not match';
+      }
+    }
+    $user = $this->_table->save($user);
+    // if (!empty($user)) {
+    //   $user = $this->_removeValidationToken($user);
+    // }
+    return $user;
   }
 }

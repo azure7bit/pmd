@@ -91,6 +91,6 @@ class ApplicantJobListsTable extends Table
 
     public static function defaultConnectionName()
     {
-      return 'oracle';
+      return 'erc';
     }
 }

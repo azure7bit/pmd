@@ -1,9 +1,9 @@
-<section id="content" class="profile">
+<section id="content" class="profile" style='margin-top: 5%;'>
   <div class="container block-content">
     <div class="row">
       <div class="col-lg-12" align="center">
         <div class="block-profile">
-          <h2>YOUR PROFILE</h2>
+          <h2>My PROFILE</h2>
         </div>
       </div>
     </div>
@@ -29,6 +29,13 @@
                   <!-- <input type="email" class="form-control" id="exampleNickname" disabled> -->
                   <p><?= h($applicant->nickname) ?></p>
                 </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1">ID CARD<span class="mandatory">*</span></label>
+                  <!-- <input type="email" class="form-control" id="exampleID" disabled> -->
+                  <p><?= h($applicant->handphone ? $applicant->handphone : '-') ?></p>
+                </div>
+
                 <div class="form-group">
                   <label for="exampleInputEmail1">PLACE<span class="mandatory">*</span></label>
                   <!-- <input type="email" class="form-control" id="examplePlace" disabled> -->
@@ -147,7 +154,7 @@
                             <option value="2">Level2</option>
                           </select>
                         </td>
-                        <td><input type="email" class="form-control" id="exampleInstitution"></td>
+                        <td><input type="email" class="form-control" id="exampleInstitution" disabled></td>
                         <td>
                           <select class="form-control" disabled>
                             <option value="0" selected>Year</option>
@@ -333,30 +340,34 @@
                 </div>
                 <div class="form-group">
                   <label>PHOTO</label>
-                  <input id="exampleInputFile" type="file" disabled>
-                  <p class="help-block" style="text-align:left; font-size:12px;">Maximum file size of 200KB | JPG, JPEG, PNG.</p>
+                  <!-- <input id="exampleInputFile" type="file" disabled>
+                  <p class="help-block" style="text-align:left; font-size:12px;">Maximum file size of 200KB | JPG, JPEG, PNG.</p> -->
+                  <p class="help-block" style="text-align:left; font-size:12px;">file : <?= h($applicant->avatar) ?></p>
                 </div>
                 <div class="form-group">
                   <label>CERTIFICATED</label>
-                  <input id="exampleInputFile" type="file" disabled>
-                  <p class="help-block" style="text-align:left; font-size:12px;">Maximum file size of 1MB | PDF.</p>
+                  <!-- <input id="exampleInputFile" type="file" disabled>
+                  <p class="help-block" style="text-align:left; font-size:12px;">Maximum file size of 1MB | PDF.</p> -->
+                  <p class="help-block" style="text-align:left; font-size:12px;">file : <?= h($applicant->cv) ?></p>
                 </div>
                 <div class="form-group">
                   <label>TRANSCRIPT</label>
-                  <input id="exampleInputFile" type="file" disabled>
-                  <p class="help-block" style="text-align:left; font-size:12px;">Maximum file size of 1MB | PDF.</p>
+                  <!-- <input id="exampleInputFile" type="file" disabled>
+                  <p class="help-block" style="text-align:left; font-size:12px;">Maximum file size of 1MB | PDF.</p> -->
+                  <p class="help-block" style="text-align:left; font-size:12px;">file : <?= h($applicant->transcript) ?></p>
                 </div>
                 <div class="form-group">
-                  <label>RESUME</label>
-                  <input id="exampleInputFile" type="file" disabled>
-                  <p class="help-block" style="text-align:left; font-size:12px;">Maximum file size of 500KB | PDF.</p>
+                  <label>CERTIFICATE</label>
+                  <!-- <input id="exampleInputFile" type="file" disabled>
+                  <p class="help-block" style="text-align:left; font-size:12px;">Maximum file size of 500KB | PDF.</p> -->
+                  <p class="help-block" style="text-align:left; font-size:12px;">file : <?= h($applicant->certificate) ?></p>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <br>
                   <div class="button-find">
                     <a href="#" class="find-job disabled">SAVE</a>&nbsp;&nbsp;<a href="#" class="find-job disabled">CANCEL</a>
                   </div>
-                </div>
+                </div> -->
               </form>
             </div>
           </div>
